@@ -1,0 +1,20 @@
+/* The live language controls are the only surface outside the folding sheet. */
+.language-sheet-layer{position:fixed;inset:0;z-index:300;overflow:hidden;pointer-events:none;contain:strict;isolation:isolate}
+.language-sheet-strip{position:absolute;left:0;top:0;overflow:hidden;transform-origin:0 0;will-change:transform,opacity;pointer-events:none;contain:paint}
+html[data-language-curtain="page"] body>.game-texture,
+html[data-language-curtain="page"] body>#site-shell>main,
+html[data-language-curtain="page"] body>#site-shell>footer,
+html[data-language-curtain="page"] body>#site-shell>.reading-toc,
+html[data-language-curtain="page"] body>#site-shell>#flight-progress,
+html[data-language-curtain="page"] body>#site-shell>#mobile-menu{opacity:0!important;pointer-events:none!important}
+html[data-language-curtain="page"] body>#site-shell>.topbar{z-index:1000!important;background:transparent!important;pointer-events:none!important}
+html[data-language-curtain="page"] body>#site-shell>.topbar>:not(.languages){opacity:0!important;pointer-events:none!important}
+html[data-language-curtain="page"] body>#site-shell>.topbar>.languages{pointer-events:auto!important;background:var(--paper);box-shadow:0 0 10px 7px var(--paper)}
+/* The cover keeps its live painting; only its prompt and quote form the fan. */
+.language-sheet-layer--cover{z-index:1}
+html[data-language-curtain="cover"] body>#entry>.cover-composition .cover-prompt,
+html[data-language-curtain="cover"] body>#entry>.cover-composition>.cover-quote{opacity:0!important;pointer-events:none!important}
+html[data-language-curtain="cover"] body>#entry>.cover-composition .cover-art{z-index:2}
+@media(prefers-reduced-motion:reduce){.language-sheet-layer{display:none}}
+/* The inactive inner header must not shine through the transparent cover. */
+html[data-language-curtain="cover"] body>#site-shell{visibility:hidden!important;pointer-events:none!important}
