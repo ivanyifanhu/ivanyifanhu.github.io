@@ -1,0 +1,62 @@
+{
+  "retrieved": "2026-10-13",
+  "license": "SIL Open Font License 1.1",
+  "files": [
+    {
+      "file": "SourceHanSerifCN-VF.ttf.woff2",
+      "bytes": 11035128,
+      "source": "https://github.com/adobe-fonts/source-han-serif/blob/release/Variable/WOFF2/TTF/Subset/SourceHanSerifCN-VF.ttf.woff2",
+      "download": "https://api.github.com/repos/adobe-fonts/source-han-serif/contents/Variable/WOFF2/TTF/Subset/SourceHanSerifCN-VF.ttf.woff2?ref=release",
+      "altered": false,
+      "format": "WOFF2, TrueType variable font",
+      "weightRange": [
+        250,
+        900
+      ]
+    },
+    {
+      "file": "SourceHanSerifJP-VF.ttf.woff2",
+      "bytes": 5964676,
+      "source": "https://github.com/adobe-fonts/source-han-serif/blob/release/Variable/WOFF2/TTF/Subset/SourceHanSerifJP-VF.ttf.woff2",
+      "download": "https://api.github.com/repos/adobe-fonts/source-han-serif/contents/Variable/WOFF2/TTF/Subset/SourceHanSerifJP-VF.ttf.woff2?ref=release",
+      "altered": false,
+      "format": "WOFF2, TrueType variable font",
+      "weightRange": [
+        250,
+        900
+      ]
+    },
+    {
+      "file": "SourceSerif4Variable-Italic.ttf.woff2",
+      "bytes": 346688,
+      "source": "https://github.com/adobe-fonts/source-serif/blob/release/WOFF2/VAR/SourceSerif4Variable-Italic.ttf.woff2",
+      "download": "https://api.github.com/repos/adobe-fonts/source-serif/contents/WOFF2/VAR/SourceSerif4Variable-Italic.ttf.woff2?ref=release",
+      "altered": false,
+      "format": "WOFF2, TrueType variable font",
+      "weightRange": [
+        200,
+        900
+      ],
+      "opticalSizeRange": [
+        8,
+        60
+      ]
+    },
+    {
+      "file": "SourceSerif4Variable-Roman.ttf.woff2",
+      "bytes": 429100,
+      "source": "https://github.com/adobe-fonts/source-serif/blob/release/WOFF2/VAR/SourceSerif4Variable-Roman.ttf.woff2",
+      "download": "https://api.github.com/repos/adobe-fonts/source-serif/contents/WOFF2/VAR/SourceSerif4Variable-Roman.ttf.woff2?ref=release",
+      "altered": false,
+      "format": "WOFF2, TrueType variable font",
+      "weightRange": [
+        200,
+        900
+      ],
+      "opticalSizeRange": [
+        8,
+        60
+      ]
+    }
+  ]
+}
