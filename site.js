@@ -75,6 +75,7 @@
   function applyLanguage(value) {
     language = value;
     doc.lang = value;
+    window.SiteVisits?.sync(value);
     document.querySelectorAll('[lang=en]').forEach(el=>el.style.fontOpticalSizing='auto');
     document.querySelectorAll('[data-lang]').forEach(el => { el.hidden = el.dataset.lang !== value; });
     document.querySelectorAll('[data-set-lang]').forEach(btn => btn.setAttribute('aria-pressed',String(btn.dataset.setLang===value)));
@@ -93,6 +94,7 @@
     window.FlightProgress?.update();
   }
   function setLanguage(value) {
+    cancelTocNavigation();
     settleRoute();
     rememberSearch();
     window.SiteSearch?.cancel();
@@ -108,6 +110,7 @@
   }
   function syncOverlays(){
     const open=menuOpen||outlineOpen;
+    tocVeil.classList.toggle('is-open',open);
     main.inert=open;
     document.querySelector('footer').inert=open;
     document.querySelector('#flight-progress').inert=open;
@@ -115,6 +118,7 @@
     document.body.style.overflow=open?'hidden':'';
   }
   function setMenu(open,restore=false){
+    if(open)cancelTocNavigation();
     const hadFocus=sidebar.contains(document.activeElement)||(menuOpen&&!mobile.matches);
     menuOpen=open&&mobile.matches;
     if(menuOpen)setOutline(false);
@@ -130,11 +134,11 @@
     if(menuOpen)sidebar.querySelector('a').focus({preventScroll:true});
   }
   function setOutline(open,restore=false){
+    if(open)cancelTocNavigation();
     const hadFocus=toc.contains(document.activeElement)||(outlineOpen&&!mobile.matches);
     outlineOpen=open&&mobile.matches&&!toc.hidden;
     if(outlineOpen)setMenu(false);
     toc.classList.toggle('is-open',outlineOpen);
-    tocVeil.classList.toggle('is-open',outlineOpen);
     outlineButton.setAttribute('aria-expanded',String(outlineOpen));
     syncOverlays();
     if(!outlineOpen&&(restore||hadFocus)){
@@ -192,6 +196,7 @@
     finish();clearRouteStyles();
   }
   async function route() {
+    cancelTocNavigation();
     // The address already points at the destination on popstate/hashchange;
     // save the still-visible result page under the entry it actually belongs to.
     rememberSearch();
@@ -236,6 +241,7 @@
         showSection(name||'about',false,searchReturn);
         safeSet('homepage-v2-entered','1');shell.inert=false;
       }
+      window.SiteVisits?.show(toCover?'entry':active);
       renderedHistoryEntry=targetHistoryEntry;
     };
     const finalize=()=>{
@@ -276,6 +282,46 @@
   let scheduled=false;
   const collapsedToc=new Set();
   const tocWords={en:{expand:'Expand',collapse:'Collapse'},ja:{expand:'展開',collapse:'折りたたむ'},zh:{expand:'展开',collapse:'收起'}};
+  let tocJumpFrame=0, tocCueTimer=0, tocCue=null;
+  let detachTocIntent=()=>{};
+  function cancelTocNavigation(){
+    cancelAnimationFrame(tocJumpFrame);tocJumpFrame=0;
+    clearTimeout(tocCueTimer);tocCueTimer=0;
+    detachTocIntent();detachTocIntent=()=>{};
+    tocCue?.classList.remove('toc-arrived');tocCue=null;
+    delete doc.dataset.tocJump;
+  }
+  function jumpToHeading(heading){
+    cancelTocNavigation();
+    window.SiteSearch?.cancel();
+    setOutline(false);
+    heading.tabIndex=-1;heading.focus({preventScroll:true});
+    const top=parseFloat(getComputedStyle(doc).getPropertyValue('--reading-top'))||126;
+    const from=scrollY;
+    const to=Math.max(0,Math.min(doc.scrollHeight-innerHeight,from+heading.getBoundingClientRect().top-top));
+    const duration=reducedMotion.matches?0:Math.min(900,420+Math.abs(to-from)*.06);
+    const start=performance.now();
+    const intent=event=>{
+      if(event.type==='keydown'&&!['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' ','Escape'].includes(event.key))return;
+      cancelTocNavigation();
+    };
+    ['wheel','touchstart','pointerdown','keydown'].forEach(type=>addEventListener(type,intent,{passive:true}));
+    detachTocIntent=()=>['wheel','touchstart','pointerdown','keydown'].forEach(type=>removeEventListener(type,intent));
+    doc.dataset.tocJump='scrolling';
+    const frame=now=>{
+      if(!heading.isConnected||heading.closest('[hidden]')){cancelTocNavigation();return;}
+      const progress=duration?Math.min(1,(now-start)/duration):1;
+      const eased=progress<.5?4*progress**3:1-(-2*progress+2)**3/2;
+      scrollTo({top:from+(to-from)*eased,behavior:'instant'});
+      if(progress<1){tocJumpFrame=requestAnimationFrame(frame);return;}
+      tocJumpFrame=0;delete doc.dataset.tocJump;
+      tocCue=heading;heading.classList.add('toc-arrived');
+      // A small, bounded heading surface gives a clear arrival cue without
+      // animating or repainting the complete article. Repeated clicks restart it.
+      tocCueTimer=setTimeout(cancelTocNavigation,reducedMotion.matches?900:1300);
+    };
+    tocJumpFrame=requestAnimationFrame(frame);
+  }
   function buildToc(){
     const page=sections.find(s=>s.dataset.section===active);
     if(!page)return;
@@ -307,7 +353,7 @@
       const track=document.createElement('span');track.className='toc-track';track.setAttribute('aria-hidden','true');
       const tick=document.createElement('span');tick.className='toc-tick';track.append(tick);
       button.append(span,track);row.append(button);item.append(row);node.element=item;node.button=button;
-      button.addEventListener('click',()=>{setOutline(false);node.heading.tabIndex=-1;node.heading.focus({preventScroll:true});node.heading.scrollIntoView({behavior:reducedMotion.matches?'instant':'smooth',block:'start'});});
+      button.addEventListener('click',()=>jumpToHeading(node.heading));
       if(node.children.length){
         const children=document.createElement('ol');children.className='toc-children';children.id='toc-children-'+node.index;
         children.append(...node.children.map(renderNode));
@@ -355,7 +401,7 @@
     const lang=event.target.closest('[data-set-lang]');
     if(lang) {setLanguage(lang.dataset.setLang);return;}
     const top=event.target.closest('[data-scroll-top]');
-    if(top){event.preventDefault();window.scrollTo({top:0,behavior:reducedMotion.matches?'instant':'smooth'});return;}
+    if(top){event.preventDefault();cancelTocNavigation();window.scrollTo({top:0,behavior:reducedMotion.matches?'instant':'smooth'});return;}
     const link=event.target.closest('a[href^="#"]');
     if(link && link.getAttribute('href')===location.hash){event.preventDefault();route();}
   });

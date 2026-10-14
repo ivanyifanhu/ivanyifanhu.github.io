@@ -1,0 +1,4 @@
+.page-views{min-height:1.8em;margin:0 0 4px;font:inherit;color:inherit;text-align:center;letter-spacing:inherit}
+.page-views>.i18n-slot{display:grid;justify-items:center}
+.page-views [data-lang]{grid-area:1/1;white-space:nowrap}
+.page-views [data-view-value]{display:inline-block;min-width:3ch;font-variant-numeric:tabular-nums}
