@@ -2,11 +2,12 @@
 .language-sheet-layer{position:fixed;inset:0;z-index:300;overflow:hidden;pointer-events:none;contain:strict;isolation:isolate}
 .language-sheet-strip{position:absolute;left:0;top:0;overflow:hidden;transform-origin:0 0;will-change:transform,opacity;pointer-events:none;contain:paint}
 html[data-language-curtain="page"] body>.game-texture,
-html[data-language-curtain="page"] body>#site-shell>main,
-html[data-language-curtain="page"] body>#site-shell>footer,
-html[data-language-curtain="page"] body>#site-shell>.reading-toc,
-html[data-language-curtain="page"] body>#site-shell>#flight-progress,
-html[data-language-curtain="page"] body>#site-shell>#mobile-menu{opacity:0!important;pointer-events:none!important}
+html[data-language-curtain="page"] body>.toc-veil,
+html[data-language-curtain="page"] body>#site-shell>:is(main,footer,.reading-toc,#flight-progress,#mobile-menu),
+html[data-language-curtain="page"] body>#site-shell>:is(main,footer,.reading-toc,#flight-progress,#mobile-menu) *{visibility:hidden!important;pointer-events:none!important}
+/* Visibility transitions must not outlive the atomic source handover. */
+html[data-language-curtain="page"] body>.toc-veil,
+html[data-language-curtain="page"] body>#site-shell>:is(.reading-toc,#mobile-menu){transition:none!important}
 html[data-language-curtain="page"] body>#site-shell>.topbar{z-index:1000!important;background:transparent!important;pointer-events:none!important}
 html[data-language-curtain="page"] body>#site-shell>.topbar>:not(.languages){opacity:0!important;pointer-events:none!important}
 html[data-language-curtain="page"] body>#site-shell>.topbar>.languages{pointer-events:auto!important;background:var(--paper);box-shadow:0 0 10px 7px var(--paper)}

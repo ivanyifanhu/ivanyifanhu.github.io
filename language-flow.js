@@ -170,9 +170,17 @@
     const clone = element.cloneNode(!shallow);
     const sources = shallow ? [element] : [element, ...element.querySelectorAll('*')];
     const copies = shallow ? [clone] : [clone, ...clone.querySelectorAll('*')];
+    const omitted = new Set();
     sources.forEach((source, index) => {
       const copy = copies[index];
+      if (omitted.has(source.parentElement)) { omitted.add(source); return; }
       const computed = getComputedStyle(source);
+      // Hidden translations still reserve their grid cell, but their text and
+      // descendants never need to be copied into every animation ribbon.
+      if (source !== element && (computed.display === 'none' || computed.visibility === 'hidden')) {
+        omitted.add(source);
+        copy.replaceChildren();
+      }
       if (paint) {
         // All ribbons share the same frozen paint rules. Repeating hundreds of
         // inline declarations in every ribbon made incoming pages expensive to
@@ -223,6 +231,8 @@
     const pieces = [];
     const add = (element, options) => {
       if (!element || !visible(element)) return;
+      const style = getComputedStyle(element);
+      if (style.visibility === 'hidden' || style.display === 'none') return;
       const rect = element.getBoundingClientRect();
       if (!intersects(rect)) return;
       let paintTop=rect.top-2,paintBottom=rect.bottom+2;
@@ -233,7 +243,8 @@
           paintTop=Math.min(paintTop,childRect.top);paintBottom=Math.max(paintBottom,childRect.bottom);
         });
       }
-      pieces.push({rect,paintTop,paintBottom,master:snapshot(element,rect,options,paint),source:element});
+      const master=snapshot(element,rect,options,paint);
+      pieces.push({rect,paintTop,paintBottom,master,source:element,plane:options?.plane});
     };
     const visit = element => {
       if (!visible(element)) return;
@@ -252,12 +263,15 @@
       add(page.querySelector('.cover-prompt'));
       add(page.querySelector('.cover-quote'));
     } else {
-      add(document.querySelector('body > .game-texture'));
+      add(document.querySelector('body > .game-texture'),{plane:true});
       visit(page);
       add(document.querySelector('#site-shell > footer'));
-      add(document.querySelector('.reading-toc'));
       add(document.querySelector('#flight-progress'));
+      // Capture the bounded live veil, including an interrupted fade. This
+      // preserves its exact opacity without duplicating spread shadows.
+      add(document.querySelector('body > .toc-veil'),{plane:true});
       add(document.querySelector('#mobile-menu'));
+      add(document.querySelector('.reading-toc'));
       // Last paint: reproduce the original opaque/gradient header occlusion.
       // Hidden text behind this header never becomes a free-floating clone.
       add(document.querySelector('.topbar'), {header:true});
@@ -300,7 +314,12 @@
       const left=upper.x-upper.width/2;
       const lowerLeft=lower.x-lower.width/2;
       const lowerY=Math.max(upper.y+height*.002,lower.y);
-      const transform=`matrix3d(${upper.width/width},0,0,0,${(ratio*lowerLeft-left)/height},${(ratio*lowerY-upper.y)/height},0,${(ratio-1)/height},0,0,1,0,${left},${upper.y},0,1)`;
+      // Keep viewport translation outside the projective matrix. Combining
+      // them makes m22 cross zero near the tip, so WAAPI's matrix decomposition
+      // interpolates through a flipped sheet between otherwise valid frames.
+      // This equivalent local matrix has positive scales for the entire fold;
+      // both directions interpolate the same continuous transform functions.
+      const transform=`translate(${left}px,${upper.y}px) matrix3d(${upper.width/width},0,0,0,${ratio*(lowerLeft-left)/height},${ratio*(lowerY-upper.y)/height},0,${(ratio-1)/height},0,0,1,0,0,0,0,1)`;
       return {transform,opacity};
     }
     const scaleX = (upper.width+lower.width)/(width*2);
@@ -335,10 +354,16 @@
       strip.style.width = `${width}px`;
       strip.style.height = `${bandHeight+overlap}px`;
       strip.style.transform = `translateY(${top}px)`;
-      pieces.forEach(({rect,paintTop,paintBottom,master}) => {
+      pieces.forEach(({rect,paintTop,paintBottom,master,plane}) => {
         if (paintBottom<=top || paintTop>=top+bandHeight+overlap) return;
         const copy=duplicate(master);
-        copy.style.setProperty('top',`${rect.top-top}px`,'important');
+        if(plane){
+          // Fixed repeating paper texture/veil: rasterize only this ribbon's
+          // height, rather than 34 full-screen masked layers at device DPR.
+          copy.style.setProperty('top','0','important');
+          copy.style.setProperty('height',`${bandHeight+overlap}px`,'important');
+          copy.style.setProperty('background-position',`center ${-top}px`,'important');
+        }else copy.style.setProperty('top',`${rect.top-top}px`,'important');
         strip.append(copy);
       });
       fragment.append(strip);
@@ -391,12 +416,14 @@
     return Promise.all(animations.map(animation=>animation.finished.catch(()=>{})));
   }
   function clearSheet(state) {
-    state.animations.forEach(animation=>animation.cancel());
-    state.animations.clear();
+    // Detach before cancelling fill styles, so the compositor can never show
+    // an outgoing strip at its full-size underlying geometry for a frame.
     state.layer?.remove();
     state.layer=null;
     state.staging?.remove();
     state.staging=null;
+    state.animations.forEach(animation=>animation.cancel());
+    state.animations.clear();
   }
   function reveal(state) {
     // Layer removal and source reveal occur synchronously in one task, before
@@ -490,8 +517,11 @@
         clearSheet(state);
         state.layer=incoming.layer;
         if(!incoming.layer.isConnected)mountSheet(incoming);
+        // Install the collapsed first frame before making the prepared sheet
+        // visible. No full-size incoming surface is exposed at the handoff.
+        const incomingMotion=animateSheet(state,incoming,true);
         incoming.layer.style.removeProperty('opacity');
-        await animateSheet(state,incoming,true);
+        await incomingMotion;
         if(!current())return;
       }
       if(!state.userMoved)restore(page,anchor);
