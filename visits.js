@@ -19,13 +19,17 @@
   const siteValues=document.querySelectorAll('[data-site-view-value]');
   const siteFooter=document.querySelector('.site-views');
   const link=footer.querySelector('.visit-details-link');
-  let language=document.documentElement.lang||'en',current=null,footerVisible=false;
+  let language=document.documentElement.lang||'en',current=null,footerVisible=false,snapshots=null;
   const labels={en:'Details',ja:'詳細',zh:'详情'};
   function read(route){
     if(route!=='__site__'&&!routes.has(route))return null;
-    return model.read(route);
+    if(!snapshots)snapshots=model.readAll();
+    return snapshots[route]||null;
   }
   function paint(){
+    // One clock/storage sample supplies counters, both map views, and ranking.
+    // latest() below reads this same immutable frame without advancing time.
+    snapshots=model.readAll();
     const data=current?read(current.route):null,site=read('__site__');
     for(const detail of document.querySelectorAll('.visit-details-link'))detail.setAttribute('aria-label',labels[language]);
     footer.dataset.visitState='ready';footer.removeAttribute('title');

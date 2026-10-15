@@ -7,15 +7,25 @@
   const ink=texture.getContext('2d',{willReadFrequently:true});
   const lightMap=document.createElement('canvas');lightMap.width=texture.width;lightMap.height=texture.height;
   const lightInk=lightMap.getContext('2d',{willReadFrequently:true});
-  const oldMap=document.createElement('canvas'),pulseMap=document.createElement('canvas');
-  oldMap.width=texture.width;oldMap.height=texture.height;pulseMap.width=1024;pulseMap.height=512;
-  const oldInk=oldMap.getContext('2d',{willReadFrequently:true}),pulseInk=pulseMap.getContext('2d',{willReadFrequently:true});
+  const oldMap=document.createElement('canvas');
+  oldMap.width=texture.width;oldMap.height=texture.height;
+  const oldInk=oldMap.getContext('2d',{willReadFrequently:true});
   let land=null,bins=[],visible=false,ready=false,frame=0,last=0,lastPaint=0,longitude=115*RAD,latitude=24*RAD,velocity=0,pointer=null,touchedAt=0,size=640;
-  let priorBins=[],pulses=[],collection='',hasData=false,transitionStart=-1600,pendingTransition=false,lightMix=1,pulseStrength=0,breathTime=0;
-  const seen=new Map(),DURATION=680,PULSE_DURATION=4200;
+  let priorBins=[],collection='',hasData=false,transitionStart=-1600,pendingTransition=false,lightMix=1,lightBreath=1;
+  const DURATION=680;
+  // A wall-clock envelope keeps every light in both views on the same phase.
+  // The short dark rest is fully zero; the cosine easing has no hard edges.
+  const breathing=window.VisitLightBreathing||(window.VisitLightBreathing=Object.freeze({
+    period:5600,
+    sample(time=Date.now()){
+      const phase=((time%5600)+5600)%5600/5600;
+      if(phase<=.08||phase>=.92)return 0;
+      return Math.sin(Math.PI*(phase-.08)/.84)**2;
+    }
+  }));
   const landPromise=window.SiteWorldLandPromise||(window.SiteWorldLandPromise=fetch('assets/world-land.json',{credentials:'omit'}).then(r=>{if(!r.ok)throw new Error('Land map unavailable');return r.json();}));
   const software=document.createElement('canvas');
-  let renderer=null,gl=null,program=null,landTexture=null,lightsTexture=null,oldTexture=null,pulseTexture=null,cpuLand=null,cpuLights=null,cpuOld=null,cpuPulse=null,dirty=true,lastData='';
+  let renderer=null,gl=null,program=null,landTexture=null,lightsTexture=null,oldTexture=null,cpuLand=null,cpuLights=null,cpuOld=null,dirty=true,lastData='';
   const makeShader=(type,source)=>{const shader=gl.createShader(type);gl.shaderSource(shader,source);gl.compileShader(shader);if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(shader));return shader;};
   function initGPU(){
     try{
@@ -23,15 +33,14 @@
       program=gl.createProgram();
       gl.attachShader(program,makeShader(gl.VERTEX_SHADER,'attribute vec2 point;varying vec2 uv;void main(){uv=point;gl_Position=vec4(point,0.,1.);}'));
       gl.attachShader(program,makeShader(gl.FRAGMENT_SHADER,`precision highp float;
-        varying vec2 uv;uniform sampler2D landMap;uniform sampler2D lightsMap;uniform sampler2D previousLightsMap;uniform sampler2D recentLightsMap;
-        uniform vec2 rotation;uniform float pixels;uniform float lightMix;uniform float pulseStrength;uniform float breathTime;uniform float motion;
+        varying vec2 uv;uniform sampler2D landMap;uniform sampler2D lightsMap;uniform sampler2D previousLightsMap;
+        uniform vec2 rotation;uniform float pixels;uniform float lightMix;uniform float lightBreath;
         void main(){vec2 p=uv/0.89;float d=dot(p,p);if(d>1.){gl_FragColor=vec4(0.);return;}
           float z=sqrt(max(0.,1.-d));float c=cos(rotation.y),s=sin(rotation.y);
           float lat=asin(clamp(p.y*c+z*s,-1.,1.));float lon=atan(p.x,z*c-p.y*s)+rotation.x;
           vec2 st=vec2(fract(lon/6.28318530718+0.5),0.5-lat/3.14159265359);
-          vec3 ground=texture2D(landMap,st).rgb;vec4 luminous=texture2D(lightsMap,st),old=texture2D(previousLightsMap,st),recent=texture2D(recentLightsMap,st);
-          float breath=1.-motion*.14*(1.-sin(breathTime*1.08+sin(st.x*36.+st.y*27.)*6.28318530718));
-          vec3 light=mix(old.rgb*old.a,luminous.rgb*luminous.a,lightMix)*breath+recent.rgb*recent.a*pulseStrength;
+          vec3 ground=texture2D(landMap,st).rgb;vec4 luminous=texture2D(lightsMap,st),old=texture2D(previousLightsMap,st);
+          vec3 light=mix(old.rgb*old.a,luminous.rgb*luminous.a,lightMix)*lightBreath;
           float diffuse=.56+.44*max(0.,dot(vec3(p,z),normalize(vec3(-.4,.5,1.))));
           float rim=pow(1.-z,3.5);vec3 color=ground*diffuse+vec3(.055,.075,.085)*rim+light*(.82+.18*z);
           float alpha=1.-smoothstep(1.-3./pixels,1.,d);gl_FragColor=vec4(color,alpha);
@@ -39,10 +48,10 @@
       gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error('Globe shader link failed');gl.useProgram(program);
       const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
       const point=gl.getAttribLocation(program,'point');gl.enableVertexAttribArray(point);gl.vertexAttribPointer(point,2,gl.FLOAT,false,0,0);
-      landTexture=gl.createTexture();lightsTexture=gl.createTexture();oldTexture=gl.createTexture();pulseTexture=gl.createTexture();
+      landTexture=gl.createTexture();lightsTexture=gl.createTexture();oldTexture=gl.createTexture();
       gl.uniform1i(gl.getUniformLocation(program,'landMap'),0);gl.uniform1i(gl.getUniformLocation(program,'lightsMap'),1);
-      gl.uniform1i(gl.getUniformLocation(program,'previousLightsMap'),2);gl.uniform1i(gl.getUniformLocation(program,'recentLightsMap'),3);
-      renderer.addEventListener('webglcontextlost',event=>{event.preventDefault();gl=null;dirty=true;cpuLand=null;cpuLights=null;cpuOld=null;cpuPulse=null;kick();});
+      gl.uniform1i(gl.getUniformLocation(program,'previousLightsMap'),2);
+      renderer.addEventListener('webglcontextlost',event=>{event.preventDefault();gl=null;dirty=true;cpuLand=null;cpuLights=null;cpuOld=null;kick();});
       canvas.dataset.renderer='webgl';
     }catch{gl=null;canvas.dataset.renderer='canvas';}
   }
@@ -55,8 +64,6 @@
     upload(texture,0,landTexture);cpuLand=null;
   }
   const identity=point=>String(point.id??(point.lat+','+point.lon));
-  const birth=point=>Number.isFinite(point.bornAt)?point.bornAt:0;
-  const pulseKey=point=>identity(point)+':'+birth(point);
   const grain=point=>{let n=2166136261;for(const c of identity(point)){n^=c.charCodeAt(0);n=Math.imul(n,16777619);}return .82+(n>>>0)%100/250;};
   function haloWeights(points){
     const grid=new Map(),key=(lat,lon)=>lat+','+((lon+540)%360-180);
@@ -67,45 +74,39 @@
       return 1/Math.max(1,nearby)**.28;
     });
   }
-  function paintField(target,points,pulse=false){
-    const w=pulse?1024:2048,h=w/2;target.clearRect(0,0,w,h);target.globalCompositeOperation='source-over';
-    const weights=pulse?[]:haloWeights(points);
+  function paintField(target,points){
+    const w=2048,h=w/2;target.clearRect(0,0,w,h);target.globalCompositeOperation='source-over';
+    const weights=haloWeights(points);
     for(const [i,bin] of points.entries()){
       const x=(bin.lon+180)/360*w,y=(90-bin.lat)/180*h;
       // Bound the outer glow in map degrees, independent of viewport size.
       // City cores remain visible; one Seoul light must not illuminate a country.
-      const strength=Math.log2(bin.count+1),variation=grain(bin),r=pulse?1.15:Math.min(2.2,(1.55+Math.min(.55,strength*.055))*variation),core=Math.min(2,1.8+Math.min(.15,strength*.015)+(variation-1)*.08),stretch=Math.min(3,1/Math.max(.34,Math.cos(bin.lat*RAD)));
+      const strength=Math.log2(bin.count+1),variation=grain(bin),r=Math.min(2.2,(1.55+Math.min(.55,strength*.055))*variation),core=Math.min(2,1.8+Math.min(.15,strength*.015)+(variation-1)*.08),stretch=Math.min(3,1/Math.max(.34,Math.cos(bin.lat*RAD)));
       const wraps=[0];if(x-r*stretch<0)wraps.push(w);if(x+r*stretch>w)wraps.push(-w);
       for(const wrap of wraps){
         target.save();target.translate(x+wrap,y);target.scale(stretch,1);
         const glow=target.createRadialGradient(0,0,0,0,0,r);
-        if(pulse){glow.addColorStop(0,'rgba(255,237,184,.86)');glow.addColorStop(.18,'rgba(255,220,149,.46)');glow.addColorStop(.5,'rgba(244,186,85,.12)');}
-        else{glow.addColorStop(0,'rgba(255,224,160,.76)');glow.addColorStop(.2,'rgba(251,205,121,.42)');glow.addColorStop(.56,'rgba(235,167,68,.16)');}
+        glow.addColorStop(0,'rgba(255,224,160,.76)');glow.addColorStop(.2,'rgba(251,205,121,.42)');glow.addColorStop(.56,'rgba(235,167,68,.16)');
         glow.addColorStop(1,'rgba(230,155,55,0)');
-        target.globalAlpha=pulse?1:weights[i];target.fillStyle=glow;target.fillRect(-r,-r,r*2,r*2);
-        if(!pulse){target.globalAlpha=.82+.16*weights[i];target.beginPath();target.arc(0,0,core,0,TAU);target.fillStyle='rgba(255,218,108,.98)';target.fill();}target.restore();
+        target.globalAlpha=weights[i];target.fillStyle=glow;target.fillRect(-r,-r,r*2,r*2);
+        target.globalAlpha=.82+.16*weights[i];target.beginPath();target.arc(0,0,core,0,TAU);target.fillStyle='rgba(255,218,108,.98)';target.fill();target.restore();
       }
     }
     target.globalAlpha=1;
   }
   function drawLights(){
-    paintField(oldInk,priorBins);paintField(lightInk,bins);paintField(pulseInk,pulses,true);
-    upload(lightMap,1,lightsTexture);upload(oldMap,2,oldTexture);upload(pulseMap,3,pulseTexture);
-    cpuLights=null;cpuOld=null;cpuPulse=null;lastPaint=0;dirty=true;kick();
-  }
-  function selectRecent(points){
-    const now=Date.now();return points.filter(point=>birth(point)>now-1800000&&birth(point)<=now+1000&&!seen.has(pulseKey(point))).sort((a,b)=>birth(b)-birth(a)).slice(0,1);
+    paintField(oldInk,priorBins);paintField(lightInk,bins);
+    upload(lightMap,1,lightsTexture);upload(oldMap,2,oldTexture);
+    cpuLights=null;cpuOld=null;lastPaint=0;dirty=true;kick();
   }
   function beginTransition(){
     transitionStart=performance.now();pendingTransition=false;
-    for(const point of pulses)seen.set(pulseKey(point),birth(point));while(seen.size>512)seen.delete(seen.keys().next().value);
-    lightMix=reduced.matches?1:0;pulseStrength=0;lastPaint=0;dirty=true;
+    lightMix=reduced.matches?1:0;lastPaint=0;dirty=true;
   }
   function updateTransition(now){
-    breathTime=now/1000;if(!reduced.matches)dirty=true;
+    const brightness=reduced.matches?1:breathing.sample();
     const elapsed=now-transitionStart,blend=reduced.matches?1:Math.max(0,Math.min(1,elapsed/DURATION)),mix=blend*blend*(3-2*blend);
-    const progress=Math.max(0,Math.min(1,elapsed/PULSE_DURATION)),pulse=reduced.matches||!pulses.length?0:Math.sin(progress*Math.PI)**2*.52;
-    if(mix!==lightMix||pulse!==pulseStrength)dirty=true;lightMix=mix;pulseStrength=pulse;
+    if(mix!==lightMix||brightness!==lightBreath)dirty=true;lightMix=mix;lightBreath=brightness;
   }
   function cpuRender(){
     // Software fallback keeps the same geographic texture at a bounded size.
@@ -113,48 +114,32 @@
     if(!cpuLand)cpuLand=ink.getImageData(0,0,2048,1024).data;
     if(!cpuLights)cpuLights=lightInk.getImageData(0,0,2048,1024).data;
     if(lightMix<1&&!cpuOld)cpuOld=oldInk.getImageData(0,0,2048,1024).data;
-    if(pulseStrength>0&&!cpuPulse)cpuPulse=pulseInk.getImageData(0,0,1024,512).data;
-    if(lightMix===1)cpuOld=null;if(pulseStrength===0)cpuPulse=null;
+    if(lightMix===1)cpuOld=null;
     const image=out.createImageData(n,n),data=image.data,cs=Math.cos(latitude),sn=Math.sin(latitude);
     for(let y=0;y<n;y++)for(let x=0;x<n;x++){
       const a=(x-c)/r,b=(c-y)/r,d=a*a+b*b;if(d>1)continue;const z=Math.sqrt(1-d);
       const lat=Math.asin(b*cs+z*sn),lon=Math.atan2(a,z*cs-b*sn)+longitude;
       const tx=Math.floor(((lon/TAU+.5)%1+1)%1*2048),ty=Math.min(1023,Math.max(0,Math.floor((.5-lat/Math.PI)*1024))),j=(ty*2048+tx)*4,i=(y*n+x)*4;
-      const diffuse=.56+.44*Math.max(0,(-.4*a+.5*b+z)/1.187),rim=(1-z)**3.5,alpha=cpuLights[j+3]/255,oldAlpha=cpuOld?cpuOld[j+3]/255:0,p=((ty>>1)*1024+(tx>>1))*4,pulseAlpha=cpuPulse?cpuPulse[p+3]/255:0;
-      const breath=reduced.matches?1:.86+.14*Math.sin(breathTime*1.08+Math.sin((tx/2048)*36+(ty/1024)*27)*TAU);
+      const diffuse=.56+.44*Math.max(0,(-.4*a+.5*b+z)/1.187),rim=(1-z)**3.5,alpha=cpuLights[j+3]/255,oldAlpha=cpuOld?cpuOld[j+3]/255:0;
       for(let k=0;k<3;k++){
-        const emission=((cpuOld?cpuOld[j+k]*oldAlpha*(1-lightMix):0)+cpuLights[j+k]*alpha*lightMix)*breath+(cpuPulse?cpuPulse[p+k]*pulseAlpha*pulseStrength:0);
+        const emission=((cpuOld?cpuOld[j+k]*oldAlpha*(1-lightMix):0)+cpuLights[j+k]*alpha*lightMix)*lightBreath;
         data[i+k]=Math.min(255,cpuLand[j+k]*diffuse+[14,19,22][k]*rim+emission*(.82+.18*z));
       }
       data[i+3]=Math.min(255,(1-d)*n/3*255);
     }
     software.width=n;software.height=n;software.getContext('2d').putImageData(image,0,0);out.clearRect(0,0,size,size);out.drawImage(software,0,0,size,size);
   }
-  function drawArrivalMarkers(){
-    let shown=0;
-    if(!reduced.matches&&pulses.length){
-      const progress=Math.max(0,Math.min(1,(breathTime*1000-transitionStart)/PULSE_DURATION)),opacity=Math.sin(progress*Math.PI)**2*.72;
-      if(opacity>0)for(const bin of pulses){
-        const phi=bin.lon*RAD-longitude,lat=bin.lat*RAD,cl=Math.cos(lat),sl=Math.sin(lat),cs=Math.cos(latitude),sn=Math.sin(latitude);
-        const z=sl*sn+cl*Math.cos(phi)*cs;if(z<=.02)continue;
-        const x=size/2+size*.445*cl*Math.sin(phi),y=size/2-size*.445*(sl*cs-cl*Math.cos(phi)*sn),scale=size/(canvas.getBoundingClientRect().width||400);
-        // A hollow location cue is separate from the bounded geographic glow.
-        out.globalAlpha=opacity;out.lineWidth=Math.max(.7,scale*.65);out.strokeStyle='#f5ce79';out.beginPath();out.arc(x,y,(3.5+progress*5)*scale,0,TAU);out.stroke();shown++;
-      }
-    }
-    out.globalAlpha=1;canvas.dataset.newLightVisible=String(shown);
-  }
   function paint(){
     if(!ready)return;
     if(gl){
       if(renderer.width!==size){renderer.width=size;renderer.height=size;gl.viewport(0,0,size,size);}
       gl.uniform2f(gl.getUniformLocation(program,'rotation'),longitude,latitude);gl.uniform1f(gl.getUniformLocation(program,'pixels'),size);
-      gl.uniform1f(gl.getUniformLocation(program,'breathTime'),breathTime);gl.uniform1f(gl.getUniformLocation(program,'motion'),reduced.matches?0:1);
-      gl.uniform1f(gl.getUniformLocation(program,'lightMix'),lightMix);gl.uniform1f(gl.getUniformLocation(program,'pulseStrength'),pulseStrength);gl.drawArrays(gl.TRIANGLES,0,6);
+      gl.uniform1f(gl.getUniformLocation(program,'lightBreath'),lightBreath);
+      gl.uniform1f(gl.getUniformLocation(program,'lightMix'),lightMix);gl.drawArrays(gl.TRIANGLES,0,6);
       out.clearRect(0,0,size,size);out.drawImage(renderer,0,0);
     }else cpuRender();
-    drawArrivalMarkers();dirty=false;canvas.dataset.longitude=String(Math.round(longitude/RAD*10)/10);canvas.dataset.latitude=String(Math.round(latitude/RAD*10)/10);
-    canvas.dataset.lightBlend=lightMix.toFixed(3);canvas.dataset.lightPulse=pulseStrength.toFixed(3);canvas.dataset.lightBreath=(reduced.matches?1:.86+.14*Math.sin(breathTime*1.08)).toFixed(3);
+    canvas.dataset.newLightVisible='0';dirty=false;canvas.dataset.longitude=String(Math.round(longitude/RAD*10)/10);canvas.dataset.latitude=String(Math.round(latitude/RAD*10)/10);
+    canvas.dataset.lightBlend=lightMix.toFixed(3);canvas.dataset.lightPulse='0.000';canvas.dataset.lightBreath=lightBreath.toFixed(3);
   }
   function tick(now){
     frame=0;if(!visible||document.hidden||!ready){canvas.dataset.motionState='paused';return;}canvas.dataset.motionState=reduced.matches?'reduced':'active';
@@ -172,12 +157,12 @@
   function setData(value,pageKey=''){
     const next=(Array.isArray(value)?value:[]).filter(b=>Number.isFinite(b.lat)&&Math.abs(b.lat)<=90&&Number.isFinite(b.lon)&&Math.abs(b.lon)<=180&&Number.isSafeInteger(b.count)&&b.count>0);
     const key=JSON.stringify([pageKey,next]);if(key===lastData)return;
-    const selected=selectRecent(next),recentIds=new Set(selected.map(identity)),samePage=hasData&&collection===pageKey;
-    priorBins=samePage?bins:next.flatMap(point=>recentIds.has(identity(point))?(point.count>1?[{...point,count:point.count-1}]:[]):[point]);
-    pendingTransition=Boolean(samePage||selected.length);lastData=key;collection=pageKey;bins=next;pulses=selected;hasData=next.length>0;
-    if(!pendingTransition){transitionStart=performance.now()-PULSE_DURATION;lightMix=1;pulseStrength=0;}
+    const samePage=hasData&&collection===pageKey;
+    priorBins=samePage?bins:next;
+    pendingTransition=Boolean(samePage);lastData=key;collection=pageKey;bins=next;hasData=next.length>0;
+    if(!pendingTransition){transitionStart=performance.now()-DURATION;lightMix=1;}
     else if(visible)beginTransition();
-    canvas.dataset.locatedVisits=String(bins.reduce((n,b)=>n+b.count,0));canvas.dataset.lightCount=String(bins.length);canvas.dataset.newLights=String(pulses.length);
+    canvas.dataset.locatedVisits=String(bins.reduce((n,b)=>n+b.count,0));canvas.dataset.lightCount=String(bins.length);canvas.dataset.newLights='0';
     if(ready)drawLights();
   }
   function setVisible(value){visible=value;canvas.dataset.motionState=value?(reduced.matches?'reduced':'active'):'paused';if(visible){if(pendingTransition)beginTransition();resize();kick();}else{cancelAnimationFrame(frame);frame=0;pointer=null;canvas.classList.remove('is-dragging');}}

@@ -254,6 +254,7 @@
     const finalize=()=>{
       commit();entry.hidden=!toCover;shell.inert=toCover;
       window.FlightProgress?.setVisible(!toCover);
+      if(isFirst)delete doc.dataset.siteBooting;
     };
     finishPendingRoute=finalize;
     setMenu(false);setOutline(false);

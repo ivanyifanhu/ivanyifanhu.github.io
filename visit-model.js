@@ -1,4 +1,4 @@
-/* v17 generated geographic display: these counts, locations and event times are
+/* v18 generated geographic display: these counts, locations and event times are
  * a deterministic presentation model, not measured visits or IP locations.
  * Nothing here reads or writes the retained real analytics database.
  * City-coordinate attributions: assets/visit-city-sources.json.
@@ -10,7 +10,7 @@
   'use strict';
   const KEY='ivan-visit-model-v14',EPOCH=Date.UTC(2026,9,15),BASE_TOTAL=386720;
   const GEO_EPOCH=Date.UTC(2026,9,15,5),LIMIT=Date.UTC(2100,0,1),DAY=86400000;
-  const GENERATED_TAIL=1024,LOCAL_TAIL=256,SITE_TAIL=512;
+  const GENERATED_TAIL=1024,LOCAL_TAIL=256;
   // Named WGS84 city-core allowlist. Sampling stays within roughly 0.2–0.7 km
   // of settled city centers; no random globe coordinates or wilderness anchors.
   const ATLAS=[
@@ -121,7 +121,7 @@
   const random=seed=>{let x=seed>>>0;x^=x>>>16;x=Math.imul(x,0x7feb352d);x^=x>>>15;x=Math.imul(x,0x846ca68b);x^=x>>>16;return (x>>>0)/4294967296;};
   const integer=value=>Number.isSafeInteger(value)&&value>=0&&value<=1000000000?value:0;
   const timestamp=value=>Number.isFinite(value)&&value>=0&&value<=LIMIT?value:0;
-  const pageWeight=route=>({entry:23,about:15,together:11,creation:12,research:12,blog:9,search:4,'about/cv':7,'together/critical-theory':8,'research/machine-and-assemblage':8,'creation/panopticon':6,'creation/critique-of-pure-jargon':7}[route]||3+hash(route)%4);
+  const pageWeight=route=>({entry:23,about:15,together:11,creation:12,research:12,blog:9,search:4,'about/cv':7,'together/critical-theory':26,'research/machine-and-assemblage':8,'creation/panopticon':6,'creation/critique-of-pure-jargon':7}[route]||3+hash(route)%4);
   function nearNode(node,seed){
     const radius=node[2]*Math.sqrt(random(seed^0x42b8e9))*0.92,angle=random(seed^0x926e7b)*Math.PI*2;
     return {lat:+(node[0]+Math.sin(angle)*radius).toFixed(7),lon:+(node[1]+Math.cos(angle)*radius/Math.max(.35,Math.cos(node[0]*Math.PI/180))).toFixed(7)};
@@ -140,7 +140,7 @@
     let storage=options.storage;
     if(storage===undefined){try{storage=window.localStorage;}catch(_){storage=null;}}
     const weights=routes.map(pageWeight),weightTotal=weights.reduce((a,b)=>a+b,0)||1;
-    const bases={},periods={},phases={},shapes=new Map(),geometry=new Map(),routeCells=new Map();
+    const bases={},periods={},phases={},shapes=new Map(),geometry=new Map();
     let allocated=0;
     routes.forEach((route,i)=>{const end=Math.round(BASE_TOTAL*weights.slice(0,i+1).reduce((a,b)=>a+b,0)/weightTotal);bases[route]=end-allocated;allocated=end;periods[route]=Math.round(23000*weightTotal/weights[i]);phases[route]=hash(route+'phase')%periods[route];});
     const state={version:1,cursor:0,increments:{},last:{},lights:{}};
@@ -203,7 +203,7 @@
         const cells=region.cells.map((cell,i)=>{
         const node=region.nodes[Math.floor(i/(region.nodes.length>1?5:12))];
         const point={...cell,id:cell.id+':'+route,...nearNode(node,hash(route+':field:'+cell.id)),group:region.group,weight:cell.weight*affinity(region)};
-        routeCells.set(point.id,point);return point;
+        return point;
         });weightedRegions.set(region.id,cells);return cells;
       };
       const selected=ranked.slice(0,width),candidates=selected.filter(region=>region.id!=='xuzhou').flatMap(weighted);
@@ -277,19 +277,18 @@
     }
     function siteBins(total){
       if(globalGeometry?.total===total)return globalGeometry.bins;
-      const ordinary=new Map(),events=[];
+      // The world is the exact union of the same page snapshots used by globes.
+      // Only pageBins owns historical compaction. No second world-only tail,
+      // position resampling, independent lights, or extra visits are introduced.
+      // Reuse frozen page points so global synthesis does not duplicate objects.
+      const combined=new Map();
       for(const route of routes)for(const point of pageBins(route)){
-        if(point.cellId)events.push(point);else add(ordinary,point,point.count,point.bornAt);
+        const previous=combined.get(point.id);
+        combined.set(point.id,previous?Object.freeze({...previous,
+          count:previous.count+point.count,bornAt:Math.max(previous.bornAt,point.bornAt)
+        }):point);
       }
-      // Keep each route's latest local arrival explicit even after a device clock
-      // rollback: its new light must remain visible in the whole-site map too.
-      const newestLocal=new Set(routes.filter(route=>state.increments[route]>0).map(route=>'l:'+route+':'+state.increments[route]));
-      events.sort((a,b)=>Number(newestLocal.has(b.id))-Number(newestLocal.has(a.id))||b.bornAt-a.bornAt||a.id.localeCompare(b.id));
-      events.forEach((point,i)=>{
-        if(i<SITE_TAIL)add(ordinary,point,point.count,point.bornAt,point.eventKind);
-        else add(ordinary,routeCells.get(point.cellId),point.count,GEO_EPOCH-120000);
-      });
-      const bins=Object.freeze([...ordinary.values()].map(Object.freeze));globalGeometry={total,bins};return bins;
+      const bins=Object.freeze([...combined.values()]);globalGeometry={total,bins};return bins;
     }
     function snapshot(route,wall){
       if(route!=='__site__'&&!valid(route))return null;
@@ -300,6 +299,16 @@
       cache.set(route,result);return result;
     }
     function read(route){return snapshot(route,sample());}
+    function readAll(){
+      // Count every manifest route once, including cover and search. Detail
+      // screens are read-only views of their source and are never extra routes.
+      // A single wall/cursor sample prevents a clock tick between the popular
+      // card, individual globes, and world total from producing mismatched UI.
+      const wall=sample(),result={};
+      for(const route of routes)result[route]=snapshot(route,wall);
+      result.__site__=snapshot('__site__',wall);
+      return Object.freeze(result);
+    }
     function visit(route){
       const wall=sample();if(!valid(route))return snapshot(route,wall);
       const n=(state.increments[route]||0)+1,at=Math.max(0,Math.floor(wall/1000)*1000-1000);
@@ -307,7 +316,7 @@
       state.lights[route]=[...(state.lights[route]||[]),{n,at}].slice(-LOCAL_TAIL);
       save();return snapshot(route,wall);
     }
-    return Object.freeze({read,visit});
+    return Object.freeze({read,readAll,visit,aggregateRoutes:Object.freeze([...routes])});
   }
-  window.SiteVisitModel=Object.freeze({create,storageKey:KEY,provenance:'generated-time-display',baseline:BASE_TOTAL,epoch:new Date(EPOCH).toISOString(),geographyVersion:17,cityCores:Object.freeze(ATLAS.map(region=>Object.freeze({id:region.id,group:region.group,nodes:Object.freeze(region.nodes.map(node=>Object.freeze([...node])))})))});
+  window.SiteVisitModel=Object.freeze({create,storageKey:KEY,provenance:'generated-time-display',baseline:BASE_TOTAL,epoch:new Date(EPOCH).toISOString(),geographyVersion:18,cityCores:Object.freeze(ATLAS.map(region=>Object.freeze({id:region.id,group:region.group,nodes:Object.freeze(region.nodes.map(node=>Object.freeze([...node])))})))});
 })();
