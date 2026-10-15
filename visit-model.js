@@ -128,7 +128,7 @@
   const random=seed=>{let x=seed>>>0;x^=x>>>16;x=Math.imul(x,0x7feb352d);x^=x>>>15;x=Math.imul(x,0x846ca68b);x^=x>>>16;return (x>>>0)/4294967296;};
   const integer=value=>Number.isSafeInteger(value)&&value>=0&&value<=1000000000?value:0;
   const timestamp=value=>Number.isFinite(value)&&value>=0&&value<=LIMIT?value:0;
-  const pageWeight=route=>({entry:23,about:15,together:11,creation:12,research:12,blog:9,search:4,'about/cv':7,'together/critical-theory':26,'research/machine-and-assemblage':8,'creation/panopticon':6,'creation/critique-of-pure-jargon':7}[route]||3+hash(route)%4);
+  const pageWeight=route=>({entry:23,about:15,together:11,creation:11,research:17,blog:9,search:4,'about/cv':7,'together/critical-theory':26,'research/machine-and-assemblage':8,'creation/panopticon':6,'creation/critique-of-pure-jargon':7}[route]||3+hash(route)%4)+(hash('weight:'+route)%997)/997;
   function nearNode(node,seed){
     const radius=node[2]*Math.sqrt(random(seed^0x42b8e9))*0.92,angle=random(seed^0x926e7b)*Math.PI*2;
     return {lat:+(node[0]+Math.sin(angle)*radius).toFixed(7),lon:+(node[1]+Math.cos(angle)*radius/Math.max(.35,Math.cos(node[0]*Math.PI/180))).toFixed(7)};

@@ -167,7 +167,13 @@
   }
 
   function snapshot(element, rect, {shallow = false, header = false} = {}, paint) {
-    const clone = element.cloneNode(!shallow);
+    let clone = element.cloneNode(!shallow);
+    // A shallow DETAILS node creates the browser's localized default summary.
+    // It is only a painted border in the snapshot, so use a neutral box.
+    if(shallow&&element.tagName==='DETAILS'){
+      clone=document.createElement('div');
+      [...element.attributes].forEach(attribute=>clone.setAttribute(attribute.name,attribute.value));
+    }
     const sources = shallow ? [element] : [element, ...element.querySelectorAll('*')];
     const copies = shallow ? [clone] : [clone, ...clone.querySelectorAll('*')];
     const omitted = new Set();
@@ -209,8 +215,20 @@
       }
       if (source instanceof HTMLInputElement || source instanceof HTMLTextAreaElement) copy.value = source.value;
       if (source instanceof HTMLImageElement) {
-        copy.loading = 'eager';
-        copy.src = source.currentSrc || source.src;
+        // Freeze the already-decoded pixels before hiding the original. Cloned
+        // IMG nodes can defer decoding until after the fold's first frame.
+        if(source.complete&&source.naturalWidth){
+          const bitmap=document.createElement('canvas');
+          [...copy.attributes].forEach(attribute=>bitmap.setAttribute(attribute.name,attribute.value));
+          const size=source.getBoundingClientRect();
+          const scale=Math.min(1,Math.max(32,Math.min(1024,size.width*1.25))/source.naturalWidth);
+          bitmap.width=Math.max(1,Math.round(source.naturalWidth*scale));
+          bitmap.height=Math.max(1,Math.round(source.naturalHeight*scale));
+          try{
+            bitmap.getContext('2d').drawImage(source,0,0,bitmap.width,bitmap.height);
+            if(copy===clone)clone=bitmap;else copy.replaceWith(bitmap);
+          }catch{copy.loading='eager';copy.src=source.currentSrc||source.src;}
+        }
       }
       if (source instanceof HTMLCanvasElement) {
         // Canvas.cloneNode() has an empty bitmap. Preserve the current painted
@@ -466,7 +484,14 @@
         const outgoing=makeSheet(page);
         state.layer=outgoing.layer;
         // Assemble everything first, then atomically replace the live surface.
+        // Warm the outgoing ribbons while the live document remains visible.
+        // Only switch surfaces after two paints; this also avoids Safari's
+        // first-frame canvas upload flash on large project illustrations.
+        outgoing.layer.style.opacity='.002';
         mountSheet(outgoing);
+        await nextFrame();await nextFrame();
+        if(!current())return;
+        outgoing.layer.style.removeProperty('opacity');
         root.dataset.languageCurtain=cover?'cover':'page';
         root.dataset.languageTransition='out';
         outgoingMotion=animateSheet(state,outgoing,false);

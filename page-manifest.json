@@ -2,7 +2,7 @@
   "version": 1,
   "site": {
     "publishedAt": "2026-10-15T03:19:06Z",
-    "updatedAt": "2026-10-15T14:40:55Z"
+    "updatedAt": "2026-10-15T15:47:14Z"
   },
   "pages": {
     "about": {
@@ -23,7 +23,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/media/portrait.png"
     },
@@ -45,7 +45,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/illustrations/theory.png"
     },
@@ -67,7 +67,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/illustrations/panopticon.png"
     },
@@ -89,9 +89,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
-      "image": "assets/illustrations/machine.png"
+      "image": "assets/illustrations/foucault-in-china.png"
     },
     "blog": {
       "titles": {
@@ -111,7 +111,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/blog/summer.png"
     },
@@ -133,7 +133,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": false,
       "image": "assets/blog/summer.png"
     },
@@ -155,7 +155,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": false,
       "image": "assets/blog/summer.png"
     },
@@ -180,7 +180,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/media/portrait.png"
     },
@@ -208,7 +208,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/blog/summer.png"
     },
@@ -233,7 +233,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/illustrations/theory.png"
     },
@@ -258,9 +258,34 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/illustrations/machine.png"
+    },
+    "research/foucault-in-china": {
+      "titles": {
+        "en": "“Ubiquitous Yet Without Influence”: Foucault in China, or, the Governmentalization of Critique—The “Practicing Foucault in Reverse” Controversy",
+        "ja": "「遍在しながらも影響を与えない」：中国におけるフーコー、あるいは批判の統治化――「フーコーを逆に実践する」論争を中心に",
+        "zh": "“无处不在又毫无影响”：福柯在中国，或批判的治理化——以“逆练福柯”事件为中心"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Studies",
+          "“Ubiquitous Yet Without Influence”: Foucault in China, or, the Governmentalization of Critique—The “Practicing Foucault in Reverse” Controversy"
+        ],
+        "ja": [
+          "研究",
+          "「遍在しながらも影響を与えない」：中国におけるフーコー、あるいは批判の統治化――「フーコーを逆に実践する」論争を中心に"
+        ],
+        "zh": [
+          "研究",
+          "“无处不在又毫无影响”：福柯在中国，或批判的治理化——以“逆练福柯”事件为中心"
+        ]
+      },
+      "publishedAt": "2026-10-15T15:47:14Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
+      "rankable": true,
+      "image": "assets/illustrations/foucault-in-china.png"
     },
     "creation/panopticon": {
       "titles": {
@@ -283,7 +308,7 @@
         ]
       },
       "publishedAt": "2026-10-15T03:19:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/illustrations/panopticon.png"
     },
@@ -308,7 +333,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/illustrations/practice.png"
     },
@@ -333,7 +358,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/illustrations/jargon.png"
     },
@@ -358,7 +383,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/illustrations/busa.png"
     },
@@ -383,7 +408,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/illustrations/melancholy.png"
     },
@@ -408,7 +433,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/illustrations/spirit.png"
     },
@@ -433,7 +458,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/illustrations/subjectivity.png"
     },
@@ -458,7 +483,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/illustrations/beast.png"
     },
@@ -486,7 +511,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/blog/crime.png"
     },
@@ -514,7 +539,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/blog/days.png"
     },
@@ -542,7 +567,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/blog/open.png"
     },
@@ -570,7 +595,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/blog/disco.png"
     },
@@ -598,7 +623,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-15T14:40:55Z",
+      "updatedAt": "2026-10-15T15:47:14Z",
       "rankable": true,
       "image": "assets/blog/immediacy.png"
     }

@@ -40,7 +40,7 @@
         blocks[l]=candidates.filter(Boolean).map(el=>({key:el.dataset.readingKey||el.dataset.source,text:plain(el,l)})).filter(item=>item.text);
       });
       const category=route.split('/')[0];
-      const group=category==='blog'?[...document.querySelectorAll('[data-section="blog"] .blog-group')].find(group=>[...group.querySelectorAll('a[href]')].some(link=>link.getAttribute('href')==='#'+route)):null;
+      const group=category==='blog'?[...document.querySelectorAll('[data-section="blog"] .blog-group')].find(group=>[...group.querySelectorAll('a[href]')].some(link=>(link.dataset.routeHref||link.getAttribute('href'))==='#'+route)):null;
       const categoryLabels=Object.fromEntries(languages.map(l=>{
         const label=section.getAttribute('data-category-label-'+l);
         const subgroup=group?.querySelector('h2 [data-lang="'+l+'"]')?.textContent.trim();

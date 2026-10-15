@@ -54,23 +54,69 @@
     }
     return record.id;
   }
-  function rememberSearch(){
-    if(active==='search'&&entry.hidden&&!finishPendingRoute&&!doc.dataset.languageTransition)window.SiteSearch?.remember(renderedHistoryEntry);
+  // Save each history entry separately: repeated visits to one article may
+  // have different reading positions and disclosure states.
+  const positionKey='ivan-reading-history-v20';
+  let readingPositions={};
+  try{readingPositions=JSON.parse(safeGet(positionKey)||'{}');}catch{}
+  let returningToParent=null;
+  const routePage=()=>entry.hidden?sections.find(s=>s.dataset.section===active):entry;
+  function rememberPosition(){
+    if(!renderedHistoryEntry||finishPendingRoute||doc.dataset.languageTransition)return;
+    const page=routePage();
+    if(!page)return;
+    readingPositions[renderedHistoryEntry]={
+      route:entry.hidden?active:'entry',y:scrollY,time:Date.now(),
+      details:[...page.querySelectorAll('details')].filter(el=>!el.closest('[data-lang][hidden]'))
+        .map((el,i)=>[el.dataset.readingKey||el.dataset.source||String(i),el.open])
+    };
+    const keys=Object.keys(readingPositions).sort((a,b)=>readingPositions[b].time-readingPositions[a].time);
+    keys.slice(80).forEach(key=>delete readingPositions[key]);
+    safeSet(positionKey,JSON.stringify(readingPositions));
+    if(active==='search'&&entry.hidden)window.SiteSearch?.remember(renderedHistoryEntry);
+  }
+  function restoreReadingPosition(record){
+    if(!record)return;
+    const states=new Map(record.details||[]),page=sections.find(s=>s.dataset.section===active);
+    [...(page?.querySelectorAll('details')||[])].filter(el=>!el.closest('[data-lang][hidden]')).forEach((el,i)=>{
+      const key=el.dataset.readingKey||el.dataset.source||String(i);
+      if(states.has(key))el.open=states.get(key);
+    });
+    scrollTo({top:record.y||0,behavior:'instant'});
   }
   const labels = {
     en: {about:'About', together:'Play/Game Together', creation:'Creation',research:'Studies',blog:'Notes',menu:'Menu',close:'Close'},
     ja: {about:'私について', together:'一緒にプレイ/ゲーム', creation:'創作',research:'研究',blog:'ノート',menu:'メニュー',close:'閉じる'},
     zh: {about:'关于', together:'一起玩/游戏', creation:'创作',research:'研究',blog:'札记',menu:'栏目',close:'关闭'}
   };
+  function syncMetadata(route){
+    const page=JSON.parse(document.getElementById('page-manifest').textContent).pages[route];
+    const noindex=!page||route==='search';
+    let robots=document.querySelector('meta[name="robots"]');
+    if(!robots){robots=document.createElement('meta');robots.name='robots';document.head.append(robots);}
+    robots.content=noindex?'noindex,follow':'index,follow';
+    if(noindex)return;
+    const target=(r,l)=>location.origin+'/pages/'+l+'--'+r.replaceAll('/','--')+'.html';
+    const canonical=target(route,language);
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href',canonical);
+    document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el=>el.href=target(route,el.hreflang==='x-default'?'en':el.hreflang));
+    document.querySelector('meta[name="description"]')?.setAttribute('content',page.titles[language]+' — Ivan Yi-fan Hu / 胡一帆');
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content',page.titles[language]+' — Ivan Yi-fan Hu');
+    document.querySelector('meta[property="og:url"]')?.setAttribute('content',canonical);
+    document.querySelector('meta[property="og:image"]')?.setAttribute('content',location.origin+'/'+page.image);
+    document.querySelectorAll('a[data-route-href]').forEach(el=>el.href=target(el.dataset.routeHref.slice(1),language));
+    const data=document.getElementById('structured-page');
+    if(data){const item=JSON.parse(data.textContent);item['@type']=route==='about'?'ProfilePage':'WebPage';item.name=page.titles[language];item.url=canonical;item.inLanguage=language;item.dateModified=page.updatedAt;item.datePublished=page.publishedAt;if(route==='about')item.mainEntity={'@type':'Person',name:'Ivan Yi-fan Hu',alternateName:'胡一帆',url:canonical};else delete item.mainEntity;data.textContent=JSON.stringify(item);}
+  }
   function updateTitle() {
     if(location.hash.split('?')[0]==='#entry'){
-      document.title='Ivan Yi-fan Hu · 胡一帆';
+      document.title='Ivan Yi-fan Hu · 胡一帆';syncMetadata('entry');
       return;
     }
     const section = sections.find(s => s.dataset.section === active);
     const heading = section?.querySelector('h1 [data-lang="'+language+'"]');
     const name = heading?.textContent || labels[language][active.split('/')[0]];
-    document.title = `${name} — Ivan Yi-fan Hu`;
+    document.title = `${name} — Ivan Yi-fan Hu`;syncMetadata(active);
   }
   function applyLanguage(value) {
     language = value;
@@ -98,7 +144,7 @@
   function setLanguage(value) {
     cancelTocNavigation();
     settleRoute();
-    rememberSearch();
+    rememberPosition();
     window.SiteSearch?.cancel();
     const url=new URL(location.href);
     const [page,query='']=url.hash.slice(1).split('?');
@@ -108,7 +154,7 @@
     }
     const expectedHref=location.href;
     const applyCurrentLanguage=next=>{if(location.href!==expectedHref){route();return;}applyLanguage(next);};
-    return window.LanguageFlow.change({value,page:entry.hidden?sections.find(s=>s.dataset.section===active):entry,apply:applyCurrentLanguage,onSettled:()=>{buildToc();window.FlightProgress?.update();requestAnimationFrame(rememberSearch);}});
+    return window.LanguageFlow.change({value,page:entry.hidden?sections.find(s=>s.dataset.section===active):entry,apply:applyCurrentLanguage,onSettled:()=>{buildToc();window.FlightProgress?.update();requestAnimationFrame(rememberPosition);}});
   }
   function syncOverlays(){
     const open=menuOpen||outlineOpen;
@@ -201,7 +247,7 @@
     cancelTocNavigation();
     // The address already points at the destination on popstate/hashchange;
     // save the still-visible result page under the entry it actually belongs to.
-    rememberSearch();
+    rememberPosition();
     routeAddress=location.href;
     const targetHistoryEntry=historyEntry();
     const ticket=++routeSerial;
@@ -219,6 +265,9 @@
     const toCover=name==='entry'||(isFirst&&!name&&!safeGet('homepage-v2-entered'));
     const fromCover=!entry.hidden;
     const searchReturn=name==='search'?window.SiteSearch?.recalled(targetHistoryEntry,routeParams.get('q')):null;
+    const readingReturn=readingPositions[targetHistoryEntry]||
+      (returningToParent===name?Object.values(readingPositions).filter(p=>p.route===name).sort((a,b)=>b.time-a.time)[0]:null);
+    returningToParent=null;
     let userScrolled=false;
     if(routeParams.has('hit')){
       const intent=event=>{
@@ -246,6 +295,7 @@
           window.SiteSearch?.render(routeParams.get('q'),language);
         }
         showSection(name||'about',false,searchReturn);
+        if(readingReturn&&!searchReturn)restoreReadingPosition(readingReturn);
         safeSet('homepage-v2-entered','1');shell.inert=false;
       }
       window.SiteVisits?.show(toCover?'entry':active);
@@ -282,8 +332,8 @@
     detachRouteIntent();detachRouteIntent=()=>{};
     if(!isFirst)(toCover?entry.querySelector('.cover-enter'):main).focus({preventScroll:true});
     if(searchReturn)window.SiteSearch?.announceReturn(searchReturn);
-    rememberSearch();
-    if(!toCover&&!userScrolled&&routeParams.has('hit'))window.SiteSearch?.jump(sections.find(s=>s.dataset.section===active),routeParams);
+    rememberPosition();
+    if(!toCover&&!readingReturn&&!userScrolled&&routeParams.has('hit'))window.SiteSearch?.jump(sections.find(s=>s.dataset.section===active),routeParams);
   }
   const toc=document.querySelector('.reading-toc');
   const tocList=toc.querySelector('.toc-items');
@@ -399,9 +449,9 @@
     });
   }
   addEventListener('scroll',()=>{if(!scheduled){scheduled=true;requestAnimationFrame(updateToc);}},{passive:true});
-  addEventListener('scroll',()=>{if(!rememberFrame)rememberFrame=requestAnimationFrame(()=>{rememberFrame=0;rememberSearch();});},{passive:true});
-  addEventListener('pagehide',rememberSearch);
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)rememberSearch();});
+  addEventListener('scroll',()=>{if(!rememberFrame)rememberFrame=requestAnimationFrame(()=>{rememberFrame=0;rememberPosition();});},{passive:true});
+  addEventListener('pagehide',rememberPosition);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)rememberPosition();});
   document.addEventListener('click',event=>{
     if(event.target.closest('.skip')){
       event.preventDefault(); setMenu(false); setOutline(false);
@@ -412,8 +462,13 @@
     if(lang) {setLanguage(lang.dataset.setLang);return;}
     const top=event.target.closest('[data-scroll-top]');
     if(top){event.preventDefault();cancelTocNavigation();window.scrollTo({top:0,behavior:reducedMotion.matches?'instant':'smooth'});return;}
-    const link=event.target.closest('a[href^="#"]');
-    if(link && link.getAttribute('href')===location.hash){event.preventDefault();route();}
+    const link=event.target.closest('a[data-route-href],a[href^="#"]');
+    if(link&&!event.metaKey&&!event.ctrlKey&&!event.shiftKey&&!event.altKey){
+      const href=link.dataset.routeHref||link.getAttribute('href');
+      rememberPosition();
+      if(link.closest('.article-bottom'))returningToParent=href.slice(1).split('?')[0];
+      event.preventDefault();if(href!==location.hash)location.hash=href;else route();
+    }
   });
   entry.querySelector('.cover-enter').addEventListener('click',()=>{
     if(location.hash==='#about')route();else location.hash='about';

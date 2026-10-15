@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://ivanyifanhu.github.io/sitemap.xml
