@@ -11,7 +11,7 @@ html[data-language-curtain="page"] body>#site-shell>:is(.reading-toc,#mobile-men
 html[data-language-curtain="page"] body>#site-shell>.topbar{z-index:1000!important;background:transparent!important;pointer-events:none!important}
 html[data-language-curtain="page"] body>#site-shell>.topbar>:not(.languages){opacity:0!important;pointer-events:none!important}
 html[data-language-curtain="page"] body>#site-shell>.topbar>.languages{pointer-events:auto!important;background:var(--paper);box-shadow:0 0 10px 7px var(--paper)}
-/* The cover keeps its live painting; only its prompt and quote form the fan. */
+/* The cover keeps its live painting; its prompt, quote and footer form the fan. */
 .language-sheet-layer--cover{z-index:1}
 html[data-language-curtain="cover"] body>#entry>.cover-composition .cover-prompt,
 html[data-language-curtain="cover"] body>#entry>.cover-composition>.cover-quote{opacity:0!important;pointer-events:none!important}
@@ -19,3 +19,4 @@ html[data-language-curtain="cover"] body>#entry>.cover-composition .cover-art{z-
 @media(prefers-reduced-motion:reduce){.language-sheet-layer{display:none}}
 /* The inactive inner header must not shine through the transparent cover. */
 html[data-language-curtain="cover"] body>#site-shell{visibility:hidden!important;pointer-events:none!important}
+html[data-language-curtain="cover"] body>#entry>.cover-signature{opacity:0!important;pointer-events:none!important}

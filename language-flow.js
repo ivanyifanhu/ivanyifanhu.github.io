@@ -262,6 +262,7 @@
     if (page.id === 'entry') {
       add(page.querySelector('.cover-prompt'));
       add(page.querySelector('.cover-quote'));
+      add(page.querySelector('.cover-signature'));
     } else {
       add(document.querySelector('body > .game-texture'),{plane:true});
       visit(page);

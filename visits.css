@@ -1,4 +1,18 @@
-.page-views{min-height:1.8em;margin:0 0 4px;font:inherit;color:inherit;text-align:center;letter-spacing:inherit}
-.page-views>.i18n-slot{display:grid;justify-items:center}
+.footer-signature{display:inline-grid;grid-template-columns:max-content;max-width:100%;text-align:left}
+.copyright{grid-row:2;white-space:nowrap;text-align:center}
+.page-views{min-height:1.8em;margin:0 0 4px;font:inherit;color:inherit;letter-spacing:inherit;display:flex;justify-content:space-between;align-items:baseline;gap:1.5em;grid-row:1}
+.page-views>.i18n-slot{display:grid;justify-items:start}
 .page-views [data-lang]{grid-area:1/1;white-space:nowrap}
 .page-views [data-view-value]{display:inline-block;min-width:3ch;font-variant-numeric:tabular-nums}
+.visit-details-link{flex:0 0 3.6em;width:3.6em;border-bottom:1px solid #a8b1af;line-height:1.55;transition:color .2s,border-color .2s}
+.visit-details-link>.i18n-slot{display:grid;width:100%}
+.visit-details-link .details-label{display:flex!important;justify-content:space-between;width:100%;letter-spacing:0}
+.visit-details-link:hover{color:var(--ink);border-color:var(--ink)}
+.site-views{min-height:1.8em;margin:0 0 4px;display:flex;justify-content:space-between;align-items:baseline;gap:1.5em;font:inherit;letter-spacing:inherit}
+.site-views>.i18n-slot{display:grid;justify-items:start}.site-views [data-lang]{white-space:nowrap}.site-views [data-site-view-value]{display:inline-block;min-width:3ch;font-variant-numeric:tabular-nums}
+.viewing-visit-details #site-shell footer .page-views{display:none}
+.cover-signature{color:#a1ada7;position:relative;z-index:2;font-size:11px;line-height:1.8;text-align:center;flex:none;letter-spacing:.015em}
+.cover-signature .visit-details-link{border-color:#78877f}.cover-signature a:hover{color:#e5eae7;border-color:#e5eae7}
+#entry{flex-direction:column;gap:36px;padding-bottom:28px}.cover-composition{width:min(960px,100%,calc((100svh - 380px)*2))}
+@media(max-width:800px){#entry{gap:28px;padding-bottom:24px}.cover-signature{font-size:10px}.cover-composition{width:min(100%,calc(max(120px,100svh - 450px)*1.25))}}
+@media(max-height:590px){#entry{justify-content:flex-start;overflow-y:auto;gap:22px;padding-top:68px;padding-bottom:18px}.cover-composition{width:min(620px,100%,calc(max(120px,100svh - 300px)*2))}.cover-signature{font-size:10px}}

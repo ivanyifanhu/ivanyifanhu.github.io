@@ -10,10 +10,10 @@
     const fallback = entry.querySelector('.cover-fallback');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const image = new Image();
-    const interval = 1000 / 24;
+    const interval = 1000 / 30;
     const { min, max, hypot, pow, round, sin, cos, floor } = Math;
     const bayer = [0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];
-    let base, still, frame, buffer, fields, objects = [];
+    let base, still, frame, buffer, fields, objects = [], clouds = [];
     let width = 0, height = 0, ready = false, inView = true;
     let timer = 0, elapsed = 0, lastTime = 0;
     canvas.hidden = true;
@@ -38,6 +38,26 @@
       { name:'bottom-black', pin:[205,837], reach:5.5, points:[[209,840],[226,851],[244,859],[259,872],[269,884],[281,887],[211,887]] },
       { name:'bottom-white', pin:[308,810], reach:6, points:[[312,814],[330,832],[350,847],[364,866],[374,883],[391,887],[311,887]] }
     ];
+    // Distant cloth is small but must obey the same attached-edge motion.
+    flags.push(
+      {name:'ridge-black-west',pin:[797,357],reach:3.6,points:[[799,360],[814,369],[825,372],[832,381],[844,385],[853,392],[837,391],[827,395],[811,399],[798,401]]},
+      {name:'ridge-black-east',pin:[1595,421],reach:4,points:[[1598,425],[1620,435],[1637,436],[1649,447],[1662,451],[1647,454],[1630,452],[1613,460],[1597,464]]},
+      {name:'ridge-black-east-low',pin:[1544,449],reach:3.3,points:[[1547,452],[1563,458],[1574,459],[1581,465],[1591,468],[1582,472],[1569,473],[1557,480],[1545,483]]},
+      {name:'ridge-black-east-high',pin:[1580,397],reach:3.2,points:[[1583,400],[1595,405],[1607,405],[1614,411],[1625,413],[1614,417],[1597,416],[1583,423]]},
+      {name:'middle-low-black',pin:[1194,546],reach:3.2,points:[[1197,550],[1208,558],[1220,559],[1226,568],[1239,574],[1229,575],[1217,572],[1207,577],[1195,579]]},
+      {name:'lower-shrine-black',pin:[1134,577],reach:2.8,points:[[1136,580],[1146,585],[1155,586],[1163,592],[1154,594],[1146,595],[1136,599]]},
+      {name:'stair-black',pin:[1059,411],reach:2.7,points:[[1062,414],[1072,419],[1080,419],[1088,426],[1079,428],[1070,431],[1061,434]]},
+      {name:'ridge-portrait-small',pin:[906,317],reach:2.8,points:[[908,321],[919,325],[924,331],[933,335],[924,338],[916,338],[908,342]]},
+      {name:'ridge-black-small',pin:[907,338],reach:2.6,points:[[910,341],[920,345],[929,346],[936,352],[925,355],[916,357],[910,361]]},
+      {name:'ridge-black-north',pin:[1051,262],reach:2.2,points:[[1053,265],[1061,267],[1066,274],[1075,277],[1065,280],[1054,281]]},
+      {name:'harbour-black-low',pin:[637,414],reach:2.8,points:[[639,418],[649,423],[655,429],[661,434],[654,438],[645,440],[638,444]]},
+      {name:'harbour-black-middle',pin:[661,462],reach:2.4,points:[[663,465],[672,469],[680,472],[685,478],[677,480],[669,484],[662,485]]},
+      {name:'harbour-black-west',pin:[598,452],reach:2.2,points:[[601,455],[609,458],[614,461],[621,464],[613,466],[601,470]]},
+      {name:'harbour-black-upper',pin:[746,394],reach:2.1,points:[[748,397],[754,401],[762,401],[768,406],[760,410],[749,412]]},
+      {name:'far-east-black',pin:[1408,318],reach:2.1,points:[[1410,321],[1417,325],[1425,326],[1428,331],[1417,333],[1410,338]]},
+      {name:'far-centre-black',pin:[1190,315],reach:1.8,points:[[1192,318],[1199,321],[1206,322],[1209,327],[1199,329],[1192,332]]},
+      {name:'far-centre-black-two',pin:[1227,325],reach:1.9,points:[[1229,328],[1237,330],[1244,336],[1236,340],[1230,341]]}
+    );
     const boats = [
       { name:'left-junk', reach:23, rate:.62, phase:.4, points:[[225,408],[232,405],[234,392],[236,390],[241,391],[241,387],[243,389],[246,391],[247,406],[252,407],[252,397],[255,398],[256,407],[273,407],[270,412],[264,414],[240,414],[231,412]] },
       { name:'right-junk', reach:17, rate:.72, phase:2, points:[[464,430],[471,426],[473,416],[476,413],[479,415],[479,409],[481,411],[482,416],[486,417],[487,429],[495,430],[491,434],[474,436],[467,433]] },
@@ -59,10 +79,29 @@
       [[386,409],[395,405],[402,407],[413,408],[420,413],[411,416],[396,416]],
       [[327,426],[341,424],[353,425],[361,429],[348,432],[334,431]]
     ];
-    const cloudShapes = [
-      [[67,166],[76,125],[104,118],[118,94],[150,103],[171,93],[185,78],[214,80],[220,53],[250,36],[278,47],[292,63],[298,83],[313,94],[342,111],[365,117],[391,114],[406,130],[440,136],[459,152],[445,168],[409,170],[382,185],[360,205],[329,218],[297,217],[265,207],[239,190],[219,177],[201,172],[177,179],[162,168],[136,161],[117,164],[100,186],[82,196]],
-      [[1288,100],[1310,104],[1331,119],[1341,145],[1361,158],[1396,174],[1421,194],[1431,218],[1415,231],[1388,229],[1369,219],[1345,214],[1320,223],[1297,223],[1267,222],[1248,207],[1240,196],[1258,180],[1276,166],[1281,143]],
-      [[790,96],[805,91],[822,99],[834,107],[855,106],[876,110],[889,122],[907,128],[923,141],[907,145],[884,141],[865,138],[846,134],[827,136],[807,130],[788,124]]
+    // Land exclusions are geometric, not colour tests. Teal island rocks and
+    // their warm mineral veins are not water or grass and never enter a warp.
+    const terrainShapes = [
+      [[170,717],[183,695],[205,679],[212,665],[232,658],[254,668],[277,686],[302,694],[322,696],[340,693],[360,703],[375,714],[396,719],[414,731],[391,744],[370,745],[350,750],[326,746],[306,748],[288,751],[273,748],[259,751],[236,751],[217,746],[200,749],[176,759],[153,763],[132,766],[117,762],[125,748],[146,735]],
+      [[832,887],[855,844],[890,824],[936,824],[982,798],[1010,763],[1031,726],[1064,703],[1105,697],[1129,708],[1141,728],[1165,743],[1173,769],[1191,797],[1174,826],[1170,887]],
+      [[0,618],[22,612],[43,609],[59,602],[79,601],[97,604],[108,611],[112,626],[94,636],[76,644],[48,640],[28,638],[0,643]],
+      [[107,754],[127,738],[148,726],[170,725],[183,735],[189,751],[181,764],[162,773],[139,774],[120,768]],
+      [[310,742],[326,733],[343,735],[362,744],[377,751],[380,760],[364,768],[339,769],[319,764],[305,757]]
+    ];
+    // Separate atmospheric layers: actual warm cloud pixels become alpha
+    // silhouettes. Their edges travel through the scene instead of a fixed
+    // polygon containing a moving rectangular texture.
+    const cloudBanks = [
+      {name:'upper-west',speed:9.5,travel:88,phase:0,points:[[54,163],[66,125],[103,112],[120,92],[148,100],[170,89],[186,73],[214,76],[219,51],[245,31],[280,42],[296,65],[304,84],[331,99],[360,110],[386,109],[412,128],[439,131],[466,150],[456,174],[418,176],[388,190],[364,210],[333,224],[299,222],[265,214],[235,194],[211,180],[192,179],[179,191],[169,184],[156,169],[134,164],[117,167],[105,188],[87,210],[70,213],[62,194]]},
+      {name:'upper-west-tail',speed:8.8,travel:80,phase:.8,points:[[169,191],[200,191],[231,208],[264,217],[303,223],[332,217],[361,208],[388,206],[414,213],[445,212],[473,216],[491,229],[472,237],[444,230],[412,225],[383,226],[354,232],[322,237],[286,239],[252,233],[227,222],[204,218],[182,209]]},
+      {name:'high-east',speed:8.2,travel:75,phase:1.4,points:[[1184,28],[1205,25],[1226,32],[1236,51],[1251,57],[1272,52],[1293,62],[1306,73],[1330,67],[1350,80],[1370,78],[1384,91],[1369,103],[1342,102],[1318,97],[1297,91],[1274,94],[1255,87],[1235,83],[1221,73],[1208,58],[1192,48]]},
+      {name:'east-ridge-mist',speed:10,travel:92,phase:2.1,points:[[1439,118],[1462,131],[1470,150],[1464,174],[1448,191],[1440,210],[1423,222],[1397,231],[1378,225],[1368,219],[1345,217],[1323,228],[1298,228],[1271,225],[1245,211],[1238,199],[1254,183],[1281,172],[1301,180],[1324,190],[1348,190],[1376,182],[1402,171],[1419,155],[1422,136]]},
+      {name:'north-centre',speed:6.8,travel:60,phase:2.7,points:[[777,107],[794,91],[813,92],[833,106],[855,106],[879,109],[891,123],[911,130],[934,143],[953,146],[979,154],[1002,153],[1022,161],[1048,162],[1067,173],[1047,183],[1019,179],[991,175],[968,174],[946,161],[919,158],[893,148],[867,143],[844,138],[819,138],[795,132],[781,123]]},
+      {name:'middle-valley',speed:7.5,travel:62,phase:3.2,points:[[722,343],[745,328],[773,325],[791,307],[818,303],[841,287],[861,288],[882,275],[907,275],[922,281],[932,293],[954,295],[964,307],[948,322],[922,326],[898,327],[877,336],[854,344],[832,350],[810,353],[785,357],[764,367],[741,368],[721,359]]},
+      {name:'eastern-low-mist',speed:8.4,travel:66,phase:4,points:[[1384,403],[1404,398],[1425,408],[1446,410],[1462,419],[1478,418],[1501,415],[1528,422],[1558,424],[1579,416],[1601,408],[1626,409],[1654,405],[1678,413],[1703,417],[1726,411],[1750,414],[1773,426],[1773,457],[1746,454],[1725,451],[1705,456],[1681,458],[1661,451],[1639,448],[1615,458],[1597,469],[1575,473],[1551,470],[1528,461],[1505,461],[1485,471],[1466,482],[1445,486],[1428,480],[1409,469],[1395,453],[1388,434]]},
+      {name:'lower-east-valley',speed:8.1,travel:57,phase:4.7,points:[[1377,457],[1398,462],[1418,477],[1435,492],[1451,513],[1456,541],[1468,558],[1482,578],[1481,601],[1466,609],[1451,596],[1438,575],[1428,551],[1413,535],[1395,522],[1381,503],[1372,480]]},
+      {name:'foreground-mist',speed:8.6,travel:68,phase:5.3,points:[[975,659],[997,655],[1014,666],[1035,672],[1059,674],[1080,683],[1099,682],[1120,691],[1141,710],[1151,733],[1173,739],[1197,729],[1215,732],[1221,753],[1209,776],[1191,787],[1173,782],[1159,765],[1141,757],[1121,747],[1104,729],[1082,723],[1056,730],[1035,744],[1016,750],[997,741],[981,727],[967,707],[958,681]]},
+      {name:'foreground-west-mist',speed:7.8,travel:55,phase:6,points:[[819,763],[837,749],[854,750],[872,763],[892,768],[910,763],[929,771],[949,784],[957,805],[942,824],[921,838],[902,837],[883,826],[864,818],[841,819],[824,807],[812,788]]}
     ];
     const plants = [
       {name:'left-tree',anchor:313,amount:3.6,mode:'tree',points:[[8,257],[25,249],[39,246],[48,251],[62,249],[71,258],[81,268],[71,276],[81,284],[65,291],[48,288],[38,302],[20,305],[4,293],[0,284]]},
@@ -98,9 +137,8 @@
         const r=original[o],g=original[o+1],b=original[o+2];
         // Both membership and source sampling must stay in the same material.
         // Cool shoreline rocks are excluded by traced holes, not a colour guess.
-        if(waterShapes.some(poly=>inside(px,py,poly)) && !waterHoles.some(poly=>inside(px,py,poly)) && g>r*1.005 && b>r*.86) water[p]=255;
-        if(cloudShapes.some(poly=>inside(px,py,poly)) && r>g*.99 && g>b*1.03 && r>140) cloud[p]=255;
-        if(water[p]||cloud[p])active.push(p);
+        if(waterShapes.some(poly=>inside(px,py,poly)) && !waterHoles.some(poly=>inside(px,py,poly)) && !terrainShapes.some(poly=>inside(px,py,poly)) && g>r*1.005 && b>r*.86) water[p]=255;
+        if(water[p])active.push(p);
       }
       return {water,cloud,active:Uint32Array.from(active)};
     };
@@ -118,7 +156,7 @@
             const o=p*4,r=original[o],g=original[o+1],b=original[o+2];
             // Refine the traced silhouette against cloth colour: the cutout
             // must not carry teal mountain pixels through ribbon gaps.
-            const black=spec.name.includes('black');
+            const black=spec.name.includes('black')||spec.name.includes('portrait');
             const cloth=black ? r>=g*.86 && b<=g*1.10 : r>=g*.975 && g>=b*1.035;
             const x=p%width,y=floor(p/width);
             const interior=x>0&&x<width-1&&y>0&&y<height-1 &&
@@ -136,7 +174,8 @@
             const o=p*4,r=original[o],g=original[o+1],b=original[o+2];
             // Plant colours inside manually delimited crowns/blade clusters.
             // Teal rocks are explicitly rejected by the grass selector.
-            const allowed=spec.mode==='grass' ? r>b*1.26 && g>b*1.12 && r>87 : g>r*1.05 && g>b*.94 && r<150;
+            const px=(p%width+.5)*1774/width,py=(floor(p/width)+.5)*887/height;
+            const allowed=spec.mode==='grass' ? r>b*1.28 && g>b*1.14 && r>100 && !terrainShapes.some(poly=>inside(px,py,poly)) : g>r*1.05 && g>b*.94 && r<150;
             if(!allowed)mask[p]=0;
           }
           if(mask[p]){const x=p%width,y=floor(p/width);x0=min(x0,x);x1=max(x1,x);y0=min(y0,y);y1=max(y1,y);union[p]=max(union[p],mask[p]);}
@@ -151,6 +190,46 @@
         painter.putImageData(pixels,0,0);
         return {...spec,mask,sprite,x0,y0,w,h};
       });
+      clouds=cloudBanks.map((spec,index)=>{
+        let mask=maskFor(spec.points);const traced=mask.slice();
+        if(index<5){
+          // Include the small bright lobes at the edge of a painted cloud. The
+          // tracing is a spatial guard, not a hard crop through its outer edge.
+          const radius=max(1,round(18*width/1774));
+          for(let pass=0;pass<radius;pass++){
+            const expanded=mask.slice();
+            for(let p=0;p<mask.length;p++)if(mask[p]){
+              const x=p%width,y=floor(p/width);
+              if(x)expanded[p-1]=max(expanded[p-1],mask[p]);if(x<width-1)expanded[p+1]=max(expanded[p+1],mask[p]);
+              if(y)expanded[p-width]=max(expanded[p-width],mask[p]);if(y<height-1)expanded[p+width]=max(expanded[p+width],mask[p]);
+            }
+            mask=expanded;
+          }
+        }
+        let x0=width,y0=height,x1=0,y1=0,count=0;
+        for(let p=0;p<mask.length;p++)if(mask[p]){
+          const o=p*4,r=original[o],g=original[o+1],b=original[o+2];
+          const px=(p%width+.5)*1774/width,py=(floor(p/width)+.5)*887/height;
+          // Cool mountain pigment, poles, cloth and dark vegetation are never
+          // copied into a cloud. Warm light, not a rectangular crop, is its alpha.
+          const warmth=smooth((r-g+(index<5?3:9))/(index<5?12:15))*smooth((g-b-5)/15);
+          const luminance=smooth((r-(index<5?155:132))/40);
+          mask[p]=union[p]||(!traced[p]&&r<200)||terrainShapes.some(poly=>inside(px,py,poly))?0:round(mask[p]*warmth*luminance);
+          if(mask[p]){const x=p%width,y=floor(p/width);x0=min(x0,x);x1=max(x1,x);y0=min(y0,y);y1=max(y1,y);count++;}
+        }
+        const w=max(1,x1-x0+1),h=max(1,y1-y0+1),sprite=document.createElement('canvas');sprite.width=w;sprite.height=h;
+        const painter=sprite.getContext('2d'),pixels=painter.createImageData(w,h);
+        if(count)for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+          const p=(y0+y)*width+x0+x,o=p*4,d=(y*w+x)*4;
+          pixels.data[d]=still[o];pixels.data[d+1]=still[o+1];pixels.data[d+2]=still[o+2];pixels.data[d+3]=mask[p];
+          // A soft alpha belongs on the travelling silhouette only. Keeping
+          // the inverse alpha in its old footprint leaves a stationary cloud
+          // outline underneath, so remove the old cloud completely here.
+          if(mask[p]>7)union[p]=255;
+        }
+        painter.putImageData(pixels,0,0);
+        return {...spec,mask,sprite,x0,y0,w,h,count};
+      });
       // Recover only newly exposed sprite footprints. The surrounding painting
       // is immutable. A nearest-background field is prepared once, never warped.
       const nearest=new Int32Array(width*height);nearest.fill(-1);
@@ -160,12 +239,26 @@
         const p=queue[read++],x=p%width,y=floor(p/width);
         for(const n of [x?p-1:-1,x<width-1?p+1:-1,y?p-width:-1,y<height-1?p+width:-1]) if(n>=0&&nearest[n]<0){nearest[n]=nearest[p];queue[write++]=n;}
       }
+      const recover=[];
       for(let p=0;p<union.length;p++)if(union[p]){
         const a=union[p]/255,o=p*4,n=nearest[p]*4;
         for(let c=0;c<3;c++)base[o+c]=still[o+c]*(1-a)+still[n+c]*a;
+        if(p%width>0&&p%width<width-1&&p>=width&&p<width*(height-1))recover.push(p);
       }
+      // Diffuse the one-time uncovered plate inside the alpha footprints only.
+      // Nearest-edge extension on its own makes long vertical streaks whenever
+      // a large cloud or flag reveals its former location.
+      let diffusion=Float32Array.from(base),next=diffusion.slice();
+      for(let pass=0;pass<72;pass++){
+        for(const p of recover){
+          const o=p*4,a=union[p]/255;
+          for(let c=0;c<3;c++)next[o+c]=((diffusion[o-4+c]+diffusion[o+4+c]+diffusion[o-width*4+c]+diffusion[o+width*4+c])*.25)*a+base[o+c]*(1-a);
+        }
+        const swap=diffusion;diffusion=next;next=swap;
+      }
+      for(const p of recover)for(let c=0;c<3;c++)base[p*4+c]=diffusion[p*4+c];
       // Keep a data-only inspection hook in offline tests; absent in the site.
-      if(typeof window.__coverAudit==='function')window.__coverAudit({width,height,fields,objects,union,base:base.slice(),still:still.slice()});
+      if(typeof window.__coverAudit==='function')window.__coverAudit({width,height,fields,objects,clouds,union,base:base.slice(),still:still.slice(),render(seconds){elapsed=seconds*1000;draw();},renderClouds(seconds){const plate=context.createImageData(width,height);plate.data.set(base);context.putImageData(plate,0,0);drawClouds(seconds);},pause:stop});
     };
     const materialPixel = (data,p,mask,sx,sy) => {
       if(sx<0||sy<0||sx>=width-1||sy>=height-1)return;
@@ -173,6 +266,22 @@
       if(!mask[q]||!mask[q+1]||!mask[q+width]||!mask[q+width+1])return;
       const fx=sx-ix,fy=sy-iy,o=p*4,a=q*4,b=a+4,c=a+width*4,d=c+4;
       for(let channel=0;channel<3;channel++)data[o+channel]=(base[a+channel]*(1-fx)+base[b+channel]*fx)*(1-fy)+(base[c+channel]*(1-fx)+base[d+channel]*fx)*fy;
+    };
+    const drawClouds = t => {
+      context.imageSmoothingEnabled=true;
+      // Two phase-shifted silhouettes crossfade at zero alpha. The wind always
+      // travels in one direction; no visible reset, reversal or stationary edge.
+      for(const cloud of clouds){
+        if(!cloud.count)continue;
+        const travel=cloud.travel*width/1774,speed=cloud.speed*width/1774;
+        for(let copy=0;copy<2;copy++){
+          const phase=((t*speed/(2*travel)+cloud.phase*.12+copy*.5)%1+1)%1;
+          context.globalAlpha=pow(sin(phase*Math.PI),2);
+          const dx=(phase-.5)*2*travel,dy=sin(phase*Math.PI*2+cloud.phase)*height/887*2.8;
+          context.drawImage(cloud.sprite,cloud.x0+dx,cloud.y0+dy);
+        }
+      }
+      context.globalAlpha=1;context.imageSmoothingEnabled=false;
     };
     const drawObjects = t => {
       context.imageSmoothingEnabled=true;context.imageSmoothingQuality='low';
@@ -231,11 +340,11 @@
             // Fast current is confined per pixel to water, including its glints.
             const glint=pow(max(0,sin(x*.24-y*.9-t*5.8)),18)*3.4;
             for(let c=0;c<3;c++)data[p*4+c]+=glint;
-          }else if(fields.cloud[p])materialPixel(data,p,fields.cloud,x+18*sin(t*.71+y*.034),y+1.1*sin(t*.43+x*.015));
+          }
         }
       }
       context.putImageData(frame,0,0);
-      if(!reducedMotion.matches){drawObjects(elapsed/1000);drawWalkers(elapsed/1000);}
+      if(!reducedMotion.matches){drawClouds(elapsed/1000);drawObjects(elapsed/1000);drawWalkers(elapsed/1000);}
     };
     const stop=()=>{if(timer)window.clearTimeout(timer);timer=0;lastTime=0;};
     const tick=()=>{

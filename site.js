@@ -58,9 +58,9 @@
     if(active==='search'&&entry.hidden&&!finishPendingRoute&&!doc.dataset.languageTransition)window.SiteSearch?.remember(renderedHistoryEntry);
   }
   const labels = {
-    en: {about:'About', together:'Play/Game Together', creation:'Creation',research:'Studies',blog:'Blog',menu:'Menu',close:'Close'},
-    ja: {about:'私について', together:'一緒にプレイ/ゲーム', creation:'創作',research:'研究',blog:'ブログ',menu:'メニュー',close:'閉じる'},
-    zh: {about:'关于', together:'一起玩/游戏', creation:'创作',research:'研究',blog:'博客',menu:'栏目',close:'关闭'}
+    en: {about:'About', together:'Play/Game Together', creation:'Creation',research:'Studies',blog:'Notes',menu:'Menu',close:'Close'},
+    ja: {about:'私について', together:'一緒にプレイ/ゲーム', creation:'創作',research:'研究',blog:'ノート',menu:'メニュー',close:'閉じる'},
+    zh: {about:'关于', together:'一起玩/游戏', creation:'创作',research:'研究',blog:'札记',menu:'栏目',close:'关闭'}
   };
   function updateTitle() {
     if(location.hash.split('?')[0]==='#entry'){
@@ -76,6 +76,8 @@
     language = value;
     doc.lang = value;
     window.SiteVisits?.sync(value);
+    window.VisitDetails?.sync(value);
+    window.SiteNightMap?.sync(value);
     document.querySelectorAll('[lang=en]').forEach(el=>el.style.fontOpticalSizing='auto');
     document.querySelectorAll('[data-lang]').forEach(el => { el.hidden = el.dataset.lang !== value; });
     document.querySelectorAll('[data-set-lang]').forEach(btn => btn.setAttribute('aria-pressed',String(btn.dataset.setLang===value)));
@@ -178,7 +180,7 @@
   }
   function clearRouteStyles(){
     [entry,routePaper].forEach(el=>el.style.removeProperty('opacity'));
-    routePaper.hidden=true;
+    routePaper.hidden=true;routePaper.style.removeProperty('background-color');
     delete doc.dataset.pageTransition;
   }
   async function fade(elements,to,duration,easing='cubic-bezier(.22,.61,.36,1)'){
@@ -230,10 +232,15 @@
     let committed=false;
     const commit=()=>{
       if(committed)return;committed=true;
+      doc.classList.toggle('world-night',name==='site-visits'&&!toCover);
+      doc.classList.toggle('viewing-visit-details',['visits','site-visits'].includes(name)&&!toCover);
+      if(name==='site-visits'&&!toCover)window.SiteNightMap?.show(language);else window.SiteNightMap?.hide();
       if(langs.includes(routeLang)&&routeLang!==language)applyLanguage(routeLang);
       if(routeParams.has('hit')&&langs.includes(matchLanguage)&&matchLanguage!==language)applyLanguage(matchLanguage);
-      if(toCover)showCover();
+      if(toCover){window.VisitDetails?.hide();showCover();}
       else{
+        if(name==='visits')window.VisitDetails?.show(routeParams.get('page'),language);
+        else window.VisitDetails?.hide();
         if(name==='search'){
           window.SiteSearch?.prepareReturn(searchReturn);
           window.SiteSearch?.render(routeParams.get('q'),language);
@@ -261,6 +268,8 @@
       await fade([entry],0,700);
     }else{
       doc.dataset.pageTransition='out';
+      // Keep the outgoing paper color until it dissolves over the next theme.
+      routePaper.style.backgroundColor=getComputedStyle(document.body).backgroundColor;
       routePaper.hidden=false;
       await fade([routePaper],1,220,'cubic-bezier(.37,0,.63,1)');
       if(ticket!==routeSerial)return;

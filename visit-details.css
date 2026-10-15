@@ -1,0 +1,31 @@
+[data-section="visits"]>.page-title{font-size:38px;line-height:1.5;letter-spacing:-.018em;margin-bottom:52px}
+.visit-detail-layout{display:grid;grid-template-columns:minmax(250px,.74fr) minmax(0,1.26fr);gap:24px;align-items:center;min-width:0}
+.visit-data{min-width:0;align-self:center;padding:20px 0}
+.visit-data dl{margin:0;display:grid;gap:22px;font-size:13px;line-height:1.8}
+.visit-data-row{display:grid;grid-template-columns:100px minmax(0,1fr);gap:22px;align-items:baseline}
+.visit-data-row dt{font-weight:500;white-space:nowrap}.visit-data-row dd{font-variant-numeric:tabular-nums;margin:0;white-space:nowrap;font-size:13px;line-height:1.8;letter-spacing:0}
+.visit-data-row time{display:grid;grid-template-columns:1fr;row-gap:1px}.visit-data-row .visit-clock{font-size:11px;color:var(--muted)}
+.visit-timezone{font-size:10px;color:var(--muted);margin:24px 0 0;letter-spacing:.04em}.visit-status{margin:12px 0 0;font-size:11px;color:var(--muted);line-height:1.9;min-height:3.8em;max-width:260px}
+.visit-world{margin:0;min-width:0;align-self:center;text-align:center;position:relative}
+#visit-globe{display:block;width:100%;height:auto;aspect-ratio:1;cursor:grab;touch-action:pan-y;outline-offset:-10px;contain:layout paint}
+#visit-globe.is-dragging{cursor:grabbing;touch-action:none}
+.visit-world figcaption,.visit-map-status{font-size:10px;line-height:1.8;color:var(--muted);margin:0;min-height:1.8em;letter-spacing:.025em}
+.visit-map-status{margin-top:8px;min-height:3.6em;padding:0 12px}
+@media(min-width:1100px){.visit-detail-layout{gap:30px}.visit-data-row{gap:26px}}
+@media(max-width:1050px) and (min-width:801px){.visit-detail-layout{grid-template-columns:1fr}.visit-world{width:min(100%,480px);justify-self:center}.visit-data{width:100%;max-width:480px;justify-self:center}.visit-data dl{grid-template-columns:1fr 1fr;column-gap:30px}.visit-data-row{grid-template-columns:1fr;gap:4px}.visit-status{max-width:100%}}
+@media(max-width:800px){[data-section="visits"]>.page-title{font-size:28px;margin-bottom:30px}.visit-detail-layout{grid-template-columns:1fr;gap:8px}.visit-data{padding:8px 0;width:100%}.visit-data dl{font-size:12px;gap:18px}.visit-data-row{grid-template-columns:minmax(92px,.75fr) minmax(0,1.25fr);gap:18px}.visit-data-row dd{font-size:12px}.visit-data-row time{display:block}.visit-clock{margin-left:10px}.visit-timezone{margin-top:18px}.visit-status{margin-top:7px;max-width:none;min-height:1.9em}.visit-world{width:min(100%,460px);justify-self:center}.visit-map-status{padding:0;min-height:3.6em}}
+@media(max-width:360px){[data-section="visits"]>.page-title{font-size:26px}.visit-data-row{gap:12px;grid-template-columns:minmax(84px,.65fr) minmax(0,1.35fr)}.visit-data-row time{display:grid}.visit-clock{margin-left:0}}
+/* The cover's worldwide view continues the cover palette and full-width map. */
+html.world-night{--paper:#0a0d0e;--ink:#d4dcd8;--muted:#84938d;--line:#27332f;--accent:#edf1ed}
+.world-night .game-texture,.world-night .top-nav,.world-night .header-search,.world-night .mobile-actions,.world-night #flight-progress{display:none!important}
+.world-night .topbar{background:linear-gradient(#0a0d0e 70%,#0a0d0e00)}
+.world-night .languages button{color:#7f8c87}.world-night .languages button[aria-pressed=true]{color:#e5eae7}
+.world-night main{margin:0 auto;padding:108px 5vw 50px;max-width:1440px;min-height:calc(100svh - 60px)}
+.world-night [data-section="site-visits"]{max-width:none;min-height:calc(100svh - 218px)}
+.world-title{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.world-atlas{width:100%;position:relative;isolation:isolate}.world-atlas>canvas{display:block;width:100%;height:auto;aspect-ratio:2}
+.world-legend{position:absolute;left:3%;bottom:5%;width:245px;color:#b7c3bc;background:none;padding:13px 22px 10px 10px;font-size:11px;line-height:1.8}
+.world-legend dl{display:grid;gap:12px;margin:0}.world-legend .visit-data-row{grid-template-columns:108px minmax(0,1fr);gap:12px}.world-legend dt{font-size:11px}.world-legend dd{font-size:11px;line-height:1.8}.world-legend .visit-clock{font-size:10px;color:#75887e}.world-legend .visit-timezone{font-size:9px;margin:13px 0 0}
+.world-night .article-tail-space{min-height:38px}.world-night .article-bottom{color:#a1ada7}.world-night footer{color:#a1ada7}
+@media(max-width:800px){.world-night main{padding:94px 22px 38px;min-height:calc(100svh - 56px)}.world-night [data-section="site-visits"]{min-height:calc(100svh - 188px)}.world-atlas>canvas{width:100%;aspect-ratio:2}.world-legend{position:relative;left:auto;bottom:auto;width:100%;padding:30px 0 0;background:none}.world-legend dl{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 22px}.world-legend .visit-data-row{grid-template-columns:1fr;gap:4px}.world-legend .visit-clock{margin-left:0}.world-legend time{display:grid}.world-legend .visit-timezone{margin-top:21px}.world-night .article-tail-space{min-height:48px}}
+@media(max-height:590px) and (min-width:801px){.world-night main{padding-top:90px}.world-legend{width:230px;bottom:3%;padding-top:6px;padding-bottom:6px}.world-legend dl{gap:7px}}
