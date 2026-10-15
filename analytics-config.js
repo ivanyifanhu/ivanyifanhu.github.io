@@ -1,2 +1,3 @@
-// Public aggregate visit service. Local previews never send visits.
-window.SiteAnalyticsConfig=Object.freeze({endpoint:'https://ivan-page-visits.ivanhughyifanhu.workers.dev',allowLocal:false});
+// Local time-based display. The genuine v13 service and its database remain
+// preserved separately; this version sends them no requests.
+window.SiteAnalyticsConfig=Object.freeze({mode:'time-model',endpoint:'',allowLocal:true});

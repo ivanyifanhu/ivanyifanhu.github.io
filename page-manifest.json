@@ -2,7 +2,7 @@
   "version": 1,
   "site": {
     "publishedAt": "2026-10-15T03:19:06Z",
-    "updatedAt": "2026-10-14T19:08:24Z"
+    "updatedAt": "2026-10-15T08:59:52Z"
   },
   "pages": {
     "about": {
@@ -23,7 +23,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/media/portrait.png"
     },
     "together": {
       "titles": {
@@ -43,7 +45,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/illustrations/theory.png"
     },
     "creation": {
       "titles": {
@@ -63,7 +67,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/illustrations/panopticon.png"
     },
     "research": {
       "titles": {
@@ -83,7 +89,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/illustrations/machine.png"
     },
     "blog": {
       "titles": {
@@ -103,7 +111,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/blog/summer.png"
     },
     "entry": {
       "titles": {
@@ -123,7 +133,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": false,
+      "image": "assets/blog/summer.png"
     },
     "search": {
       "titles": {
@@ -143,7 +155,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": false,
+      "image": "assets/blog/summer.png"
     },
     "about/cv": {
       "titles": {
@@ -166,7 +180,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/media/portrait.png"
     },
     "blog/summer": {
       "titles": {
@@ -192,7 +208,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/blog/summer.png"
     },
     "together/critical-theory": {
       "titles": {
@@ -215,7 +233,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/illustrations/theory.png"
     },
     "research/machine-and-assemblage": {
       "titles": {
@@ -238,7 +258,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/illustrations/machine.png"
     },
     "creation/panopticon": {
       "titles": {
@@ -261,7 +283,9 @@
         ]
       },
       "publishedAt": "2026-10-15T03:19:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/illustrations/panopticon.png"
     },
     "together/critical-practice": {
       "titles": {
@@ -284,7 +308,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/illustrations/practice.png"
     },
     "creation/critique-of-pure-jargon": {
       "titles": {
@@ -307,7 +333,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/illustrations/jargon.png"
     },
     "research/index-thomisticus": {
       "titles": {
@@ -330,7 +358,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/illustrations/busa.png"
     },
     "research/left-melancholy": {
       "titles": {
@@ -353,7 +383,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/illustrations/melancholy.png"
     },
     "research/spirit-is-a-bone": {
       "titles": {
@@ -376,7 +408,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/illustrations/spirit.png"
     },
     "research/subjectivity": {
       "titles": {
@@ -399,7 +433,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/illustrations/subjectivity.png"
     },
     "research/beast-and-god": {
       "titles": {
@@ -422,7 +458,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/illustrations/beast.png"
     },
     "blog/crime-and-punishment": {
       "titles": {
@@ -448,7 +486,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/blog/crime.png"
     },
     "blog/now-and-in-other-days": {
       "titles": {
@@ -474,7 +514,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/blog/days.png"
     },
     "blog/open-closed-open": {
       "titles": {
@@ -500,7 +542,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/blog/open.png"
     },
     "blog/disco-elysium": {
       "titles": {
@@ -526,7 +570,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/blog/disco.png"
     },
     "blog/immediacy": {
       "titles": {
@@ -552,7 +598,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-14T19:08:24Z"
+      "updatedAt": "2026-10-15T08:59:52Z",
+      "rankable": true,
+      "image": "assets/blog/immediacy.png"
     }
   }
 }

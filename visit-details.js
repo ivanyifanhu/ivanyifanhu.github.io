@@ -30,8 +30,8 @@
     page.querySelector('.visit-status').textContent=state==='local'?w.local:state==='unavailable'?w.unavailable:state==='stale'?w.stale:'';
     page.querySelector('#visit-globe').setAttribute('aria-label',w.globe);
     const located=Array.isArray(data?.bins)&&data.bins.length;
-    page.querySelector('.visit-map-status').textContent=!geoEnabled||data?.source==='legacy'?'':!data?(state==='unavailable'?w.unavailable:w.mapLoading):located&&dateParts(data?.geoSince)?w.mapSince(dateParts(data.geoSince).date):w.noLocations;
-    window.VisitGlobe?.setData(data?.source==='own'?data.bins:[]);
+    page.querySelector('.visit-map-status').textContent=data?.source==='time-model'||!geoEnabled||data?.source==='legacy'?'':!data?(state==='unavailable'?w.unavailable:w.mapLoading):located&&dateParts(data?.geoSince)?w.mapSince(dateParts(data.geoSince).date):w.noLocations;
+    window.VisitGlobe?.setData(['own','time-model'].includes(data?.source)?data.bins:[],route);
     if(active&&location.hash.startsWith('#visits'))document.title=w.title(meta.breadcrumbs[language].join('—'))+' — Ivan Yi-fan Hu';
   }
   function show(value,lang){
