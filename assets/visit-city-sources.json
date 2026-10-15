@@ -13,7 +13,8 @@
         {"name": "Dammam", "url": "https://www.geonames.org/110336/dammam.html"},
         {"name": "Johannesburg", "url": "https://www.geonames.org/993800/johannesburg.html"},
         {"name": "Cape Town", "url": "https://www.geonames.org/3369157/cape-town.html"},
-        {"name": "Durban", "url": "https://www.geonames.org/1007311/durban.html"}
+        {"name": "Durban", "url": "https://www.geonames.org/1007311/durban.html"},
+        {"name": "Hsinchu", "url": "https://www.geonames.org/1675151/hsinchu.html", "latitude": 24.80361, "longitude": 120.96861, "featureCode": "P.PPLA2"}
       ]
     },
     {
