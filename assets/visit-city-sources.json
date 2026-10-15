@@ -1,0 +1,29 @@
+{
+  "title": "City coordinate source credits",
+  "coordinateSystem": "WGS84",
+  "sources": [
+    {
+      "attribution": "GeoNames contributors",
+      "license": "Creative Commons Attribution 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "sourceUrl": "https://www.geonames.org/about.html",
+      "places": [
+        {"name": "Riyadh", "url": "https://www.geonames.org/108410/riyadh.html"},
+        {"name": "Jeddah", "url": "https://www.geonames.org/105343/jeddah.html"},
+        {"name": "Dammam", "url": "https://www.geonames.org/110336/dammam.html"},
+        {"name": "Johannesburg", "url": "https://www.geonames.org/993800/johannesburg.html"},
+        {"name": "Cape Town", "url": "https://www.geonames.org/3369157/cape-town.html"},
+        {"name": "Durban", "url": "https://www.geonames.org/1007311/durban.html"}
+      ]
+    },
+    {
+      "attribution": "OpenStreetMap contributors",
+      "license": "Open Data Commons Open Database License",
+      "licenseUrl": "https://www.openstreetmap.org/copyright",
+      "places": [
+        {"name": "Pengcheng Square, Xuzhou", "url": "https://www.openstreetmap.org/way/450516143", "readVia": "https://mapcarta.com/W450516143"}
+      ]
+    }
+  ],
+  "adaptation": "Approximate city anchors are curated for the light display. Sampling radii, regional profiles, display weights and event sequences are independently defined in visit-model.js."
+}
