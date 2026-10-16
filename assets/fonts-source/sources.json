@@ -60,7 +60,7 @@
     }
   ],
   "subsets": {
-    "generated": "2026-10-15",
+    "generated": "2026-10-16",
     "tool": "fontTools 4.67.0",
     "recipe": "build-fonts.py",
     "files": [
