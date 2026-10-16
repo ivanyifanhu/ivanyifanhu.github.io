@@ -5,7 +5,7 @@
     const entry = document.getElementById('entry');
     const canvas = document.getElementById('cover-canvas');
     if (!entry || !canvas) return;
-    const context = canvas.getContext('2d', { alpha: false });
+    const context = canvas.getContext('2d', { alpha: true });
     if (!context) return;
     const fallback = entry.querySelector('.cover-fallback');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -40,6 +40,7 @@
     ];
     // Distant cloth is small but must obey the same attached-edge motion.
     flags.push(
+      {name:'quay-portrait-black',pin:[561,771],reach:5.4,points:[[564,774],[576,782],[585,786],[594,791],[603,799],[607,807],[609,815],[604,819],[596,815],[587,812],[578,814],[568,820],[563,819]],parts:[[[591,787],[602,789],[610,796],[614,801],[611,803],[602,798],[597,797]],[[602,804],[611,809],[618,813],[618,817],[610,814]]] },
       {name:'foreground-west-black',pin:[94,875],reach:3.8,points:[[96,877],[109,881],[119,883],[132,887],[96,887]]},
       {name:'foreground-west-white',pin:[153,868],reach:2.2,points:[[155,869],[161,871],[164,873],[163,878],[158,876],[155,878]]},
       {name:'foreground-quay-black',pin:[396,784],reach:5.2,points:[[399,788],[408,793],[422,797],[433,801],[441,813],[449,823],[459,831],[464,845],[459,853],[452,852],[443,844],[436,837],[422,834],[411,836],[398,840]],parts:[[[440,813],[449,814],[457,817],[464,823],[468,826],[464,828],[455,823],[449,822]],[[448,834],[458,836],[468,842],[475,844],[473,847],[466,847],[456,841]]]},
@@ -88,6 +89,7 @@
     // Land exclusions are geometric, not colour tests. Teal island rocks and
     // their warm mineral veins are not water or grass and never enter a warp.
     const terrainShapes = [
+      [[166,735],[177,706],[190,691],[201,678],[216,669],[235,670],[242,652],[256,644],[271,650],[278,659],[295,665],[305,686],[319,687],[337,688],[356,685],[373,690],[384,701],[400,704],[414,714],[398,725],[379,727],[369,739],[390,739],[406,750],[388,760],[367,759],[350,766],[325,761],[303,759],[288,752],[267,754],[244,752],[219,754],[196,756],[172,759],[156,761]],
       [[170,717],[183,695],[205,679],[212,665],[232,658],[254,668],[277,686],[302,694],[322,696],[340,693],[360,703],[375,714],[396,719],[414,731],[391,744],[370,745],[350,750],[326,746],[306,748],[288,751],[273,748],[259,751],[236,751],[217,746],[200,749],[176,759],[153,763],[132,766],[117,762],[125,748],[146,735]],
       [[832,887],[855,844],[890,824],[936,824],[982,798],[1010,763],[1031,726],[1064,703],[1105,697],[1129,708],[1141,728],[1165,743],[1173,769],[1191,797],[1174,826],[1170,887]],
       [[0,618],[22,612],[43,609],[59,602],[79,601],[97,604],[108,611],[112,626],[94,636],[76,644],[48,640],[28,638],[0,643]],
@@ -97,7 +99,10 @@
     // Separate atmospheric layers: actual warm cloud pixels become alpha
     // silhouettes. Their edges travel through the scene instead of a fixed
     // polygon containing a moving rectangular texture.
+    const cloudStonework = [[[1014,460],[1054,460],[1067,485],[1055,516],[1036,538],[1018,545],[999,548],[990,542]]];
     const cloudBanks = [
+      {name:'portrait-valley-west',speed:8,travel:42,phase:1.2,points:[[846,556],[855,546],[868,542],[883,548],[898,552],[912,550],[928,546],[946,547],[951,559],[950,579],[946,598],[929,610],[907,600],[886,591],[866,580],[848,572]]},
+      {name:'portrait-valley-east',speed:8.4,travel:48,phase:3.8,points:[[1005,541],[1018,536],[1032,538],[1048,536],[1063,528],[1077,536],[1090,542],[1104,542],[1119,536],[1133,535],[1148,543],[1161,542],[1175,533],[1186,526],[1199,532],[1211,536],[1225,538],[1238,530],[1248,534],[1254,550],[1247,567],[1230,577],[1214,582],[1197,577],[1186,583],[1171,579],[1152,580],[1134,585],[1118,581],[1104,591],[1085,590],[1069,579],[1055,574],[1043,564],[1026,560],[1008,553]]},
       {name:'upper-west',speed:9.5,travel:88,phase:0,points:[[54,163],[66,125],[103,112],[120,92],[148,100],[170,89],[186,73],[214,76],[219,51],[245,31],[280,42],[296,65],[304,84],[331,99],[360,110],[386,109],[412,128],[439,131],[466,150],[456,174],[418,176],[388,190],[364,210],[333,224],[299,222],[265,214],[235,194],[211,180],[192,179],[179,191],[169,184],[156,169],[134,164],[117,167],[105,188],[87,210],[70,213],[62,194]]},
       {name:'upper-west-tail',speed:8.8,travel:80,phase:.8,points:[[169,191],[200,191],[231,208],[264,217],[303,223],[332,217],[361,208],[388,206],[414,213],[445,212],[473,216],[491,229],[472,237],[444,230],[412,225],[383,226],[354,232],[322,237],[286,239],[252,233],[227,222],[204,218],[182,209]]},
       {name:'high-east',speed:8.2,travel:75,phase:1.4,points:[[1184,28],[1205,25],[1226,32],[1236,51],[1251,57],[1272,52],[1293,62],[1306,73],[1330,67],[1350,80],[1370,78],[1384,91],[1369,103],[1342,102],[1318,97],[1297,91],[1274,94],[1255,87],[1235,83],[1221,73],[1208,58],[1192,48]]},
@@ -123,8 +128,7 @@
       {name:'middle-west-crown',anchor:552,amount:1.7,mode:'crown',points:[[657,540],[661,533],[668,530],[673,531],[678,535],[680,541],[676,546],[668,547],[663,544]]},
       {name:'middle-low-crown',anchor:583,amount:2,mode:'crown',points:[[690,567],[694,560],[702,557],[706,561],[711,561],[717,565],[721,571],[716,576],[708,578],[701,575],[695,578],[690,575]]},
       {name:'left-tree',anchor:313,amount:3.6,mode:'tree',points:[[8,257],[25,249],[39,246],[48,251],[62,249],[71,258],[81,268],[71,276],[81,284],[65,291],[48,288],[38,302],[20,305],[4,293],[0,284]]},
-      {name:'island-tree',anchor:714,amount:4.2,mode:'tree',points:[[217,674],[229,665],[242,658],[249,646],[263,648],[271,657],[285,660],[300,674],[292,687],[272,690],[251,686],[235,693],[218,690]]},
-      {name:'centre-shrub',anchor:768,amount:4,mode:'tree',points:[[335,746],[348,735],[361,732],[370,739],[382,747],[392,757],[381,763],[361,765],[344,762]]},
+      {name:'island-tree',anchor:699,amount:2.2,mode:'crown',points:[[322,677],[327,672],[331,672],[332,667],[338,665],[343,669],[350,670],[353,676],[349,680],[342,678],[336,681],[330,679],[325,681]]},
       {name:'left-bank-tree',anchor:633,amount:3.6,mode:'tree',points:[[93,613],[108,600],[125,599],[135,601],[146,613],[144,625],[127,630],[112,627],[101,630]]},
       {name:'grass-centre',anchor:886,amount:6.2,mode:'grass',points:[[982,849],[1009,819],[1030,789],[1056,774],[1085,772],[1110,760],[1132,763],[1155,779],[1179,777],[1202,786],[1225,805],[1246,812],[1267,840],[1283,878],[1286,887],[974,887]]},
       {name:'grass-right',anchor:887,amount:7.2,mode:'grass',points:[[1172,856],[1194,827],[1206,796],[1230,755],[1251,737],[1284,721],[1310,710],[1346,705],[1374,700],[1398,685],[1420,685],[1440,707],[1452,737],[1477,758],[1501,767],[1514,796],[1539,804],[1565,827],[1577,858],[1595,887],[1165,887]]},
@@ -210,7 +214,8 @@
       });
       clouds=cloudBanks.map((spec,index)=>{
         let mask=maskFor(spec.points);const traced=mask.slice();
-        if(index<5){
+        const highCloud=['upper-west','upper-west-tail','high-east','east-ridge-mist','north-centre'].includes(spec.name);
+        if(highCloud){
           // Include the small bright lobes at the edge of a painted cloud. The
           // tracing is a spatial guard, not a hard crop through its outer edge.
           const radius=max(1,round(18*width/1774));
@@ -230,9 +235,9 @@
           const px=(p%width+.5)*1774/width,py=(floor(p/width)+.5)*887/height;
           // Cool mountain pigment, poles, cloth and dark vegetation are never
           // copied into a cloud. Warm light, not a rectangular crop, is its alpha.
-          const warmth=smooth((r-g+(index<5?3:9))/(index<5?12:15))*smooth((g-b-5)/15);
-          const luminance=smooth((r-(index<5?155:132))/40);
-          mask[p]=union[p]||(!traced[p]&&r<200)||terrainShapes.some(poly=>inside(px,py,poly))?0:round(mask[p]*warmth*luminance);
+          const warmth=smooth((r-g+(highCloud?3:9))/(highCloud?12:15))*smooth((g-b-5)/15);
+          const luminance=smooth((r-(highCloud?155:132))/40);
+          mask[p]=union[p]||(!traced[p]&&r<200)||terrainShapes.some(poly=>inside(px,py,poly))||cloudStonework.some(poly=>inside(px,py,poly))?0:round(mask[p]*warmth*luminance);
           if(mask[p]){const x=p%width,y=floor(p/width);x0=min(x0,x);x1=max(x1,x);y0=min(y0,y);y1=max(y1,y);count++;}
         }
         const w=max(1,x1-x0+1),h=max(1,y1-y0+1),sprite=document.createElement('canvas');sprite.width=w;sprite.height=h;
@@ -276,7 +281,7 @@
       }
       for(const p of recover)for(let c=0;c<3;c++)base[p*4+c]=diffusion[p*4+c];
       // Keep a data-only inspection hook in offline tests; absent in the site.
-      if(typeof window.__coverAudit==='function')window.__coverAudit({width,height,fields,objects,clouds,union,base:base.slice(),still:still.slice(),render(seconds){elapsed=seconds*1000;draw();},renderObject(name,seconds){context.fillStyle='#000';context.fillRect(0,0,width,height);drawObjects(seconds,name);},renderClouds(seconds){const plate=context.createImageData(width,height);plate.data.set(base);context.putImageData(plate,0,0);drawClouds(seconds);},pause:stop});
+      if(typeof window.__coverAudit==='function')window.__coverAudit({width,height,fields,objects,clouds,union,base:base.slice(),still:still.slice(),render(seconds){elapsed=seconds*1000;draw();},renderObject(name,seconds){context.fillStyle='#000';context.fillRect(0,0,width,height);drawObjects(seconds,name);},renderWater(seconds){const pixels=frame.data;pixels.set(base);drawWater(pixels,seconds);context.putImageData(frame,0,0);},renderClouds(seconds){const plate=context.createImageData(width,height);plate.data.set(base);context.putImageData(plate,0,0);drawClouds(seconds);},pause:stop});
     };
     const materialPixel = (data,p,mask,sx,sy) => {
       if(sx<0||sy<0||sx>=width-1||sy>=height-1)return;
@@ -350,12 +355,7 @@
         context.fillStyle='#434c4a';context.fillRect(x-direction*stride,y,1,1);context.fillRect(x+direction*stride,y-1,1,1);
       }
     };
-    const draw = () => {
-      if(!ready)return;
-      if(!base){context.filter='grayscale(20%) saturate(75%) brightness(82%)';context.drawImage(buffer,0,0);context.filter='none';return;}
-      const data=frame.data;data.set(reducedMotion.matches?still:base);
-      if(!reducedMotion.matches){
-        const t=elapsed/1000;
+    const drawWater = (data,t) => {
         for(const p of fields.active){
           const x=p%width,y=floor(p/width);
           if(fields.water[p]){
@@ -365,6 +365,14 @@
             for(let c=0;c<3;c++)data[p*4+c]+=glint;
           }
         }
+    };
+    const draw = () => {
+      if(!ready)return;
+      if(!base){context.filter='grayscale(20%) saturate(75%) brightness(82%)';context.drawImage(buffer,0,0);context.filter='none';return;}
+      const data=frame.data;data.set(reducedMotion.matches?still:base);
+      if(!reducedMotion.matches){
+        const t=elapsed/1000;
+        drawWater(data,t);
       }
       context.putImageData(frame,0,0);
       if(!reducedMotion.matches){drawClouds(elapsed/1000);drawObjects(elapsed/1000);drawWalkers(elapsed/1000);}
@@ -375,8 +383,11 @@
       const now=performance.now();if(lastTime)elapsed+=min(200,now-lastTime);lastTime=now;
       draw();timer=window.setTimeout(tick,interval);
     };
-    const sync=()=>{stop();if(!visible())return;draw();if(!reducedMotion.matches&&base){lastTime=performance.now();timer=window.setTimeout(tick,interval);}};
-    image.addEventListener('load',()=>{
+    const sync=()=>{stop();if(!visible())return;if(context.isContextLost?.()){canvas.hidden=true;return;}try{draw();canvas.hidden=false;}catch{canvas.hidden=true;return;}if(!reducedMotion.matches&&base){lastTime=performance.now();timer=window.setTimeout(tick,interval);}};
+    image.addEventListener('load',async()=>{
+      // Safari may dispatch load before a usable decoded surface is available.
+      // Keep the original image visible until actual pixels have been checked.
+      try{if(image.decode)await image.decode();}catch{canvas.hidden=true;entry.dataset.coverReady='fallback';return;}
       const scale=min(800/image.naturalWidth,400/image.naturalHeight,1);
       width=canvas.width=max(1,round(image.naturalWidth*scale));height=canvas.height=max(1,round(image.naturalHeight*scale));
       buffer=document.createElement('canvas');buffer.width=width;buffer.height=height;
@@ -384,6 +395,9 @@
       source.imageSmoothingEnabled=true;source.imageSmoothingQuality='high';source.drawImage(image,0,0,width,height);
       try{
         frame=source.getImageData(0,0,width,height);const original=frame.data.slice();
+        let lit=0,opaque=0,samples=0;
+        for(let p=0;p<original.length;p+=256){samples++;if(original[p+3]>128)opaque++;if(original[p]+original[p+1]+original[p+2]>90)lit++;}
+        if(opaque<samples*.9||lit<samples*.8)throw new Error('Cover image has no decoded painting');
         fields=makeFields(original);base=new Uint8ClampedArray(frame.data.length);const data=frame.data;
         for(let y=0;y<height;y++)for(let x=0;x<width;x++){
           const o=(y*width+x)*4,light=.2126*data[o]+.7152*data[o+1]+.0722*data[o+2],grain=(bayer[(y&3)*4+(x&3)]-7.5)*.9;
@@ -391,10 +405,15 @@
           base[o]=(tone*.94+(data[o]-light)*.65)*vignette;base[o+1]=(tone*.98+(data[o+1]-light)*.65)*vignette;base[o+2]=(tone*1.025+(data[o+2]-light)*.65)*vignette;base[o+3]=255;
         }
         still=base.slice();makeObjects(original);
-      }catch{base=null;}
-      ready=true;draw();canvas.hidden=false;if(fallback)fallback.hidden=true;entry.dataset.coverReady='true';sync();
+      }catch{base=null;ready=false;canvas.hidden=true;entry.dataset.coverReady='fallback';return;}
+      ready=true;sync();entry.dataset.coverReady='true';
     },{once:true});
     image.addEventListener('error',()=>{stop();canvas.hidden=true;if(fallback)fallback.hidden=false;},{once:true});
+    // A transparent canvas leaves the decoded original underneath if the GPU
+    // surface is discarded. Restore the complete frame before revealing it.
+    if(fallback)fallback.hidden=false;
+    canvas.addEventListener('contextlost',event=>{event.preventDefault();stop();canvas.hidden=true;});
+    canvas.addEventListener('contextrestored',()=>{sync();});
     new MutationObserver(sync).observe(entry,{attributes:true,attributeFilter:['hidden','class','style']});
     if('IntersectionObserver'in window)new IntersectionObserver(([o])=>{inView=o.isIntersecting;sync();}).observe(entry);
     document.addEventListener('visibilitychange',sync);window.addEventListener('pagehide',stop);window.addEventListener('pageshow',sync);

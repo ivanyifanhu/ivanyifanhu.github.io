@@ -45,3 +45,6 @@ main{padding-top:112px;padding-bottom:60px;max-width:none}.page-section{max-widt
 [data-section="about/cv"] .prose details>div>.cv-reference{margin-top:.75em}
 [data-section="about/cv"] .cv-reference a{box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .original-block .institutional-emblem{filter:grayscale(1) brightness(.6) contrast(8);mix-blend-mode:multiply;opacity:.8}
+
+/* The original painting remains underneath the animation during decode/recovery. */
+.cover-art .cover-fallback{filter:grayscale(20%) saturate(75%) brightness(82%)}

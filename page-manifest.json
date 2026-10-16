@@ -89,7 +89,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-16T03:16:22Z",
+      "updatedAt": "2026-10-16T07:16:48Z",
       "rankable": true,
       "image": "assets/illustrations/foucault-in-china.png"
     },
@@ -133,7 +133,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-16T03:16:22Z",
+      "updatedAt": "2026-10-16T07:16:48Z",
       "rankable": false,
       "image": "assets/blog/summer.png"
     },
@@ -440,7 +440,7 @@
     "research/subjectivity": {
       "titles": {
         "en": "Spatial Cartography of the Conceptual History of Critical Theory: The Case of \"Subjectivity\" in Mainland China, 2000–2026",
-        "ja": "批判理論概念史の空間的カルトグラフィー：2000–2026 年中国大陸における「主観性」を事例として",
+        "ja": "批判理論概念史の空間的カルトグラフィー：2000–2026 年中国大陸における「主体性」を事例として",
         "zh": "批判理论概念史的空间制图：以2000–2026年中国大陆语境下的“主体性”为例"
       },
       "breadcrumbs": {
@@ -450,7 +450,7 @@
         ],
         "ja": [
           "研究",
-          "批判理論概念史の空間的カルトグラフィー：2000–2026 年中国大陸における「主観性」を事例として"
+          "批判理論概念史の空間的カルトグラフィー：2000–2026 年中国大陸における「主体性」を事例として"
         ],
         "zh": [
           "研究",
@@ -458,7 +458,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-16T03:16:22Z",
+      "updatedAt": "2026-10-16T07:16:48Z",
       "rankable": true,
       "image": "assets/illustrations/subjectivity.png"
     },
