@@ -37,3 +37,11 @@ main{padding-top:112px;padding-bottom:60px;max-width:none}.page-section{max-widt
 /* Keep the language cell stable; underline the visible CV label only. */
 .profile-links>.text-link{border-bottom:0}
 .profile-links>.text-link [data-lang]{justify-self:start;width:max-content;max-width:100%;border-bottom:1px solid #a8b1af}
+
+/* CV disclosures: institution and role form one compact block; related work has its own measured gap. */
+[data-section="about/cv"] .prose details>div{padding-top:16px;padding-bottom:4px}
+[data-section="about/cv"] .prose details>div>p{margin:0;line-height:1.9}
+[data-section="about/cv"] .prose details>div>p+p{margin-top:0}
+[data-section="about/cv"] .prose details>div>.cv-reference{margin-top:.75em}
+[data-section="about/cv"] .cv-reference a{box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.original-block .institutional-emblem{filter:grayscale(1) brightness(.6) contrast(8);mix-blend-mode:multiply;opacity:.8}

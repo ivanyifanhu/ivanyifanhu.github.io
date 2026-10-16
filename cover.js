@@ -40,6 +40,12 @@
     ];
     // Distant cloth is small but must obey the same attached-edge motion.
     flags.push(
+      {name:'foreground-west-black',pin:[94,875],reach:3.8,points:[[96,877],[109,881],[119,883],[132,887],[96,887]]},
+      {name:'foreground-west-white',pin:[153,868],reach:2.2,points:[[155,869],[161,871],[164,873],[163,878],[158,876],[155,878]]},
+      {name:'foreground-quay-black',pin:[396,784],reach:5.2,points:[[399,788],[408,793],[422,797],[433,801],[441,813],[449,823],[459,831],[464,845],[459,853],[452,852],[443,844],[436,837],[422,834],[411,836],[398,840]],parts:[[[440,813],[449,814],[457,817],[464,823],[468,826],[464,828],[455,823],[449,822]],[[448,834],[458,836],[468,842],[475,844],[473,847],[466,847],[456,841]]]},
+      {name:'foreground-quay-white',pin:[397,844],reach:4,points:[[399,847],[409,849],[421,852],[431,858],[436,866],[441,875],[445,881],[453,887],[431,887],[417,879],[406,878],[400,881]]},
+      {name:'foreground-quay-white-small',pin:[460,816],reach:2.2,points:[[462,818],[472,821],[480,823],[483,828],[481,832],[471,828],[463,831]]},
+      {name:'harbour-white',pin:[489,504],reach:2.6,points:[[491,507],[501,512],[509,518],[511,527],[507,531],[501,527],[494,526],[490,531]]},
       {name:'ridge-black-west',pin:[797,357],reach:3.6,points:[[799,360],[814,369],[825,372],[832,381],[844,385],[853,392],[837,391],[827,395],[811,399],[798,401]]},
       {name:'ridge-black-east',pin:[1595,421],reach:4,points:[[1598,425],[1620,435],[1637,436],[1649,447],[1662,451],[1647,454],[1630,452],[1613,460],[1597,464]]},
       {name:'ridge-black-east-low',pin:[1544,449],reach:3.3,points:[[1547,452],[1563,458],[1574,459],[1581,465],[1591,468],[1582,472],[1569,473],[1557,480],[1545,483]]},
@@ -101,9 +107,21 @@
       {name:'eastern-low-mist',speed:8.4,travel:66,phase:4,points:[[1384,403],[1404,398],[1425,408],[1446,410],[1462,419],[1478,418],[1501,415],[1528,422],[1558,424],[1579,416],[1601,408],[1626,409],[1654,405],[1678,413],[1703,417],[1726,411],[1750,414],[1773,426],[1773,457],[1746,454],[1725,451],[1705,456],[1681,458],[1661,451],[1639,448],[1615,458],[1597,469],[1575,473],[1551,470],[1528,461],[1505,461],[1485,471],[1466,482],[1445,486],[1428,480],[1409,469],[1395,453],[1388,434]]},
       {name:'lower-east-valley',speed:8.1,travel:57,phase:4.7,points:[[1377,457],[1398,462],[1418,477],[1435,492],[1451,513],[1456,541],[1468,558],[1482,578],[1481,601],[1466,609],[1451,596],[1438,575],[1428,551],[1413,535],[1395,522],[1381,503],[1372,480]]},
       {name:'foreground-mist',speed:8.6,travel:68,phase:5.3,points:[[975,659],[997,655],[1014,666],[1035,672],[1059,674],[1080,683],[1099,682],[1120,691],[1141,710],[1151,733],[1173,739],[1197,729],[1215,732],[1221,753],[1209,776],[1191,787],[1173,782],[1159,765],[1141,757],[1121,747],[1104,729],[1082,723],[1056,730],[1035,744],[1016,750],[997,741],[981,727],[967,707],[958,681]]},
-      {name:'foreground-west-mist',speed:7.8,travel:55,phase:6,points:[[819,763],[837,749],[854,750],[872,763],[892,768],[910,763],[929,771],[949,784],[957,805],[942,824],[921,838],[902,837],[883,826],[864,818],[841,819],[824,807],[812,788]]}
+      {name:'foreground-west-mist',speed:7.8,travel:55,phase:6,points:[[819,763],[837,749],[854,750],[872,763],[892,768],[910,763],[929,771],[949,784],[957,805],[942,824],[921,838],[902,837],[883,826],[864,818],[841,819],[824,807],[812,788]]},
+      {name:'central-harbour-mist',speed:7.4,travel:38,phase:1.7,points:[[585,376],[604,365],[619,361],[632,352],[646,350],[660,351],[673,359],[690,362],[705,356],[720,358],[736,351],[747,355],[761,363],[778,368],[789,376],[783,388],[767,390],[748,383],[733,386],[716,380],[698,388],[682,388],[670,383],[656,379],[639,378],[626,383],[611,382],[600,387],[585,386]]},
+      {name:'western-valley-mist',speed:6.6,travel:36,phase:3.6,points:[[399,266],[411,253],[429,248],[441,249],[458,241],[476,240],[489,232],[506,234],[516,226],[530,226],[541,218],[551,214],[553,223],[544,234],[535,241],[529,253],[517,261],[505,266],[492,276],[476,280],[461,280],[447,290],[430,294],[412,288],[399,279]]}
     ];
     const plants = [
+      {name:'central-ridge-west-crown',anchor:235,amount:1.4,mode:'crown',points:[[552,227],[555,223],[562,221],[568,221],[574,219],[580,220],[583,224],[589,225],[587,229],[577,230],[566,231],[556,232]]},
+      {name:'central-ridge-crown',anchor:230,amount:1.4,mode:'crown',points:[[603,225],[608,222],[612,218],[620,219],[626,222],[634,225],[631,229],[620,228],[613,230],[606,228]]},
+      {name:'central-summit-crown',anchor:161,amount:1.2,mode:'crown',points:[[724,153],[727,149],[734,149],[739,152],[744,152],[748,156],[744,159],[735,157],[728,159]]},
+      {name:'central-ridge-north-crown',anchor:164,amount:1.4,mode:'crown',points:[[699,157],[701,151],[706,150],[710,153],[716,155],[716,160],[709,161],[703,161]]},
+      {name:'central-ridge-east-crown',anchor:170,amount:1.5,mode:'crown',points:[[781,159],[786,153],[791,153],[797,155],[801,155],[807,160],[801,163],[795,166],[789,165],[786,169]]},
+      {name:'central-ridge-far-crown',anchor:191,amount:1.5,mode:'crown',points:[[837,180],[842,174],[848,173],[850,167],[856,166],[862,170],[867,171],[873,176],[871,180],[862,182],[854,181],[849,188],[841,189]]},
+      {name:'east-ridge-crown',anchor:171,amount:1.3,mode:'crown',points:[[900,162],[904,158],[913,157],[918,161],[926,161],[932,165],[928,169],[920,168],[910,169],[903,168]]},
+      {name:'middle-hillside-crown',anchor:553,amount:1.9,mode:'crown',points:[[718,536],[723,530],[728,528],[730,521],[735,518],[739,523],[742,528],[748,529],[750,536],[743,540],[736,539],[732,546],[726,546],[721,542]]},
+      {name:'middle-west-crown',anchor:552,amount:1.7,mode:'crown',points:[[657,540],[661,533],[668,530],[673,531],[678,535],[680,541],[676,546],[668,547],[663,544]]},
+      {name:'middle-low-crown',anchor:583,amount:2,mode:'crown',points:[[690,567],[694,560],[702,557],[706,561],[711,561],[717,565],[721,571],[716,576],[708,578],[701,575],[695,578],[690,575]]},
       {name:'left-tree',anchor:313,amount:3.6,mode:'tree',points:[[8,257],[25,249],[39,246],[48,251],[62,249],[71,258],[81,268],[71,276],[81,284],[65,291],[48,288],[38,302],[20,305],[4,293],[0,284]]},
       {name:'island-tree',anchor:714,amount:4.2,mode:'tree',points:[[217,674],[229,665],[242,658],[249,646],[263,648],[271,657],[285,660],[300,674],[292,687],[272,690],[251,686],[235,693],[218,690]]},
       {name:'centre-shrub',anchor:768,amount:4,mode:'tree',points:[[335,746],[348,735],[361,732],[370,739],[382,747],[392,757],[381,763],[361,765],[344,762]]},
@@ -175,8 +193,8 @@
             // Plant colours inside manually delimited crowns/blade clusters.
             // Teal rocks are explicitly rejected by the grass selector.
             const px=(p%width+.5)*1774/width,py=(floor(p/width)+.5)*887/height;
-            const allowed=spec.mode==='grass' ? r>b*1.28 && g>b*1.14 && r>100 && !terrainShapes.some(poly=>inside(px,py,poly)) : g>r*1.05 && g>b*.94 && r<150;
-            if(!allowed)mask[p]=0;
+            const allowed=spec.mode==='grass' ? r>b*1.28 && g>b*1.14 && r>100 && !terrainShapes.some(poly=>inside(px,py,poly)) : spec.mode==='crown' ? r<145 && g<151 && g>r*.99 && g<r*1.24 && b<g*1.01 : g>r*1.05 && g>b*.94 && r<150;
+            if(!allowed||union[p])mask[p]=0;
           }
           if(mask[p]){const x=p%width,y=floor(p/width);x0=min(x0,x);x1=max(x1,x);y0=min(y0,y);y1=max(y1,y);union[p]=max(union[p],mask[p]);}
         }
@@ -258,7 +276,7 @@
       }
       for(const p of recover)for(let c=0;c<3;c++)base[p*4+c]=diffusion[p*4+c];
       // Keep a data-only inspection hook in offline tests; absent in the site.
-      if(typeof window.__coverAudit==='function')window.__coverAudit({width,height,fields,objects,clouds,union,base:base.slice(),still:still.slice(),render(seconds){elapsed=seconds*1000;draw();},renderClouds(seconds){const plate=context.createImageData(width,height);plate.data.set(base);context.putImageData(plate,0,0);drawClouds(seconds);},pause:stop});
+      if(typeof window.__coverAudit==='function')window.__coverAudit({width,height,fields,objects,clouds,union,base:base.slice(),still:still.slice(),render(seconds){elapsed=seconds*1000;draw();},renderObject(name,seconds){context.fillStyle='#000';context.fillRect(0,0,width,height);drawObjects(seconds,name);},renderClouds(seconds){const plate=context.createImageData(width,height);plate.data.set(base);context.putImageData(plate,0,0);drawClouds(seconds);},pause:stop});
     };
     const materialPixel = (data,p,mask,sx,sy) => {
       if(sx<0||sy<0||sx>=width-1||sy>=height-1)return;
@@ -283,10 +301,14 @@
       }
       context.globalAlpha=1;context.imageSmoothingEnabled=false;
     };
-    const drawObjects = t => {
+    const drawObjects = (t,onlyName) => {
       context.imageSmoothingEnabled=true;context.imageSmoothingQuality='low';
-      const gust=.93+.19*sin(t*1.19)+.11*sin(t*2.31);
+      const scale=width/640;
       for(const object of objects){
+        if(onlyName&&object.name!==onlyName)continue;
+        // The same travelling gust reaches flags and vegetation, with slower,
+        // damped branches and faster cloth ripples; roots and hoists stay fixed.
+        const gust=.93+.19*sin(t*1.19-object.x0*.006)+.11*sin(t*2.31-object.x0*.004);
         if(object.type==='flag'){
           const pin=object.pin[0]*width/1774-object.x0;
           // Attached edge remains anchored. The cloth is sliced from an alpha
@@ -294,18 +316,19 @@
           for(let x=0;x<object.w;x++){
             const free=clamp((x-pin)/max(1,object.w-pin)),weight=pow(free,.86);
             const wave=sin(t*6.1-free*5.8+object.phase),ripple=sin(t*10.9-free*9+object.phase);
-            const dy=weight*object.reach*gust*(wave+.23*ripple);
-            const dx=weight*1.1*sin(t*4.7-free*4+object.phase);
+            const dy=weight*object.reach*scale*gust*(wave+.23*ripple);
+            const dx=weight*1.1*scale*sin(t*4.7-free*4+object.phase);
             context.drawImage(object.sprite,x,0,1,object.h,object.x0+x+dx,object.y0+dy,1.12,object.h);
           }
         }else if(object.type==='boat'){
-          const phase=t*object.rate+object.phase,x=object.x0+object.reach*sin(phase),y=object.y0+1.4*sin(phase*2)+.48*sin(t*5.1+object.phase);
+          const phase=t*object.rate+object.phase,x=object.x0+object.reach*scale*sin(phase),y=object.y0+scale*(1.4*sin(phase*2)+.48*sin(t*5.1+object.phase));
           context.drawImage(object.sprite,x,y);
         }else{
           const anchor=object.anchor*height/887-object.y0;
           for(let y=0;y<object.h;y++){
             const weight=pow(clamp((anchor-y)/max(1,anchor)),1.18);
-            const dx=weight*object.amount*gust*(.72+.62*sin(t*3.4-y*.035+object.phase)+.17*sin(t*7.3+object.phase));
+            const branch=object.mode!=='grass';
+            const dx=weight*object.amount*scale*gust*(.48+.62*sin(t*(branch?1.8:3.4)-y*.035+object.phase)+.17*sin(t*(branch?3.1:7.3)+object.phase));
             context.drawImage(object.sprite,0,y,object.w,1,object.x0+dx,object.y0+y,object.w,1.12);
           }
         }
@@ -354,7 +377,7 @@
     };
     const sync=()=>{stop();if(!visible())return;draw();if(!reducedMotion.matches&&base){lastTime=performance.now();timer=window.setTimeout(tick,interval);}};
     image.addEventListener('load',()=>{
-      const scale=min(640/image.naturalWidth,360/image.naturalHeight,1);
+      const scale=min(800/image.naturalWidth,400/image.naturalHeight,1);
       width=canvas.width=max(1,round(image.naturalWidth*scale));height=canvas.height=max(1,round(image.naturalHeight*scale));
       buffer=document.createElement('canvas');buffer.width=width;buffer.height=height;
       const source=buffer.getContext('2d',{willReadFrequently:true});if(!source)return;
