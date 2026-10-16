@@ -1,0 +1,631 @@
+{
+  "version": 1,
+  "site": {
+    "publishedAt": "2026-10-15T03:19:06Z",
+    "updatedAt": "2026-10-16T03:16:22Z"
+  },
+  "pages": {
+    "about": {
+      "titles": {
+        "en": "About",
+        "ja": "私について",
+        "zh": "关于"
+      },
+      "breadcrumbs": {
+        "en": [
+          "About"
+        ],
+        "ja": [
+          "私について"
+        ],
+        "zh": [
+          "关于"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/media/portrait.png"
+    },
+    "together": {
+      "titles": {
+        "en": "Play/Game Together",
+        "ja": "一緒にプレイ/ゲーム",
+        "zh": "一起玩/游戏"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Play/Game Together"
+        ],
+        "ja": [
+          "一緒にプレイ/ゲーム"
+        ],
+        "zh": [
+          "一起玩/游戏"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/illustrations/theory.png"
+    },
+    "creation": {
+      "titles": {
+        "en": "Creation",
+        "ja": "創作",
+        "zh": "创作"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Creation"
+        ],
+        "ja": [
+          "創作"
+        ],
+        "zh": [
+          "创作"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/illustrations/panopticon.png"
+    },
+    "research": {
+      "titles": {
+        "en": "Studies",
+        "ja": "研究",
+        "zh": "研究"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Studies"
+        ],
+        "ja": [
+          "研究"
+        ],
+        "zh": [
+          "研究"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T07:16:48Z",
+      "rankable": true,
+      "image": "assets/illustrations/foucault-in-china.png"
+    },
+    "blog": {
+      "titles": {
+        "en": "Notes",
+        "ja": "ノート",
+        "zh": "札记"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes"
+        ],
+        "ja": [
+          "ノート"
+        ],
+        "zh": [
+          "札记"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/blog/summer.png"
+    },
+    "entry": {
+      "titles": {
+        "en": "Cover",
+        "ja": "表紙",
+        "zh": "封面"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Cover"
+        ],
+        "ja": [
+          "表紙"
+        ],
+        "zh": [
+          "封面"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T07:16:48Z",
+      "rankable": false,
+      "image": "assets/blog/summer.png"
+    },
+    "search": {
+      "titles": {
+        "en": "Search",
+        "ja": "検索",
+        "zh": "搜索"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Search"
+        ],
+        "ja": [
+          "検索"
+        ],
+        "zh": [
+          "搜索"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": false,
+      "image": "assets/blog/summer.png"
+    },
+    "about/cv": {
+      "titles": {
+        "en": "CV",
+        "ja": "履歴書",
+        "zh": "简历"
+      },
+      "breadcrumbs": {
+        "en": [
+          "About",
+          "CV"
+        ],
+        "ja": [
+          "私について",
+          "履歴書"
+        ],
+        "zh": [
+          "关于",
+          "简历"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T11:27:47Z",
+      "rankable": true,
+      "image": "assets/media/portrait.png"
+    },
+    "blog/summer": {
+      "titles": {
+        "en": "Have You Had a Good Summer?",
+        "ja": "良い夏を過ごしましたか？",
+        "zh": "你的夏天还好吗？"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Miscellaneous Notes",
+          "Have You Had a Good Summer?"
+        ],
+        "ja": [
+          "ノート",
+          "雑記",
+          "良い夏を過ごしましたか？"
+        ],
+        "zh": [
+          "札记",
+          "零散札记",
+          "你的夏天还好吗？"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/blog/summer.png"
+    },
+    "together/critical-theory": {
+      "titles": {
+        "en": "Critical Theory in the Age of Digintelligence",
+        "ja": "デジタルインテリジェンス時代の批判理論",
+        "zh": "数智时代的批判理论"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Play/Game Together",
+          "Critical Theory in the Age of Digintelligence"
+        ],
+        "ja": [
+          "一緒にプレイ/ゲーム",
+          "デジタルインテリジェンス時代の批判理論"
+        ],
+        "zh": [
+          "一起玩/游戏",
+          "数智时代的批判理论"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T08:24:00Z",
+      "rankable": true,
+      "image": "assets/illustrations/theory.png"
+    },
+    "research/machine-and-assemblage": {
+      "titles": {
+        "en": "Machine and Assemblage: Deleuze–Guattari and Tensions within the \"Material Turn\"",
+        "ja": "機械とアッサンブラージュ：ドゥルーズ＝ガタリと「物質的転回」内の緊張",
+        "zh": "机器与装配：德勒兹—加塔利与“物转向”的张力"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Studies",
+          "Machine and Assemblage: Deleuze–Guattari and Tensions within the \"Material Turn\""
+        ],
+        "ja": [
+          "研究",
+          "機械とアッサンブラージュ：ドゥルーズ＝ガタリと「物質的転回」内の緊張"
+        ],
+        "zh": [
+          "研究",
+          "机器与装配：德勒兹—加塔利与“物转向”的张力"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T08:24:00Z",
+      "rankable": true,
+      "image": "assets/illustrations/machine.png"
+    },
+    "research/foucault-in-china": {
+      "titles": {
+        "en": "“Ubiquitous Yet Without Influence”: Foucault in China, or, the Governmentalization of Critique—The “Practicing Foucault in Reverse” Controversy",
+        "ja": "「遍在しながらも影響を与えない」：中国におけるフーコー、あるいは批判の統治化――「フーコーを逆に実践する」論争を中心に",
+        "zh": "“无处不在又毫无影响”：福柯在中国，或批判的治理化——以“逆练福柯”事件为中心"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Studies",
+          "“Ubiquitous Yet Without Influence”: Foucault in China, or, the Governmentalization of Critique—The “Practicing Foucault in Reverse” Controversy"
+        ],
+        "ja": [
+          "研究",
+          "「遍在しながらも影響を与えない」：中国におけるフーコー、あるいは批判の統治化――「フーコーを逆に実践する」論争を中心に"
+        ],
+        "zh": [
+          "研究",
+          "“无处不在又毫无影响”：福柯在中国，或批判的治理化——以“逆练福柯”事件为中心"
+        ]
+      },
+      "publishedAt": "2026-10-15T15:47:14Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/illustrations/foucault-in-china.png"
+    },
+    "creation/panopticon": {
+      "titles": {
+        "en": "Panopticon",
+        "ja": "パノプティコン",
+        "zh": "全景敞视监狱"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Creation",
+          "Panopticon"
+        ],
+        "ja": [
+          "創作",
+          "パノプティコン"
+        ],
+        "zh": [
+          "创作",
+          "全景敞视监狱"
+        ]
+      },
+      "publishedAt": "2026-10-15T03:19:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/illustrations/panopticon.png"
+    },
+    "together/critical-practice": {
+      "titles": {
+        "en": "Critical Practice in the Age of Digintelligence",
+        "ja": "デジタルインテリジェンス時代の批判実践",
+        "zh": "数智时代的批判实践"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Play/Game Together",
+          "Critical Practice in the Age of Digintelligence"
+        ],
+        "ja": [
+          "一緒にプレイ/ゲーム",
+          "デジタルインテリジェンス時代の批判実践"
+        ],
+        "zh": [
+          "一起玩/游戏",
+          "数智时代的批判实践"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/illustrations/practice.png"
+    },
+    "creation/critique-of-pure-jargon": {
+      "titles": {
+        "en": "Critique of Pure Jargon",
+        "ja": "純粋ジャーゴン批判",
+        "zh": "纯粹黑话批判"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Creation",
+          "Critique of Pure Jargon"
+        ],
+        "ja": [
+          "創作",
+          "純粋ジャーゴン批判"
+        ],
+        "zh": [
+          "创作",
+          "纯粹黑话批判"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/illustrations/jargon.png"
+    },
+    "research/index-thomisticus": {
+      "titles": {
+        "en": "\"Father of Digital Humanities\", or, Jesuit Priest?: A Techno‑Theological Archaeology of Roberto Busa's Index Thomisticus",
+        "ja": "「デジタル·ヒューマニティーズの父」、それともイエズス会士？——ロベルト·ブーザ『トマス著作索引』の技術—神学的考古学",
+        "zh": "是“数字人文之父”，抑或是耶稣会神父？——罗伯托·布萨《托马斯著作索引》的一种技术—神学考古"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Studies",
+          "\"Father of Digital Humanities\", or, Jesuit Priest?: A Techno‑Theological Archaeology of Roberto Busa's Index Thomisticus"
+        ],
+        "ja": [
+          "研究",
+          "「デジタル·ヒューマニティーズの父」、それともイエズス会士？——ロベルト·ブーザ『トマス著作索引』の技術—神学的考古学"
+        ],
+        "zh": [
+          "研究",
+          "是“数字人文之父”，抑或是耶稣会神父？——罗伯托·布萨《托马斯著作索引》的一种技术—神学考古"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/illustrations/busa.png"
+    },
+    "research/left-melancholy": {
+      "titles": {
+        "en": "Translating Left Melancholy: Shuang Xuetao, Ban Yu, and the Spectral Aesthetics of China's \"Northeast Renaissance\"",
+        "ja": "左のメランコリーを翻訳する：双雪涛·班宇と中国「東北ルネサンス」の幽霊的美学",
+        "zh": "转译左派忧郁：双雪涛、班宇与中国“东北文艺复兴”的幽灵美学"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Studies",
+          "Translating Left Melancholy: Shuang Xuetao, Ban Yu, and the Spectral Aesthetics of China's \"Northeast Renaissance\""
+        ],
+        "ja": [
+          "研究",
+          "左のメランコリーを翻訳する：双雪涛·班宇と中国「東北ルネサンス」の幽霊的美学"
+        ],
+        "zh": [
+          "研究",
+          "转译左派忧郁：双雪涛、班宇与中国“东北文艺复兴”的幽灵美学"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/illustrations/melancholy.png"
+    },
+    "research/spirit-is-a-bone": {
+      "titles": {
+        "en": "\"Spirit is a Bone\": A Geistanalysis of AI Consciousness and Its Discontents",
+        "ja": "「精神は骨である」：AI 意識とその不満に対するガイスト分析",
+        "zh": "“精神是一块骨头”：对人工智能意识及其不满的一种“精神”分析"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Studies",
+          "\"Spirit is a Bone\": A Geistanalysis of AI Consciousness and Its Discontents"
+        ],
+        "ja": [
+          "研究",
+          "「精神は骨である」：AI 意識とその不満に対するガイスト分析"
+        ],
+        "zh": [
+          "研究",
+          "“精神是一块骨头”：对人工智能意识及其不满的一种“精神”分析"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/illustrations/spirit.png"
+    },
+    "research/subjectivity": {
+      "titles": {
+        "en": "Spatial Cartography of the Conceptual History of Critical Theory: The Case of \"Subjectivity\" in Mainland China, 2000–2026",
+        "ja": "批判理論概念史の空間的カルトグラフィー：2000–2026 年中国大陸における「主体性」を事例として",
+        "zh": "批判理论概念史的空间制图：以2000–2026年中国大陆语境下的“主体性”为例"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Studies",
+          "Spatial Cartography of the Conceptual History of Critical Theory: The Case of \"Subjectivity\" in Mainland China, 2000–2026"
+        ],
+        "ja": [
+          "研究",
+          "批判理論概念史の空間的カルトグラフィー：2000–2026 年中国大陸における「主体性」を事例として"
+        ],
+        "zh": [
+          "研究",
+          "批判理论概念史的空间制图：以2000–2026年中国大陆语境下的“主体性”为例"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T07:16:48Z",
+      "rankable": true,
+      "image": "assets/illustrations/subjectivity.png"
+    },
+    "research/beast-and-god": {
+      "titles": {
+        "en": "La Bête et le Dieu: An Futurology of the Human Sciences",
+        "ja": "獣と神：人間科学の未来学",
+        "zh": "兽与神：一种人类科学未来学"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Studies",
+          "La Bête et le Dieu: An Futurology of the Human Sciences"
+        ],
+        "ja": [
+          "研究",
+          "獣と神：人間科学の未来学"
+        ],
+        "zh": [
+          "研究",
+          "兽与神：一种人类科学未来学"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/illustrations/beast.png"
+    },
+    "blog/crime-and-punishment": {
+      "titles": {
+        "en": "Crime and Punishment",
+        "ja": "罪と罰",
+        "zh": "罪与罚"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Crime and Punishment"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "罪と罰"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "罪与罚"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/blog/crime.png"
+    },
+    "blog/now-and-in-other-days": {
+      "titles": {
+        "en": "Now and in Other Days",
+        "ja": "今と他の日々",
+        "zh": "现在及他日"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Now and in Other Days"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "今と他の日々"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "现在及他日"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/blog/days.png"
+    },
+    "blog/open-closed-open": {
+      "titles": {
+        "en": "Open Closed Open",
+        "ja": "開 閉 開",
+        "zh": "开 闭 开"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Open Closed Open"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "開 閉 開"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "开 闭 开"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/blog/open.png"
+    },
+    "blog/disco-elysium": {
+      "titles": {
+        "en": "Disco Elysium",
+        "ja": "ディスコ·エリジウム",
+        "zh": "极乐迪斯科"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Disco Elysium"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "ディスコ·エリジウム"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "极乐迪斯科"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/blog/disco.png"
+    },
+    "blog/immediacy": {
+      "titles": {
+        "en": "Immediacy, or, The Style of Too Late Capitalism",
+        "ja": "直接性、あるいは遅すぎる資本主義の様式",
+        "zh": "直接性，或太过晚期资本主义的风格"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Studies",
+          "Immediacy, or, The Style of Too Late Capitalism"
+        ],
+        "ja": [
+          "ノート",
+          "研究のノート",
+          "直接性、あるいは遅すぎる資本主義の様式"
+        ],
+        "zh": [
+          "札记",
+          "研究札记",
+          "直接性，或太过晚期资本主义的风格"
+        ]
+      },
+      "publishedAt": "2026-10-13T17:53:06Z",
+      "updatedAt": "2026-10-16T03:16:22Z",
+      "rankable": true,
+      "image": "assets/blog/immediacy.png"
+    }
+  }
+}
