@@ -67,6 +67,7 @@
     if(!page)return;
     readingPositions[renderedHistoryEntry]={
       route:entry.hidden?active:'entry',y:scrollY,time:Date.now(),
+      tocSelection:tocSelection?.route===active?{...tocSelection}:null,
       details:[...page.querySelectorAll('details')].filter(el=>!el.closest('[data-lang][hidden]'))
         .map((el,i)=>[el.dataset.readingKey||el.dataset.source||String(i),el.open])
     };
@@ -83,6 +84,7 @@
       if(states.has(key))el.open=states.get(key);
     });
     scrollTo({top:record.y||0,behavior:'instant'});
+    tocSelection=record.tocSelection?.route===active?{...record.tocSelection,y:scrollY}:null;
   }
   const labels = {
     en: {about:'About', together:'Play/Game Together', creation:'Creation',research:'Studies',blog:'Notes',menu:'Menu',close:'Close'},
@@ -142,6 +144,7 @@
     window.FlightProgress?.update();
   }
   function setLanguage(value) {
+    const selectedHeading=tocSelection?.route===active?{...tocSelection}:null;
     cancelTocNavigation();
     settleRoute();
     rememberPosition();
@@ -154,7 +157,7 @@
     }
     const expectedHref=location.href;
     const applyCurrentLanguage=next=>{if(location.href!==expectedHref){route();return;}applyLanguage(next);};
-    return window.LanguageFlow.change({value,page:entry.hidden?sections.find(s=>s.dataset.section===active):entry,apply:applyCurrentLanguage,onSettled:()=>{buildToc();window.FlightProgress?.update();requestAnimationFrame(rememberPosition);}});
+    return window.LanguageFlow.change({value,page:entry.hidden?sections.find(s=>s.dataset.section===active):entry,apply:applyCurrentLanguage,onSettled:()=>{if(selectedHeading?.route===active)tocSelection={...selectedHeading,y:scrollY};buildToc();window.FlightProgress?.update();requestAnimationFrame(rememberPosition);}});
   }
   function syncOverlays(){
     const open=menuOpen||outlineOpen;
@@ -196,6 +199,7 @@
   }
   function showSection(route, focus=false, restore=null) {
     active = sections.some(s=>s.dataset.section===route) ? route : 'about';
+    tocSelection=null;
     sections.forEach(s=> { s.hidden = s.dataset.section !== active; });
     document.querySelectorAll('[data-nav]').forEach(a=>{
       if(a.dataset.nav===active.split('/')[0]) a.setAttribute('aria-current','page');
@@ -339,6 +343,8 @@
   const tocList=toc.querySelector('.toc-items');
   let tocTargets=[];
   let tocNodes=[];
+  let tocSelection=null;
+  const tocHeadingKey=heading=>heading.dataset.readingKey||heading.dataset.source||heading.id;
   let scheduled=false;
   const collapsedToc=new Set();
   const tocWords={en:{expand:'Expand',collapse:'Collapse'},ja:{expand:'展開',collapse:'折りたたむ'},zh:{expand:'展开',collapse:'收起'}};
@@ -361,13 +367,14 @@
     const to=Math.max(0,Math.min(doc.scrollHeight-innerHeight,from+heading.getBoundingClientRect().top-top));
     const duration=reducedMotion.matches?0:Math.min(900,420+Math.abs(to-from)*.06);
     const start=performance.now();
+    tocSelection={route:active,key:tocHeadingKey(heading),y:to};
     const intent=event=>{
       if(event.type==='keydown'&&!['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' ','Escape'].includes(event.key))return;
-      cancelTocNavigation();
+      cancelTocNavigation();tocSelection=null;updateToc();
     };
     ['wheel','touchstart','pointerdown','keydown'].forEach(type=>addEventListener(type,intent,{passive:true}));
     detachTocIntent=()=>['wheel','touchstart','pointerdown','keydown'].forEach(type=>removeEventListener(type,intent));
-    doc.dataset.tocJump='scrolling';
+    doc.dataset.tocJump='scrolling';updateToc();
     const frame=now=>{
       if(!heading.isConnected||heading.closest('[hidden]')){cancelTocNavigation();return;}
       const progress=duration?Math.min(1,(now-start)/duration):1;
@@ -375,6 +382,9 @@
       scrollTo({top:from+(to-from)*eased,behavior:'instant'});
       if(progress<1){tocJumpFrame=requestAnimationFrame(frame);return;}
       tocJumpFrame=0;delete doc.dataset.tocJump;
+      detachTocIntent();detachTocIntent=()=>{};
+      if(tocSelection)tocSelection.y=scrollY;
+      updateToc();rememberPosition();
       tocCue=heading;heading.classList.add('toc-arrived');
       // A small, bounded heading surface gives a clear arrival cue without
       // animating or repainting the complete article. Repeated clicks restart it.
@@ -438,9 +448,17 @@
   function updateToc(){
     scheduled=false;
     if(!tocNodes.length)return;
-    let current=tocNodes[0];
-    tocNodes.forEach(node=>{if(node.heading.getBoundingClientRect().top<parseFloat(getComputedStyle(doc).getPropertyValue('--reading-top'))+20)current=node;});
-    if(window.scrollY>0 && window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-3)current=tocNodes.at(-1);
+    const readingTop=parseFloat(getComputedStyle(doc).getPropertyValue('--reading-top'))||126;
+    // Several short/empty sections can share the same clamped scroll offset.
+    // An explicit choice owns that position until the reader actually moves.
+    let selected=tocSelection?.route===active?tocNodes.find(node=>tocHeadingKey(node.heading)===tocSelection.key):null;
+    const moving=doc.dataset.tocJump==='scrolling'||!!doc.dataset.languageTransition;
+    if(selected&&!moving&&Math.abs(scrollY-tocSelection.y)>3){tocSelection=null;selected=null;}
+    let current=selected||tocNodes[0];
+    if(!selected){
+      tocNodes.forEach(node=>{if(node.heading.getBoundingClientRect().top<readingTop+20)current=node;});
+      if(scrollY>0&&scrollY+innerHeight>=doc.scrollHeight-3)current=tocNodes.at(-1);
+    }
     // When a branch is closed, its visible ancestor marks the reading position.
     while(current.element.closest('[hidden]') && current.parent)current=current.parent;
     tocNodes.forEach(node=>{
