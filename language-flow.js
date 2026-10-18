@@ -174,7 +174,9 @@
       clone=document.createElement('div');
       [...element.attributes].forEach(attribute=>clone.setAttribute(attribute.name,attribute.value));
     }
-    const sources = shallow ? [element] : [element, ...element.querySelectorAll('*')];
+    // Do not recapture outgoing chrome ribbons when staging the next locale.
+    clone.querySelectorAll('.language-sheet-layer').forEach(node=>node.remove());
+    const sources = shallow ? [element] : [element, ...element.querySelectorAll('*')].filter(node=>!node.closest('.language-sheet-layer'));
     const copies = shallow ? [clone] : [clone, ...clone.querySelectorAll('*')];
     const omitted = new Set();
     sources.forEach((source, index) => {
@@ -241,7 +243,11 @@
       'width':`${rect.width}px`,'height':`${rect.height}px`,'min-width':'0','min-height':'0','max-width':'none','max-height':'none',
       'margin':'0','transform':'none','z-index':'auto','box-sizing':'border-box'};
     Object.entries(fixed).forEach(([property,value]) => clone.style.setProperty(property,value,'important'));
-    if (header) clone.querySelectorAll('.languages').forEach(control => control.style.setProperty('opacity','0','important'));
+    clone.style.setProperty('isolation','isolate','important');
+    if (header) {
+      clone.style.setProperty('background','transparent','important');
+      clone.querySelectorAll('.languages').forEach(control => control.style.setProperty('opacity','0','important'));
+    }
     return clone;
   }
 
@@ -256,13 +262,13 @@
       let paintTop=rect.top-2,paintBottom=rect.bottom+2;
       if(options?.header){
         // Mobile search fields may extend below the header's own box.
-        [...element.querySelectorAll('*')].filter(visible).forEach(child=>{
+        [...element.querySelectorAll('*')].filter(child=>!child.closest('.language-sheet-layer')&&visible(child)).forEach(child=>{
           const childRect=child.getBoundingClientRect();
           paintTop=Math.min(paintTop,childRect.top);paintBottom=Math.max(paintBottom,childRect.bottom);
         });
       }
       const master=snapshot(element,rect,options,paint);
-      pieces.push({rect,paintTop,paintBottom,master,source:element,plane:options?.plane});
+      pieces.push({rect,paintTop,paintBottom,master,source:element,plane:options?.plane,header:options?.header});
     };
     const visit = element => {
       if (!visible(element)) return;
@@ -291,8 +297,8 @@
       add(document.querySelector('body > .toc-veil'),{plane:true});
       add(document.querySelector('#mobile-menu'));
       add(document.querySelector('.reading-toc'));
-      // Last paint: reproduce the original opaque/gradient header occlusion.
-      // Hidden text behind this header never becomes a free-floating clone.
+      // Chrome folds above the live header gradient; body ribbons stay below.
+      // Occluded content can never burst through the stationary gradient veil.
       add(document.querySelector('.topbar'), {header:true});
     }
     return pieces;
@@ -357,6 +363,11 @@
     layer.setAttribute('aria-hidden','true');
     layer.inert = true;
     layer.style.backgroundColor = cover ? 'transparent' : getComputedStyle(document.body).backgroundColor;
+    const headerLayer=cover?null:document.createElement('div');
+    if(headerLayer){
+      headerLayer.className='language-sheet-layer language-header-sheet';
+      headerLayer.setAttribute('aria-hidden','true');headerLayer.inert=true;
+    }
     const width = innerWidth, height = innerHeight;
     const paint = cover ? null : {id:`s${++sheetSerial}`,rules:[],keys:new Map()};
     const pieces = collectPieces(page,paint);
@@ -365,7 +376,7 @@
     const bottomEdge=cover?Math.min(height,Math.ceil(Math.max(...pieces.map(piece=>piece.paintBottom)))):height;
     const bandSize = cover?6:Math.max(16,Math.ceil(height/(width<=800?34:44)));
     const overlap = cover?.45:1.2;
-    const fragment = document.createDocumentFragment();
+    const fragment = document.createDocumentFragment(),headerFragment=document.createDocumentFragment();
     for (let top=topEdge; top<bottomEdge; top+=bandSize) {
       const bandHeight = Math.min(bandSize,bottomEdge-top);
       const strip = document.createElement('div');
@@ -373,7 +384,8 @@
       strip.style.width = `${width}px`;
       strip.style.height = `${bandHeight+overlap}px`;
       strip.style.transform = `translateY(${top}px)`;
-      pieces.forEach(({rect,paintTop,paintBottom,master,plane}) => {
+      let headerStrip;
+      pieces.forEach(({rect,paintTop,paintBottom,master,plane,header}) => {
         if (paintBottom<=top || paintTop>=top+bandHeight+overlap) return;
         const copy=duplicate(master);
         if(plane){
@@ -383,10 +395,14 @@
           copy.style.setProperty('height',`${bandHeight+overlap}px`,'important');
           copy.style.setProperty('background-position',`center ${-top}px`,'important');
         }else copy.style.setProperty('top',`${rect.top-top}px`,'important');
-        strip.append(copy);
+        if(header){
+          if(!headerStrip)headerStrip=strip.cloneNode(false);
+          headerStrip.append(copy);
+        }else strip.append(copy);
       });
       fragment.append(strip);
       bands.push({strip,top,height:bandHeight+overlap});
+      if(headerStrip){headerFragment.append(headerStrip);bands.push({strip:headerStrip,top,height:bandHeight+overlap});}
     }
     if (paint) {
       const stylesheet = document.createElement('style');
@@ -394,13 +410,15 @@
       layer.append(stylesheet);
     }
     layer.append(fragment);
+    headerLayer?.append(headerFragment);
     layer.dataset.pieces=String(pieces.length);
     layer.dataset.bands=String(bands.length);
-    return {layer,bands,width,height,host:cover?page:document.body,point:{...origin(page),textTop:topEdge,textBottom:bottomEdge}};
+    return {layer,headerLayer,bands,width,height,host:cover?page:document.body,point:{...origin(page),textTop:topEdge,textBottom:bottomEdge}};
   }
 
   function mountSheet(sheet) {
     sheet.host.append(sheet.layer);
+    if(sheet.headerLayer)document.querySelector('.topbar').append(sheet.headerLayer);
     // Scroll offsets can be set only after the clone has a real layout box.
     // Doing so in this same task keeps a scrolled TOC/table from flashing its
     // first item at the instant the animation layer replaces the source.
@@ -439,7 +457,8 @@
     // an outgoing strip at its full-size underlying geometry for a frame.
     state.layer?.remove();
     state.layer=null;
-    state.staging?.remove();
+    state.headerLayer?.remove();state.headerLayer=null;
+    state.staging?.layer.remove();state.staging?.headerLayer?.remove();
     state.staging=null;
     state.animations.forEach(animation=>animation.cancel());
     state.animations.clear();
@@ -471,7 +490,7 @@
   async function change({value,page,apply,animate=true,onSettled}={}) {
     cancel();
     if(!page||typeof apply!=='function')return;
-    const state={id:serial,animations:new Set(),layer:null,staging:null,detach:()=>{},userMoved:false};
+    const state={id:serial,animations:new Set(),layer:null,headerLayer:null,staging:null,detach:()=>{},userMoved:false};
     running=state;
     const current=()=>running===state&&serial===state.id;
     const anchor=capture(page),disclosures=captureDisclosures(page);
@@ -482,17 +501,20 @@
       let outgoingMotion;
       if(moving){
         const outgoing=makeSheet(page);
-        state.layer=outgoing.layer;
+        state.layer=outgoing.layer;state.headerLayer=outgoing.headerLayer;
         // Assemble everything first, then atomically replace the live surface.
         // Warm the outgoing ribbons while the live document remains visible.
         // Only switch surfaces after two paints; this also avoids Safari's
         // first-frame canvas upload flash on large project illustrations.
         outgoing.layer.style.opacity='.002';
+        if(!cover)outgoing.layer.style.zIndex='80';
+        if(outgoing.headerLayer)outgoing.headerLayer.style.opacity='.002';
         mountSheet(outgoing);
         await nextFrame();await nextFrame();
         if(!current())return;
-        outgoing.layer.style.removeProperty('opacity');
+        outgoing.layer.style.removeProperty('opacity');outgoing.headerLayer?.style.removeProperty('opacity');
         root.dataset.languageCurtain=cover?'cover':'page';
+        outgoing.layer.style.removeProperty('z-index');
         root.dataset.languageTransition='out';
         outgoingMotion=animateSheet(state,outgoing,false);
         if(cover)await outgoingMotion;
@@ -526,8 +548,8 @@
           // Preparing a detached DOM tree does not paint it. Rasterize the real
           // incoming bands at full size while the old sheet is still folding;
           // nonzero opacity prevents the compositor from culling this surface.
-          state.staging=incoming.layer;
-          incoming.layer.style.opacity='.002';
+          state.staging=incoming;
+          incoming.layer.style.opacity='.002';incoming.headerLayer.style.opacity='.002';
           incoming.layer.style.zIndex='301';
           incoming.layer.dataset.languagePrepared='warming';
           mountSheet(incoming);
@@ -541,12 +563,12 @@
         root.dataset.languageTransition='in';
         state.staging=null;
         clearSheet(state);
-        state.layer=incoming.layer;
+        state.layer=incoming.layer;state.headerLayer=incoming.headerLayer;
         if(!incoming.layer.isConnected)mountSheet(incoming);
         // Install the collapsed first frame before making the prepared sheet
         // visible. No full-size incoming surface is exposed at the handoff.
         const incomingMotion=animateSheet(state,incoming,true);
-        incoming.layer.style.removeProperty('opacity');
+        incoming.layer.style.removeProperty('opacity');incoming.headerLayer?.style.removeProperty('opacity');
         await incomingMotion;
         if(!current())return;
       }

@@ -67,3 +67,7 @@ main{padding-top:112px;padding-bottom:60px;max-width:none}.page-section{max-widt
 @media(prefers-reduced-motion:reduce){.toc-label{transition:none}.toc-item.is-hovered .toc-tick::after,.toc-item:focus-visible .toc-tick::after{animation:none;transform:scaleX(1);opacity:1}}
 
 .original-block .emoji{background:transparent;mix-blend-mode:multiply}.original-block .emoji.ritsumeikan-mark{mix-blend-mode:normal}
+
+/* Reserve the same author line for personal and work notes. */
+.blog-row .blog-author{min-height:1.9em}
+@media(max-width:800px){.blog-row .blog-author{min-height:1.7em}}

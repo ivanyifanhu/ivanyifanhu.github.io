@@ -3,7 +3,7 @@
   'use strict';
   const languages=['en','ja','zh'];
   const words={
-    en:{search:'Search',placeholder:'Search…',empty:'Enter a keyword to search',none:'No results for this keyword.',results:q=>`Search results for “${q}”`,count:n=>`${n} ${n===1?'work':'works'}`,more:n=>`Show all ${n} passages`,less:'Show less',matched:'Matching versions:',categories:{together:'Play/Game Together',creation:'Creation',research:'Studies',blog:'Notes'}},
+    en:{search:'Search',placeholder:'Search…',empty:'Enter a keyword to search',none:'No results for this keyword.',results:q=>`Search results for "${q}"`,count:n=>`${n} ${n===1?'work':'works'}`,more:n=>`Show all ${n} passages`,less:'Show less',matched:'Matching versions:',categories:{together:'Play/Game Together',creation:'Creation',research:'Studies',blog:'Notes'}},
     ja:{search:'検索',placeholder:'検索…',empty:'キーワードを入力して検索',none:'該当する結果はありません。',results:q=>`「${q}」の検索結果`,count:n=>`${n}件`,more:n=>`全${n}箇所を表示`,less:'折りたたむ',matched:'一致する版：',categories:{together:'一緒にプレイ/ゲーム',creation:'創作',research:'研究',blog:'ノート'}},
     zh:{search:'搜索',placeholder:'搜索…',empty:'输入关键词以搜索',none:'没有找到匹配结果。',results:q=>`“${q}”的搜索结果`,count:n=>`${n} 个条目`,more:n=>`展开全部 ${n} 处`,less:'收起',matched:'匹配版本：',categories:{together:'一起玩/游戏',creation:'创作',research:'研究',blog:'札记'}}
   };
@@ -23,7 +23,7 @@
   const visitPrefix='homepage-search-visit:';
   let lastOpened=null, returnTimer=0, disclosureMotion=null;
   const create=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;};
-  function slot(values){const outer=create('span','i18n-slot');languages.forEach(l=>{const span=create('span','',values[l]);span.lang=l;span.dataset.lang=l;span.hidden=l!==language;outer.append(span);});return outer;}
+  function slot(values){const outer=create('span','i18n-slot');languages.forEach(l=>{const span=create('span');span.append(window.SiteTypography.fragment(values[l],l));span.lang=l;span.dataset.lang=l;span.hidden=l!==language;outer.append(span);});return outer;}
   function plain(element,l){
     const copy=element.cloneNode(true);
     copy.querySelectorAll('[data-lang]').forEach(el=>{if(el.dataset.lang!==l)el.remove();});
@@ -84,10 +84,8 @@
     // Stable across language changes: title matches first, then source order.
     return found.sort((a,b)=>Number(languages.some(l=>matches(b.titles[l],term).length))-Number(languages.some(l=>matches(a.titles[l],term).length)));
   }
-  function markedText(text,term){
-    const fragment=document.createDocumentFragment();let last=0;
-    matches(text,term).forEach(hit=>{fragment.append(document.createTextNode(text.slice(last,hit.start)));fragment.append(create('mark','search-keyword',text.slice(hit.start,hit.end)));last=hit.end;});
-    fragment.append(document.createTextNode(text.slice(last)));return fragment;
+  function markedText(text,term,lang){
+    return window.SiteTypography.fragment(text,lang,matches(text,term));
   }
   function targetURL(doc,hit){
     const params=new URLSearchParams({q:query,hit:hit.key,matchLang:hit.lang});
@@ -98,7 +96,7 @@
     const radius=hit.lang==='en'?115:64;
     const start=Math.max(0,hit.at.start-radius),end=Math.min(hit.text.length,hit.at.end+radius);
     const excerpt=(start?'…':'')+hit.text.slice(start,end)+(end<hit.text.length?'…':'');
-    link.append(markedText(excerpt,query));
+    link.append(markedText(excerpt,query,hit.lang));
     return link;
   }
   function passageSlot(doc,hit){
