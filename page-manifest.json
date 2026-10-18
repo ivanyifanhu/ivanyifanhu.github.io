@@ -2,7 +2,7 @@
   "version": 1,
   "site": {
     "publishedAt": "2026-10-15T03:19:06Z",
-    "updatedAt": "2026-10-18T14:56:24Z"
+    "updatedAt": "2026-10-18T16:24:39Z"
   },
   "pages": {
     "about": {
@@ -89,7 +89,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-18T13:25:56Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/illustrations/foucault-in-china.png"
     },
@@ -111,7 +111,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-18T14:56:24Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/blog/summer.png"
     },
@@ -133,7 +133,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-18T13:25:56Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": false,
       "image": "assets/blog/summer.png"
     },
@@ -180,7 +180,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-18T14:56:24Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/media/portrait.png"
     },
@@ -233,7 +233,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-16T08:24:00Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/illustrations/theory.png"
     },
@@ -258,20 +258,20 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-16T08:24:00Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/illustrations/machine.png"
     },
     "research/foucault-in-china": {
       "titles": {
-        "en": "“Ubiquitous Yet Without Influence”: Foucault in China, or, the Governmentalization of Critique—The “Practicing Foucault in Reverse” Controversy",
+        "en": "\"Ubiquitous Yet Without Influence\": Foucault in China, or, the Governmentalization of Critique—The \"Practicing Foucault in Reverse\" Controversy",
         "ja": "「遍在しながらも影響を与えない」：中国におけるフーコー、あるいは批判の統治化――「フーコーを逆に実践する」論争を中心に",
         "zh": "“无处不在又毫无影响”：福柯在中国，或批判的治理化——以“逆练福柯”事件为中心"
       },
       "breadcrumbs": {
         "en": [
           "Studies",
-          "“Ubiquitous Yet Without Influence”: Foucault in China, or, the Governmentalization of Critique—The “Practicing Foucault in Reverse” Controversy"
+          "\"Ubiquitous Yet Without Influence\": Foucault in China, or, the Governmentalization of Critique—The \"Practicing Foucault in Reverse\" Controversy"
         ],
         "ja": [
           "研究",
@@ -283,7 +283,7 @@
         ]
       },
       "publishedAt": "2026-10-15T15:47:14Z",
-      "updatedAt": "2026-10-16T03:16:22Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/illustrations/foucault-in-china.png"
     },
@@ -511,7 +511,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-16T03:16:22Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/blog/crime.png"
     },
@@ -539,7 +539,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-16T03:16:22Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/blog/days.png"
     },
@@ -567,7 +567,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-16T03:16:22Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/blog/open.png"
     },
@@ -595,7 +595,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-16T03:16:22Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/blog/disco.png"
     },
@@ -623,7 +623,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-16T03:16:22Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/blog/immediacy.png"
     },
@@ -654,14 +654,14 @@
     },
     "research/theoretical-practice": {
       "titles": {
-        "en": "Theory and the Subject in an Age of Textual Apocalypse: Reflections from Althusser’s “Theory of Theoretical Practice”",
+        "en": "Theory and the Subject in an Age of Textual Apocalypse: Reflections from Althusser's \"Theory of Theoretical Practice\"",
         "ja": "テクストの終末時代における理論と主体――アルチュセールの「理論的実践の理論」からの考察",
         "zh": "文本末世时代的理论与主体——从阿尔都塞“理论实践的理论”出发的思考"
       },
       "breadcrumbs": {
         "en": [
           "Studies",
-          "Theory and the Subject in an Age of Textual Apocalypse: Reflections from Althusser’s “Theory of Theoretical Practice”"
+          "Theory and the Subject in an Age of Textual Apocalypse: Reflections from Althusser's \"Theory of Theoretical Practice\""
         ],
         "ja": [
           "研究",
@@ -673,20 +673,20 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-18T13:25:56Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/illustrations/theoretical-practice.png"
     },
     "research/lu-xun-nietzsche": {
       "titles": {
-        "en": "The Rebirth of the “Fellow Traveller” and the “Intermediary”: Nietzsche as the Intellectual Ground of Lu Xun’s Mid-Career Turn (1924–1926)",
+        "en": "The Rebirth of the \"Fellow Traveller\" and the \"Intermediary\": Nietzsche as the Intellectual Ground of Lu Xun's Mid-Career Turn (1924–1926)",
         "ja": "「同伴者」と「中間物」の再生――魯迅の中期的転回の思想的基盤としてのニーチェ（1924–1926）",
         "zh": "“同路人”与“中间物”的重生——论作为鲁迅中期转向之思想基底的尼采（1924–1926）"
       },
       "breadcrumbs": {
         "en": [
           "Studies",
-          "The Rebirth of the “Fellow Traveller” and the “Intermediary”: Nietzsche as the Intellectual Ground of Lu Xun’s Mid-Career Turn (1924–1926)"
+          "The Rebirth of the \"Fellow Traveller\" and the \"Intermediary\": Nietzsche as the Intellectual Ground of Lu Xun's Mid-Career Turn (1924–1926)"
         ],
         "ja": [
           "研究",
@@ -698,20 +698,20 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-18T13:25:56Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/illustrations/lu-xun-nietzsche.png"
     },
     "research/shadow-rain": {
       "titles": {
-        "en": "Transparency and Obstruction, or, How Generative AI “Writes”: On Rie Qudan’s Shadow Rain",
+        "en": "Transparency and Obstruction, or, How Generative AI \"Writes\": On Rie Qudan's Shadow Rain",
         "ja": "透明と障害、あるいは生成AIはいかに「書く」のか――九段理江『影の雨』をめぐって",
         "zh": "透明与障碍，或生成式人工智能如何“书写”——以九段理江《影之雨》为例"
       },
       "breadcrumbs": {
         "en": [
           "Studies",
-          "Transparency and Obstruction, or, How Generative AI “Writes”: On Rie Qudan’s Shadow Rain"
+          "Transparency and Obstruction, or, How Generative AI \"Writes\": On Rie Qudan's Shadow Rain"
         ],
         "ja": [
           "研究",
@@ -723,7 +723,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-18T13:25:56Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/illustrations/shadow-rain.png"
     },
@@ -751,7 +751,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-18T14:56:24Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/blog/sartre.png"
     },
@@ -779,13 +779,13 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-18T13:25:56Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/blog/sandalwood-death.png"
     },
     "blog/summer-palace": {
       "titles": {
-        "en": "Diary Time, Anti-Historical Allegory, and the Melancholic Politics of Post-Reform China: On Lou Ye’s Summer Palace and Its 70,000-Character Review",
+        "en": "Diary Time, Anti-Historical Allegory, and the Melancholic Politics of Post-Reform China: On Lou Ye's Summer Palace and Its 70,000-Character Review",
         "ja": "日記の時間、反歴史的アレゴリーとポスト改革期中国のメランコリーの政治――ロウ・イエ『天安門、恋人たち』とその七万字の映画評をめぐって",
         "zh": "日记时间、反历史寓言与后改革中国的忧郁政治——关于娄烨《颐和园》及其七万字影评"
       },
@@ -793,7 +793,7 @@
         "en": [
           "Notes",
           "Notes on Creation",
-          "Diary Time, Anti-Historical Allegory, and the Melancholic Politics of Post-Reform China: On Lou Ye’s Summer Palace and Its 70,000-Character Review"
+          "Diary Time, Anti-Historical Allegory, and the Melancholic Politics of Post-Reform China: On Lou Ye's Summer Palace and Its 70,000-Character Review"
         ],
         "ja": [
           "ノート",
@@ -807,13 +807,13 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-18T13:25:56Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/blog/summer-palace.png"
     },
     "blog/great-buddha-plus": {
       "titles": {
-        "en": "Sounds from the Buddha’s Belly",
+        "en": "Sounds from the Buddha's Belly",
         "ja": "仏の腹から聞こえる音",
         "zh": "佛肚传出声响"
       },
@@ -821,7 +821,7 @@
         "en": [
           "Notes",
           "Notes on Creation",
-          "Sounds from the Buddha’s Belly"
+          "Sounds from the Buddha's Belly"
         ],
         "ja": [
           "ノート",
@@ -835,7 +835,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-18T13:25:56Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/blog/great-buddha-plus.png"
     },
@@ -863,7 +863,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-18T14:56:24Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/blog/north-river.png"
     },
@@ -891,13 +891,13 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-18T13:25:56Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/blog/pig-snake-pigeon.png"
     },
     "blog/the-substance": {
       "titles": {
-        "en": "Where Does Matter Come From? Where Does Vitality Go?—The Substance and the Polyphony of “Things”",
+        "en": "Where Does Matter Come From? Where Does Vitality Go?—The Substance and the Polyphony of \"Things\"",
         "ja": "物質はどこから来て、活力はどこへ行くのか――『サブスタンス』と「物」の多重奏",
         "zh": "物质从哪来？活力到哪去？——《某种物质》与“物”的多重奏"
       },
@@ -905,7 +905,7 @@
         "en": [
           "Notes",
           "Notes on Creation",
-          "Where Does Matter Come From? Where Does Vitality Go?—The Substance and the Polyphony of “Things”"
+          "Where Does Matter Come From? Where Does Vitality Go?—The Substance and the Polyphony of \"Things\""
         ],
         "ja": [
           "ノート",
@@ -919,7 +919,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-18T13:25:56Z",
+      "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": true,
       "image": "assets/blog/substance.png"
     }
