@@ -128,6 +128,7 @@
     window.SiteNightMap?.sync(value);
     document.querySelectorAll('[lang=en]').forEach(el=>el.style.fontOpticalSizing='auto');
     document.querySelectorAll('[data-lang]').forEach(el => { el.hidden = el.dataset.lang !== value; });
+    document.querySelectorAll('[data-flip-toggle]').forEach(button=>button.setAttribute('aria-label',({en:'Switch between work title and essay title',ja:'作品名と記事の題名を切り替える',zh:'切换作品名与文章题目'})[value]));
     document.querySelectorAll('[data-set-lang]').forEach(btn => btn.setAttribute('aria-pressed',String(btn.dataset.setLang===value)));
     document.querySelectorAll('.work-row').forEach(row=>row.querySelector('.work-visual')?.setAttribute('aria-label',row.querySelector(`h2 [data-lang="${value}"]`).textContent));
     entry.setAttribute('aria-label',({en:'Cover',ja:'表紙',zh:'封面'})[value]);
@@ -344,7 +345,7 @@
   let tocTargets=[];
   let tocNodes=[];
   let tocSelection=null;
-  const tocHeadingKey=heading=>heading.dataset.readingKey||heading.dataset.source||heading.id;
+  const tocHeadingKey=heading=>heading.dataset.readingKey||heading.dataset.source||heading.id||heading.dataset.tocKey;
   let scheduled=false;
   const collapsedToc=new Set();
   const tocWords={en:{expand:'Expand',collapse:'Collapse'},ja:{expand:'展開',collapse:'折りたたむ'},zh:{expand:'展开',collapse:'收起'}};
@@ -405,6 +406,8 @@
     toc.setAttribute('aria-label',({en:'On this page',ja:'このページの目次',zh:'本页目录'})[language]);
     const roots=[];const stack=[];
     tocTargets.forEach((heading,index)=>{
+      // Gallery and group headings need the same unique identity as prose.
+      heading.dataset.tocKey=active+':heading:'+index;
       const rank=Number(heading.tagName.slice(1));
       while(stack.length && stack.at(-1).rank>=rank)stack.pop();
       const parent=stack.at(-1)||null;
@@ -471,6 +474,18 @@
   addEventListener('pagehide',rememberPosition);
   document.addEventListener('visibilitychange',()=>{if(document.hidden)rememberPosition();});
   document.addEventListener('click',event=>{
+    const flip=event.target.closest('[data-flip-toggle]');
+    if(flip){
+      const row=flip.closest('.note-row-wrap'),open=row.dataset.titleOpen!=='true';
+      row.dataset.titleOpen=String(open);flip.setAttribute('aria-pressed',String(open));
+      return;
+    }
+    const footnote=event.target.closest('[data-footnote-target]');
+    if(footnote){
+      const target=document.getElementById(footnote.dataset.footnoteTarget);
+      if(target){event.preventDefault();target.tabIndex=-1;target.focus({preventScroll:true});target.scrollIntoView({block:'start',behavior:reducedMotion.matches?'instant':'smooth'});target.classList.remove('toc-arrived');requestAnimationFrame(()=>target.classList.add('toc-arrived'));setTimeout(()=>target.classList.remove('toc-arrived'),1300);}
+      return;
+    }
     if(event.target.closest('.skip')){
       event.preventDefault(); setMenu(false); setOutline(false);
       if(!entry.hidden){if(location.hash==='#about')route();else location.hash='about';}
