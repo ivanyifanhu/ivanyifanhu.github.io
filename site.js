@@ -128,7 +128,6 @@
     window.SiteNightMap?.sync(value);
     document.querySelectorAll('[lang=en]').forEach(el=>el.style.fontOpticalSizing='auto');
     document.querySelectorAll('[data-lang]').forEach(el => { el.hidden = el.dataset.lang !== value; });
-    document.querySelectorAll('[data-flip-toggle]').forEach(button=>button.setAttribute('aria-label',({en:'Switch between work title and essay title',ja:'作品名と記事の題名を切り替える',zh:'切换作品名与文章题目'})[value]));
     document.querySelectorAll('[data-set-lang]').forEach(btn => btn.setAttribute('aria-pressed',String(btn.dataset.setLang===value)));
     document.querySelectorAll('.work-row').forEach(row=>row.querySelector('.work-visual')?.setAttribute('aria-label',row.querySelector(`h2 [data-lang="${value}"]`).textContent));
     entry.setAttribute('aria-label',({en:'Cover',ja:'表紙',zh:'封面'})[value]);
@@ -427,6 +426,16 @@
       const tick=document.createElement('span');tick.className='toc-tick';track.append(tick);
       button.append(span,track);row.append(button);item.append(row);node.element=item;node.button=button;
       button.addEventListener('click',()=>jumpToHeading(node.heading));
+      button.addEventListener('pointerenter',event=>{
+        if(event.pointerType==='touch'||!matchMedia('(hover:hover)').matches)return;
+        const rect=tick.getBoundingClientRect();
+        const origin=Math.max(0,Math.min(1,(event.clientX-rect.left)/Math.max(1,rect.width)));
+        button.style.setProperty('--ink-origin',`${origin*100}%`);
+        button.classList.add('is-hovered');
+      });
+      const clearHover=()=>button.classList.remove('is-hovered');
+      button.addEventListener('pointerleave',clearHover);
+      button.addEventListener('pointercancel',clearHover);
       if(node.children.length){
         const children=document.createElement('ol');children.className='toc-children';children.id='toc-children-'+node.index;
         children.append(...node.children.map(renderNode));
@@ -474,12 +483,6 @@
   addEventListener('pagehide',rememberPosition);
   document.addEventListener('visibilitychange',()=>{if(document.hidden)rememberPosition();});
   document.addEventListener('click',event=>{
-    const flip=event.target.closest('[data-flip-toggle]');
-    if(flip){
-      const row=flip.closest('.note-row-wrap'),open=row.dataset.titleOpen!=='true';
-      row.dataset.titleOpen=String(open);flip.setAttribute('aria-pressed',String(open));
-      return;
-    }
     const footnote=event.target.closest('[data-footnote-target]');
     if(footnote){
       const target=document.getElementById(footnote.dataset.footnoteTarget);
