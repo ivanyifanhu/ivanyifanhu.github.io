@@ -2,7 +2,7 @@
   "version": 1,
   "site": {
     "publishedAt": "2026-10-15T03:19:06Z",
-    "updatedAt": "2026-10-16T03:16:22Z"
+    "updatedAt": "2026-10-18T14:56:24Z"
   },
   "pages": {
     "about": {
@@ -111,7 +111,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-18T13:25:56Z",
+      "updatedAt": "2026-10-18T14:56:24Z",
       "rankable": true,
       "image": "assets/blog/summer.png"
     },
@@ -180,7 +180,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-18T04:50:00Z",
+      "updatedAt": "2026-10-18T14:56:24Z",
       "rankable": true,
       "image": "assets/media/portrait.png"
     },
@@ -208,7 +208,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-16T03:16:22Z",
+      "updatedAt": "2026-10-18T14:56:24Z",
       "rankable": true,
       "image": "assets/blog/summer.png"
     },
@@ -729,29 +729,29 @@
     },
     "blog/what-is-literature": {
       "titles": {
-        "en": "What Is Engagement: Mediating Engagement, or Engaging Mediation?—A Reading of Sartre’s What Is Literature?",
-        "ja": "アンガジュマンとは何か――介入を媒介するのか、媒介に介入するのか：サルトル『文学とは何か』の一解釈",
-        "zh": "什么是介入：是中介介入，还是介入中介？——萨特《什么是文学？》一解"
+        "en": "What Is Engagement: Mediating Engagement, or Engaging Mediation?",
+        "ja": "アンガジュマンとは何か――介入を媒介するのか、媒介に介入するのか",
+        "zh": "什么是介入：是中介介入，还是介入中介？"
       },
       "breadcrumbs": {
         "en": [
           "Notes",
           "Notes on Studies",
-          "What Is Engagement: Mediating Engagement, or Engaging Mediation?—A Reading of Sartre’s What Is Literature?"
+          "What Is Engagement: Mediating Engagement, or Engaging Mediation?"
         ],
         "ja": [
           "ノート",
           "研究のノート",
-          "アンガジュマンとは何か――介入を媒介するのか、媒介に介入するのか：サルトル『文学とは何か』の一解釈"
+          "アンガジュマンとは何か――介入を媒介するのか、媒介に介入するのか"
         ],
         "zh": [
           "札记",
           "研究札记",
-          "什么是介入：是中介介入，还是介入中介？——萨特《什么是文学？》一解"
+          "什么是介入：是中介介入，还是介入中介？"
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-18T13:25:56Z",
+      "updatedAt": "2026-10-18T14:56:24Z",
       "rankable": true,
       "image": "assets/blog/sartre.png"
     },
@@ -841,29 +841,29 @@
     },
     "blog/north-river": {
       "titles": {
-        "en": "After Patricide: Between Giving Up the Search and Searching Again—On Zhang Chengzhi’s Rivers of the North",
-        "ja": "父殺しの後で――探すことをやめることと探し直すことのあいだ：張承志『北方の河』を読む",
-        "zh": "弑父之后：在不寻与重寻之间——评张承志《北方的河》"
+        "en": "After Patricide: Between Giving Up the Search and Searching Again",
+        "ja": "父殺しの後で――探すことをやめることと探し直すことのあいだ",
+        "zh": "弑父之后：在不寻与重寻之间"
       },
       "breadcrumbs": {
         "en": [
           "Notes",
           "Notes on Creation",
-          "After Patricide: Between Giving Up the Search and Searching Again—On Zhang Chengzhi’s Rivers of the North"
+          "After Patricide: Between Giving Up the Search and Searching Again"
         ],
         "ja": [
           "ノート",
           "創作のノート",
-          "父殺しの後で――探すことをやめることと探し直すことのあいだ：張承志『北方の河』を読む"
+          "父殺しの後で――探すことをやめることと探し直すことのあいだ"
         ],
         "zh": [
           "札记",
           "创作札记",
-          "弑父之后：在不寻与重寻之间——评张承志《北方的河》"
+          "弑父之后：在不寻与重寻之间"
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-18T13:25:56Z",
+      "updatedAt": "2026-10-18T14:56:24Z",
       "rankable": true,
       "image": "assets/blog/north-river.png"
     },
