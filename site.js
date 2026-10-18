@@ -421,7 +421,7 @@
       const row=document.createElement('div');row.className='toc-row';
       const button=document.createElement('button');button.className='toc-item';button.type='button';
       button.setAttribute('aria-label',label);button.title=label;
-      const span=document.createElement('span');span.className='toc-label';span.textContent=label;
+      const span=document.createElement('span');span.className='toc-label';window.SiteTypography.set(span,label,language);
       const track=document.createElement('span');track.className='toc-track';track.setAttribute('aria-hidden','true');
       const tick=document.createElement('span');tick.className='toc-tick';track.append(tick);
       button.append(span,track);row.append(button);item.append(row);node.element=item;node.button=button;

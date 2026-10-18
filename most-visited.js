@@ -19,7 +19,7 @@
     const name=winner.route==='about'?'Ivan Yi-fan Hu':winner.meta.titles[lang];
     const path=winner.meta.breadcrumbs[lang];
     card.href='#'+winner.route;card.dataset.route=winner.route;
-    title.textContent=name;title.title=name;
+    window.SiteTypography.set(title,name,lang);title.title=name;
     category.textContent=(path.length>1?path.slice(0,-1):path).join('—');
     category.title=category.textContent;
     if(image.getAttribute('src')!==winner.meta.image)image.src=winner.meta.image;
