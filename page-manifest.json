@@ -45,7 +45,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-16T03:16:22Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/theory.png"
     },
@@ -67,7 +67,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-16T03:16:22Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/panopticon.png"
     },
@@ -89,7 +89,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-18T16:24:39Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/foucault-in-china.png"
     },
@@ -111,9 +111,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-18T16:24:39Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
-      "image": "assets/blog/summer.png"
+      "image": "assets/blog/summer-landscape-v32.png"
     },
     "entry": {
       "titles": {
@@ -135,7 +135,7 @@
       "publishedAt": "2026-10-13T17:53:06Z",
       "updatedAt": "2026-10-18T16:24:39Z",
       "rankable": false,
-      "image": "assets/blog/summer.png"
+      "image": "assets/blog/summer-landscape-v32.png"
     },
     "search": {
       "titles": {
@@ -155,9 +155,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-16T03:16:22Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": false,
-      "image": "assets/blog/summer.png"
+      "image": "assets/blog/summer-landscape-v32.png"
     },
     "about/cv": {
       "titles": {
@@ -208,9 +208,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
-      "image": "assets/blog/summer.png"
+      "image": "assets/blog/summer-landscape-v32.png"
     },
     "together/critical-theory": {
       "titles": {
@@ -233,7 +233,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/theory.png"
     },
@@ -258,7 +258,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/machine.png"
     },
@@ -283,7 +283,7 @@
         ]
       },
       "publishedAt": "2026-10-15T15:47:14Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/foucault-in-china.png"
     },
@@ -308,7 +308,7 @@
         ]
       },
       "publishedAt": "2026-10-15T03:19:06Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/panopticon.png"
     },
@@ -333,7 +333,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/practice.png"
     },
@@ -358,7 +358,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/jargon.png"
     },
@@ -383,7 +383,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/busa.png"
     },
@@ -408,7 +408,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/melancholy.png"
     },
@@ -433,7 +433,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/spirit.png"
     },
@@ -458,7 +458,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/subjectivity.png"
     },
@@ -483,7 +483,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/beast.png"
     },
@@ -511,9 +511,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
-      "image": "assets/blog/crime.png"
+      "image": "assets/blog/crime-landscape-v32.png"
     },
     "blog/now-and-in-other-days": {
       "titles": {
@@ -539,9 +539,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
-      "image": "assets/blog/days.png"
+      "image": "assets/blog/days-landscape-v32.png"
     },
     "blog/open-closed-open": {
       "titles": {
@@ -567,9 +567,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
-      "image": "assets/blog/open.png"
+      "image": "assets/blog/open-landscape-v32.png"
     },
     "blog/disco-elysium": {
       "titles": {
@@ -595,9 +595,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
-      "image": "assets/blog/disco.png"
+      "image": "assets/blog/disco-landscape-v32.png"
     },
     "blog/immediacy": {
       "titles": {
@@ -623,9 +623,9 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
-      "image": "assets/blog/immediacy.png"
+      "image": "assets/blog/immediacy-landscape-v32.png"
     },
     "research/dersu-uzala": {
       "titles": {
@@ -648,7 +648,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/dersu-uzala.png"
     },
@@ -673,7 +673,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/theoretical-practice.png"
     },
@@ -698,7 +698,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/lu-xun-nietzsche.png"
     },
@@ -723,7 +723,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/illustrations/shadow-rain.png"
     },
@@ -751,7 +751,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/blog/sartre.png"
     },
@@ -779,7 +779,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/blog/sandalwood-death.png"
     },
@@ -807,7 +807,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/blog/summer-palace.png"
     },
@@ -835,7 +835,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/blog/great-buddha-plus.png"
     },
@@ -863,7 +863,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/blog/north-river.png"
     },
@@ -891,7 +891,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/blog/pig-snake-pigeon.png"
     },
@@ -919,7 +919,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-19T01:54:48Z",
+      "updatedAt": "2026-10-19T04:55:45Z",
       "rankable": true,
       "image": "assets/blog/substance.png"
     }
