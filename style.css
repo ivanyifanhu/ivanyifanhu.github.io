@@ -72,3 +72,6 @@ main{padding-top:112px;padding-bottom:60px;max-width:none}.page-section{max-widt
 /* Reserve the same author line for personal and work notes. */
 .blog-row .blog-author{min-height:1.9em}
 @media(max-width:800px){.blog-row .blog-author{min-height:1.7em}}
+
+/* Footnote navigation is a vector, independent of OS emoji presentation. */
+.footnote-back{display:inline-flex;align-items:center;justify-content:center;vertical-align:-.12em;line-height:1;width:1.1em;height:1.1em}.footnote-back svg{display:block;width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}.footnote-reference{scroll-margin-top:var(--reading-top)}
