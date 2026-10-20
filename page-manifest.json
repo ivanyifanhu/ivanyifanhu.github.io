@@ -2,7 +2,7 @@
   "version": 1,
   "site": {
     "publishedAt": "2026-10-15T03:19:06Z",
-    "updatedAt": "2026-10-20T05:07:02+00:00"
+    "updatedAt": "2026-10-20T07:56:30+00:00"
   },
   "pages": {
     "about": {
@@ -155,7 +155,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-20T05:07:02+00:00",
+      "updatedAt": "2026-10-20T07:56:30+00:00",
       "rankable": false,
       "image": "assets/blog/summer-landscape-v32.png"
     },
@@ -751,7 +751,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-20T05:07:02+00:00",
+      "updatedAt": "2026-10-20T07:56:30+00:00",
       "rankable": true,
       "image": "assets/blog/sartre.png"
     },
@@ -863,7 +863,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-20T05:07:02+00:00",
+      "updatedAt": "2026-10-20T07:56:30+00:00",
       "rankable": true,
       "image": "assets/blog/north-river.png"
     },
@@ -919,7 +919,7 @@
         ]
       },
       "publishedAt": "2026-10-18T13:25:56Z",
-      "updatedAt": "2026-10-20T05:07:02+00:00",
+      "updatedAt": "2026-10-20T07:56:30+00:00",
       "rankable": true,
       "image": "assets/blog/substance.png"
     }
