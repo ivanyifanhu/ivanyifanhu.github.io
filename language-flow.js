@@ -271,11 +271,19 @@
       pieces.push({rect,paintTop,paintBottom,master,source:element,plane:options?.plane,header:options?.header});
     };
     const visit = element => {
+      if (!element || element.closest('[hidden]')) return;
+      const computed = getComputedStyle(element);
+      if (computed.visibility === 'hidden' || computed.display === 'none') return;
+      // Grid metadata wrappers have no box of their own, but their children
+      // still paint. Traverse them before testing viewport geometry so titles,
+      // authors, dates and links remain part of the folding sheet.
+      if (computed.display === 'contents') {
+        [...element.children].forEach(visit);
+        return;
+      }
       if (!visible(element)) return;
       const rect = element.getBoundingClientRect();
       if (!intersects(rect)) return;
-      const computed = getComputedStyle(element);
-      if (computed.visibility === 'hidden' || computed.display === 'none') return;
       const directText = [...element.childNodes].some(node => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
       if (element.matches(atomic) || !element.children.length || directText) { add(element); return; }
       // Preserve a container's own paint without cloning its entire long page.
