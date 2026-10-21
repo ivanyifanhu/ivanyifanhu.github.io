@@ -30,7 +30,22 @@
     copy.querySelectorAll('img,canvas,svg,[aria-hidden="true"]').forEach(el=>el.remove());
     // A nested source block has its own search anchor.
     copy.querySelectorAll('[data-reading-key],[data-source]').forEach(el=>el.remove());
-    return copy.textContent.replace(/\s+/g,' ').trim();
+    // Keep the same whitespace/anchor model as keyword matching, while
+    // retaining original emphasis even when a snippet clips either boundary.
+    const walker=document.createTreeWalker(copy,NodeFilter.SHOW_TEXT),raw=[];let node;
+    while(node=walker.nextNode()){
+      const em=!!node.parentElement.closest('em,i'),strong=!!node.parentElement.closest('strong,b');
+      for(let i=0;i<node.textContent.length;i++)raw.push({char:node.textContent[i],em,strong});
+    }
+    const chars=[];
+    for(const item of raw){if(/\s/.test(item.char)){if(chars.length&&chars.at(-1).char!==' ')chars.push({...item,char:' '});}else chars.push(item);}
+    if(chars.at(-1)?.char===' ')chars.pop();
+    const formats=[];
+    for(const [property,kind]of [['em','em'],['strong','strong']]){
+      let start=null;
+      for(let i=0;i<=chars.length;i++)if(chars[i]?.[property]){if(start===null)start=i;}else if(start!==null){formats.push({start,end:i,kind});start=null;}
+    }
+    return {text:chars.map(item=>item.char).join(''),formats};
   }
   function buildIndex(){
     return [...document.querySelectorAll('[data-searchable]')].map(section=>{
@@ -38,7 +53,7 @@
       languages.forEach(l=>{
         titles[l]=section.querySelector(`h1 [data-lang="${l}"]`)?.textContent.trim()||'';
         const candidates=[section.querySelector('h1'),section.querySelector('.detail-meta'),...section.querySelectorAll(`.detail-body[data-lang="${l}"] [data-reading-key]`)];
-        blocks[l]=candidates.filter(Boolean).map(el=>({key:el.dataset.readingKey||el.dataset.source,text:plain(el,l)})).filter(item=>item.text);
+        blocks[l]=candidates.filter(Boolean).map(el=>({key:el.dataset.readingKey||el.dataset.source,...plain(el,l)})).filter(item=>item.text);
       });
       const category=route.split('/')[0];
       const group=category==='blog'?[...document.querySelectorAll('[data-section="blog"] .blog-group')].find(group=>[...group.querySelectorAll('a[href]')].some(link=>(link.dataset.routeHref||link.getAttribute('href'))==='#'+route)):null;
@@ -84,8 +99,8 @@
     // Stable across language changes: title matches first, then source order.
     return found.sort((a,b)=>Number(languages.some(l=>matches(b.titles[l],term).length))-Number(languages.some(l=>matches(a.titles[l],term).length)));
   }
-  function markedText(text,term,lang){
-    return window.SiteTypography.fragment(text,lang,matches(text,term));
+  function markedText(text,term,lang,formats=[]){
+    return window.SiteTypography.fragment(text,lang,matches(text,term),'',formats);
   }
   function targetURL(doc,hit){
     const params=new URLSearchParams({q:query,hit:hit.key,matchLang:hit.lang});
@@ -96,7 +111,9 @@
     const radius=hit.lang==='en'?115:64;
     const start=Math.max(0,hit.at.start-radius),end=Math.min(hit.text.length,hit.at.end+radius);
     const excerpt=(start?'…':'')+hit.text.slice(start,end)+(end<hit.text.length?'…':'');
-    link.append(markedText(excerpt,query,hit.lang));
+    const leading=start?1:0;
+    const formats=(hit.formats||[]).filter(x=>x.start<end&&x.end>start).map(x=>({...x,start:Math.max(x.start,start)-start+leading,end:Math.min(x.end,end)-start+leading}));
+    link.append(markedText(excerpt,query,hit.lang,formats));
     return link;
   }
   function passageSlot(doc,hit){
