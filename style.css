@@ -75,3 +75,32 @@ main{padding-top:112px;padding-bottom:60px;max-width:none}.page-section{max-widt
 
 /* Footnote navigation is a vector, independent of OS emoji presentation. */
 .footnote-back{display:inline-flex;align-items:center;justify-content:center;vertical-align:-.12em;line-height:1;width:1.1em;height:1.1em}.footnote-back svg{display:block;width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}.footnote-reference{scroll-margin-top:var(--reading-top)}
+
+/* Project lists share a quiet divider and a date-aligned corner link.
+   Keep the existing document, translations, routes and alternating artwork. */
+.work-row{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr) auto;column-gap:42px;row-gap:0;align-items:start;padding:36px 0;border-bottom:1px solid var(--line)}
+.work-row:first-child{padding-top:0}.work-row+.work-row{margin-top:0}
+.work-row.reverse{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
+.work-row .work-copy,.work-row .work-meta{display:contents}
+.work-row .work-visual{grid-column:1;grid-row:1/4;align-self:start}
+.work-row h2{grid-column:2;grid-row:1;margin:0 0 18px}
+.work-row .work-meta>p:first-child{grid-column:2;grid-row:2;margin:0 0 16px}
+.work-row .work-meta>p:last-child{grid-column:1;grid-row:4;align-self:end;justify-self:start;margin:16px 0 0;padding-right:44px;font-variant-numeric:tabular-nums}
+.work-row .work-links{grid-column:2;grid-row:4;align-self:end;justify-self:end;margin-top:16px}
+.work-row.reverse .work-visual{grid-column:2;order:0}
+.work-row.reverse h2,.work-row.reverse .work-meta>p:first-child{grid-column:1}
+.work-links{position:relative;display:block;width:44px;height:1.8em;margin:0;font-size:14px;line-height:1.8}
+.work-links>.text-link{position:absolute;right:-15px;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:44px;height:44px;border:0;color:var(--muted)}
+.work-links>.text-link>.i18n-slot{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.work-links>.text-link::after{content:"";display:block;width:1em;height:1em;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 13 13 3M3 3h10v10' fill='none' stroke='black' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 13 13 3M3 3h10v10' fill='none' stroke='black' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform .2s ease,color .2s ease}
+.work-links>.text-link:hover,.work-links>.text-link:focus-visible{color:var(--ink)}
+@media(hover:hover){.work-links>.text-link:hover::after{transform:translate(1px,-1px)}}
+@media(max-width:1100px){
+ .work-row,.work-row.reverse{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto;gap:0}
+ .work-row .work-visual,.work-row.reverse .work-visual{grid-column:1;grid-row:1;margin-bottom:24px}
+ .work-row h2,.work-row.reverse h2{grid-column:1;grid-row:2}
+ .work-row .work-meta>p:first-child,.work-row.reverse .work-meta>p:first-child{grid-column:1;grid-row:3}
+ .work-row .work-meta>p:last-child,.work-row.reverse .work-meta>p:last-child,.work-row .work-links,.work-row.reverse .work-links{grid-column:1;grid-row:4}
+}
+@media(max-width:800px){.work-row{padding:28px 0}.work-row:first-child{padding-top:0}.work-links{font-size:13px}.work-row .work-meta>p:first-child{margin-bottom:12px}}
+@media(prefers-reduced-motion:reduce){.work-links>.text-link::after{transition:none}}
