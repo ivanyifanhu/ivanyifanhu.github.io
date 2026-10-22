@@ -1,8 +1,8 @@
 {
   "version": 1,
   "site": {
-    "publishedAt": "2026-10-15T03:19:06Z",
-    "updatedAt": "2026-10-20T07:56:30+00:00"
+    "publishedAt": "2026-10-22T07:30:37Z",
+    "updatedAt": "2026-10-22T07:54:19Z"
   },
   "pages": {
     "about": {
@@ -111,7 +111,7 @@
         ]
       },
       "publishedAt": "2026-10-13T17:53:06Z",
-      "updatedAt": "2026-10-19T04:55:45Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
       "rankable": true,
       "image": "assets/blog/summer-landscape-v32.png"
     },
@@ -922,6 +922,1350 @@
       "updatedAt": "2026-10-20T07:56:30+00:00",
       "rankable": true,
       "image": "assets/blog/substance.png"
+    },
+    "blog/in-game": {
+      "titles": {
+        "en": "In-Game: From Immersion to Incorporation",
+        "ja": "In-Game: From Immersion to Incorporation",
+        "zh": "宅兹游戏：从沉浸到归化"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Studies",
+          "In-Game: From Immersion to Incorporation"
+        ],
+        "ja": [
+          "ノート",
+          "研究のノート",
+          "In-Game: From Immersion to Incorporation"
+        ],
+        "zh": [
+          "札记",
+          "研究札记",
+          "宅兹游戏：从沉浸到归化"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/in-game-v42.jpg"
+    },
+    "blog/red-alert-republic": {
+      "titles": {
+        "en": "Command & Conquer: Red Alert 2 — Glory of the Republic",
+        "ja": "レッドアラート2：共和国の輝き",
+        "zh": "红色警戒2：共和国之辉"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Command & Conquer: Red Alert 2 — Glory of the Republic"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "レッドアラート2：共和国の輝き"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "红色警戒2：共和国之辉"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/red-alert-republic-v42.jpg"
+    },
+    "blog/gta-iv": {
+      "titles": {
+        "en": "Grand Theft Auto IV",
+        "ja": "グランド・セフト・オートIV",
+        "zh": "侠盗猎车手IV"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Grand Theft Auto IV"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "グランド・セフト・オートIV"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "侠盗猎车手IV"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/gta-iv-v42.jpg"
+    },
+    "blog/minecraft": {
+      "titles": {
+        "en": "Minecraft",
+        "ja": "マインクラフト",
+        "zh": "我的世界"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Minecraft"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "マインクラフト"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "我的世界"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/minecraft-v42.jpg"
+    },
+    "blog/skyrim": {
+      "titles": {
+        "en": "The Elder Scrolls V: Skyrim",
+        "ja": "The Elder Scrolls V: Skyrim",
+        "zh": "上古卷轴V：天际"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "The Elder Scrolls V: Skyrim"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "The Elder Scrolls V: Skyrim"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "上古卷轴V：天际"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/skyrim-v42.jpg"
+    },
+    "blog/sleeping-dogs": {
+      "titles": {
+        "en": "Sleeping Dogs",
+        "ja": "スリーピングドッグス 香港秘密警察",
+        "zh": "热血无赖"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Sleeping Dogs"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "スリーピングドッグス 香港秘密警察"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "热血无赖"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/sleeping-dogs-v42.jpg"
+    },
+    "blog/csgo": {
+      "titles": {
+        "en": "CS2 (CS:GO)",
+        "ja": "CS2 (CS:GO)",
+        "zh": "CS2 (CS:GO)"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "CS2 (CS:GO)"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "CS2 (CS:GO)"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "CS2 (CS:GO)"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/csgo-v42.jpg"
+    },
+    "blog/kentucky-route-zero": {
+      "titles": {
+        "en": "Kentucky Route Zero",
+        "ja": "Kentucky Route Zero",
+        "zh": "肯塔基零号公路"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Kentucky Route Zero"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "Kentucky Route Zero"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "肯塔基零号公路"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/kentucky-route-zero-v42.jpg"
+    },
+    "blog/gta-v": {
+      "titles": {
+        "en": "Grand Theft Auto V",
+        "ja": "グランド・セフト・オートV",
+        "zh": "侠盗猎车手V"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Grand Theft Auto V"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "グランド・セフト・オートV"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "侠盗猎车手V"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/gta-v-v42.jpg"
+    },
+    "blog/stanley-parable": {
+      "titles": {
+        "en": "The Stanley Parable",
+        "ja": "The Stanley Parable",
+        "zh": "史丹利的寓言"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "The Stanley Parable"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "The Stanley Parable"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "史丹利的寓言"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/stanley-parable-v42.jpg"
+    },
+    "blog/assassins-creed-unity": {
+      "titles": {
+        "en": "Assassin's Creed Unity",
+        "ja": "アサシン クリード ユニティ",
+        "zh": "刺客信条：大革命"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Assassin's Creed Unity"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "アサシン クリード ユニティ"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "刺客信条：大革命"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/assassins-creed-unity-v42.jpg"
+    },
+    "blog/witcher-3": {
+      "titles": {
+        "en": "The Witcher 3: Wild Hunt",
+        "ja": "ウィッチャー3 ワイルドハント",
+        "zh": "巫师3：狂猎"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "The Witcher 3: Wild Hunt"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "ウィッチャー3 ワイルドハント"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "巫师3：狂猎"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/witcher-3-v42.jpg"
+    },
+    "blog/fallout-shelter": {
+      "titles": {
+        "en": "Fallout Shelter",
+        "ja": "Fallout Shelter",
+        "zh": "辐射：避难所"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Fallout Shelter"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "Fallout Shelter"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "辐射：避难所"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/fallout-shelter-v42.jpg"
+    },
+    "blog/honor-of-kings": {
+      "titles": {
+        "en": "Honor of Kings",
+        "ja": "Honor of Kings",
+        "zh": "王者荣耀"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Honor of Kings"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "Honor of Kings"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "王者荣耀"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/honor-of-kings-v42.jpg"
+    },
+    "blog/fallout-4": {
+      "titles": {
+        "en": "Fallout 4",
+        "ja": "Fallout 4",
+        "zh": "辐射4"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Fallout 4"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "Fallout 4"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "辐射4"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/fallout-4-v42.jpg"
+    },
+    "blog/pubg": {
+      "titles": {
+        "en": "PUBG: Battlegrounds",
+        "ja": "PUBG: Battlegrounds",
+        "zh": "绝地求生"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "PUBG: Battlegrounds"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "PUBG: Battlegrounds"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "绝地求生"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/pubg-v42.jpg"
+    },
+    "blog/detroit-become-human": {
+      "titles": {
+        "en": "Detroit: Become Human",
+        "ja": "Detroit: Become Human",
+        "zh": "底特律：变人"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Detroit: Become Human"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "Detroit: Become Human"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "底特律：变人"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/detroit-become-human-v42.jpg"
+    },
+    "blog/red-dead-redemption-2": {
+      "titles": {
+        "en": "Red Dead Redemption 2",
+        "ja": "レッド・デッド・リデンプション2",
+        "zh": "荒野大镖客：救赎2"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Red Dead Redemption 2"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "レッド・デッド・リデンプション2"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "荒野大镖客：救赎2"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/red-dead-redemption-2-v42.jpg"
+    },
+    "blog/sekiro": {
+      "titles": {
+        "en": "Sekiro: Shadows Die Twice",
+        "ja": "SEKIRO: SHADOWS DIE TWICE",
+        "zh": "只狼：影逝二度"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Sekiro: Shadows Die Twice"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "SEKIRO: SHADOWS DIE TWICE"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "只狼：影逝二度"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/sekiro-v42.jpg"
+    },
+    "blog/valorant": {
+      "titles": {
+        "en": "Valorant",
+        "ja": "VALORANT",
+        "zh": "无畏契约"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Valorant"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "VALORANT"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "无畏契约"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/valorant-v42.jpg"
+    },
+    "blog/cyberpunk-2077": {
+      "titles": {
+        "en": "Cyberpunk 2077",
+        "ja": "サイバーパンク2077",
+        "zh": "赛博朋克2077"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Cyberpunk 2077"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "サイバーパンク2077"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "赛博朋克2077"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/cyberpunk-2077-v42.jpg"
+    },
+    "blog/1001-nights": {
+      "titles": {
+        "en": "1001 Nights",
+        "ja": "1001 Nights",
+        "zh": "1001夜"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "1001 Nights"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "1001 Nights"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "1001夜"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/1001-nights-v42.jpg"
+    },
+    "blog/suck-up": {
+      "titles": {
+        "en": "Suck Up!",
+        "ja": "Suck Up!",
+        "zh": "Suck Up!"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Suck Up!"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "Suck Up!"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "Suck Up!"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:30:37Z",
+      "updatedAt": "2026-10-22T07:30:37Z",
+      "rankable": true,
+      "image": "assets/blog/suck-up-v42.jpg"
+    },
+    "blog/blade-runner": {
+      "titles": {
+        "en": "Blade Runner",
+        "ja": "ブレードランナー",
+        "zh": "银翼杀手"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Blade Runner"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "ブレードランナー"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "银翼杀手"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/blade-runner-v42.jpg"
+    },
+    "blog/ran": {
+      "titles": {
+        "en": "Ran",
+        "ja": "乱",
+        "zh": "乱"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Ran"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "乱"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "乱"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/ran-v42.jpg"
+    },
+    "blog/rouge": {
+      "titles": {
+        "en": "Rouge",
+        "ja": "ルージュ",
+        "zh": "胭脂扣"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Rouge"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "ルージュ"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "胭脂扣"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/rouge-v42.jpg"
+    },
+    "blog/farewell-my-concubine": {
+      "titles": {
+        "en": "Farewell My Concubine",
+        "ja": "さらば、わが愛／覇王別姫",
+        "zh": "霸王别姬"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Farewell My Concubine"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "さらば、わが愛／覇王別姫"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "霸王别姬"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/farewell-my-concubine-v42.jpg"
+    },
+    "blog/three-body-problem": {
+      "titles": {
+        "en": "The Three-Body Problem",
+        "ja": "三体",
+        "zh": "三体"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "The Three-Body Problem"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "三体"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "三体"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/three-body-problem-v42.jpg"
+    },
+    "blog/cold-fish": {
+      "titles": {
+        "en": "Cold Fish",
+        "ja": "冷たい熱帯魚",
+        "zh": "冰冷热带鱼"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Cold Fish"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "冷たい熱帯魚"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "冰冷热带鱼"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/cold-fish-v42.jpg"
+    },
+    "blog/blade-runner-2049": {
+      "titles": {
+        "en": "Blade Runner 2049",
+        "ja": "ブレードランナー2049",
+        "zh": "银翼杀手2049"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Blade Runner 2049"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "ブレードランナー2049"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "银翼杀手2049"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/blade-runner-2049-v42.jpg"
+    },
+    "blog/bold-corrupt-beautiful": {
+      "titles": {
+        "en": "The Bold, the Corrupt, and the Beautiful",
+        "ja": "血観音",
+        "zh": "血观音"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "The Bold, the Corrupt, and the Beautiful"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "血観音"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "血观音"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/bold-corrupt-beautiful-v42.jpg"
+    },
+    "blog/bad-kids": {
+      "titles": {
+        "en": "The Bad Kids",
+        "ja": "バッド・キッズ 隠秘之罪",
+        "zh": "隐秘的角落"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "The Bad Kids"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "バッド・キッズ 隠秘之罪"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "隐秘的角落"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/bad-kids-v42.jpg"
+    },
+    "blog/why-try-to-change-me-now": {
+      "titles": {
+        "en": "Why Try to Change Me Now",
+        "ja": "平原のモーセ",
+        "zh": "平原上的摩西"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Why Try to Change Me Now"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "平原のモーセ"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "平原上的摩西"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/why-try-to-change-me-now-v42.jpg"
+    },
+    "blog/long-season": {
+      "titles": {
+        "en": "The Long Season",
+        "ja": "ロング・シーズン 長く遠い殺人",
+        "zh": "漫长的季节"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "The Long Season"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "ロング・シーズン 長く遠い殺人"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "漫长的季节"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/long-season-v42.jpg"
+    },
+    "blog/oppenheimer": {
+      "titles": {
+        "en": "Oppenheimer",
+        "ja": "オッペンハイマー",
+        "zh": "奥本海默"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Creation",
+          "Oppenheimer"
+        ],
+        "ja": [
+          "ノート",
+          "創作のノート",
+          "オッペンハイマー"
+        ],
+        "zh": [
+          "札记",
+          "创作札记",
+          "奥本海默"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/oppenheimer-v42.jpg"
+    },
+    "blog/homo-ludens": {
+      "titles": {
+        "en": "Homo Ludens: A Study of the Play-Element in Culture",
+        "ja": "ホモ・ルーデンス",
+        "zh": "游戏的人：文化的游戏要素研究"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Studies",
+          "Homo Ludens: A Study of the Play-Element in Culture"
+        ],
+        "ja": [
+          "ノート",
+          "研究のノート",
+          "ホモ・ルーデンス"
+        ],
+        "zh": [
+          "札记",
+          "研究札记",
+          "游戏的人：文化的游戏要素研究"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/homo-ludens-v42.jpg"
+    },
+    "blog/man-play-games": {
+      "titles": {
+        "en": "Man, Play and Games",
+        "ja": "遊びと人間",
+        "zh": "游戏与人"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Studies",
+          "Man, Play and Games"
+        ],
+        "ja": [
+          "ノート",
+          "研究のノート",
+          "遊びと人間"
+        ],
+        "zh": [
+          "札记",
+          "研究札记",
+          "游戏与人"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/man-play-games-v42.jpg"
+    },
+    "blog/introspection-retrospection": {
+      "titles": {
+        "en": "Introspection and Retrospection",
+        "ja": "内省と遡行",
+        "zh": "内省与溯行"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Studies",
+          "Introspection and Retrospection"
+        ],
+        "ja": [
+          "ノート",
+          "研究のノート",
+          "内省と遡行"
+        ],
+        "zh": [
+          "札记",
+          "研究札记",
+          "内省与溯行"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/introspection-retrospection-v42.jpg"
+    },
+    "blog/ambiguity-of-play": {
+      "titles": {
+        "en": "The Ambiguity of Play",
+        "ja": "遊びの曖昧さ",
+        "zh": "游戏的模糊性"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Studies",
+          "The Ambiguity of Play"
+        ],
+        "ja": [
+          "ノート",
+          "研究のノート",
+          "遊びの曖昧さ"
+        ],
+        "zh": [
+          "札记",
+          "研究札记",
+          "游戏的模糊性"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/ambiguity-of-play-v42.jpg"
+    },
+    "blog/hamlet-holodeck": {
+      "titles": {
+        "en": "Hamlet on the Holodeck: The Future of Narrative in Cyberspace",
+        "ja": "デジタル・ストーリーテリング：電脳空間におけるナラティヴの未来形",
+        "zh": "全息甲板上的哈姆雷特：赛博空间中的叙事未来"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Studies",
+          "Hamlet on the Holodeck: The Future of Narrative in Cyberspace"
+        ],
+        "ja": [
+          "ノート",
+          "研究のノート",
+          "デジタル・ストーリーテリング：電脳空間におけるナラティヴの未来形"
+        ],
+        "zh": [
+          "札记",
+          "研究札记",
+          "全息甲板上的哈姆雷特：赛博空间中的叙事未来"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/hamlet-holodeck-v42.jpg"
+    },
+    "blog/cybertext": {
+      "titles": {
+        "en": "Cybertext: Perspectives on Ergodic Literature",
+        "ja": "サイバーテクスト：エルゴード文学のパースペクティヴ",
+        "zh": "赛博文本：遍历文学的视角"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Studies",
+          "Cybertext: Perspectives on Ergodic Literature"
+        ],
+        "ja": [
+          "ノート",
+          "研究のノート",
+          "サイバーテクスト：エルゴード文学のパースペクティヴ"
+        ],
+        "zh": [
+          "札记",
+          "研究札记",
+          "赛博文本：遍历文学的视角"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/cybertext-v42.jpg"
+    },
+    "blog/rules-of-play": {
+      "titles": {
+        "en": "Rules of Play: Game Design Fundamentals",
+        "ja": "ルールズ・オブ・プレイ：ゲームデザインの基礎",
+        "zh": "玩乐之道：游戏设计基础"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Studies",
+          "Rules of Play: Game Design Fundamentals"
+        ],
+        "ja": [
+          "ノート",
+          "研究のノート",
+          "ルールズ・オブ・プレイ：ゲームデザインの基礎"
+        ],
+        "zh": [
+          "札记",
+          "研究札记",
+          "玩乐之道：游戏设计基础"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/rules-of-play-v42.jpg"
+    },
+    "blog/zhu-xi-historical-world": {
+      "titles": {
+        "en": "Tracing Inner Logic and Reconstructing an External World",
+        "ja": "内なる理路をたどり、外なる図景を再構成する",
+        "zh": "内抉理路与外塑图景"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Studies",
+          "Tracing Inner Logic and Reconstructing an External World"
+        ],
+        "ja": [
+          "ノート",
+          "研究のノート",
+          "内なる理路をたどり、外なる図景を再構成する"
+        ],
+        "zh": [
+          "札记",
+          "研究札记",
+          "内抉理路与外塑图景"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/zhu-xi-historical-world-v42.jpg"
+    },
+    "blog/half-real": {
+      "titles": {
+        "en": "Half-Real: Video Games between Real Rules and Fictional Worlds",
+        "ja": "ハーフリアル：虚実のあいだのビデオゲーム",
+        "zh": "半真实：真实规则与虚构世界之间的电子游戏"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Studies",
+          "Half-Real: Video Games between Real Rules and Fictional Worlds"
+        ],
+        "ja": [
+          "ノート",
+          "研究のノート",
+          "ハーフリアル：虚実のあいだのビデオゲーム"
+        ],
+        "zh": [
+          "札记",
+          "研究札记",
+          "半真实：真实规则与虚构世界之间的电子游戏"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/half-real-v42.jpg"
+    },
+    "blog/persuasive-games": {
+      "titles": {
+        "en": "Persuasive Games: The Expressive Power of Videogames",
+        "ja": "説得するゲーム：ビデオゲームの表現力",
+        "zh": "说服性游戏：电子游戏的表达力量"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Studies",
+          "Persuasive Games: The Expressive Power of Videogames"
+        ],
+        "ja": [
+          "ノート",
+          "研究のノート",
+          "説得するゲーム：ビデオゲームの表現力"
+        ],
+        "zh": [
+          "札记",
+          "研究札记",
+          "说服性游戏：电子游戏的表达力量"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/persuasive-games-v42.jpg"
+    },
+    "blog/intelligence-spirit": {
+      "titles": {
+        "en": "Intelligence and Spirit",
+        "ja": "知性と精神",
+        "zh": "智能与精神"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Studies",
+          "Intelligence and Spirit"
+        ],
+        "ja": [
+          "ノート",
+          "研究のノート",
+          "知性と精神"
+        ],
+        "zh": [
+          "札记",
+          "研究札记",
+          "智能与精神"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/intelligence-spirit-v42.jpg"
+    },
+    "blog/hegel-wired-brain": {
+      "titles": {
+        "en": "Hegel in a Wired Brain",
+        "ja": "接続された脳とヘーゲル：シンギュラリティにおける主体性の行方",
+        "zh": "连线大脑里的黑格尔"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Studies",
+          "Hegel in a Wired Brain"
+        ],
+        "ja": [
+          "ノート",
+          "研究のノート",
+          "接続された脳とヘーゲル：シンギュラリティにおける主体性の行方"
+        ],
+        "zh": [
+          "札记",
+          "研究札记",
+          "连线大脑里的黑格尔"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/hegel-wired-brain-v42.jpg"
+    },
+    "blog/introduction-contemporary-thought": {
+      "titles": {
+        "en": "An Introduction to Contemporary Thought",
+        "ja": "現代思想入門",
+        "zh": "现代思想入门"
+      },
+      "breadcrumbs": {
+        "en": [
+          "Notes",
+          "Notes on Studies",
+          "An Introduction to Contemporary Thought"
+        ],
+        "ja": [
+          "ノート",
+          "研究のノート",
+          "現代思想入門"
+        ],
+        "zh": [
+          "札记",
+          "研究札记",
+          "现代思想入门"
+        ]
+      },
+      "publishedAt": "2026-10-22T07:54:19Z",
+      "updatedAt": "2026-10-22T07:54:19Z",
+      "rankable": true,
+      "image": "assets/blog/introduction-contemporary-thought-v42.jpg"
     }
   }
 }
