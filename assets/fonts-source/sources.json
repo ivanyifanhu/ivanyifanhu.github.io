@@ -60,7 +60,7 @@
     }
   ],
   "subsets": {
-    "generated": "2026-10-20",
+    "generated": "2026-10-22",
     "tool": "fontTools 4.67.0",
     "recipe": "build-fonts.py",
     "files": [
@@ -270,6 +270,110 @@
         "subset": "content",
         "derivedFrom": "SourceHanSerifJP-VF.ttf.woff2",
         "internalFamily": "Ivan Han Serif JP Content",
+        "license": "SIL Open Font License 1.1"
+      },
+      {
+        "file": "IvanHanSerifSC-Regular-notes-v42.woff2",
+        "bytes": 27920,
+        "sha256": "a7a7a29eebfefaea4156eb39c5a60814832078c6fd7fa08b2eb85895e3ff9584",
+        "format": "WOFF2, static TrueType subset",
+        "altered": true,
+        "weight": 400,
+        "glyphCoverage": 115,
+        "subset": "notes-v42",
+        "derivedFrom": "SourceHanSerifCN-VF.ttf.woff2",
+        "internalFamily": "Ivan Han Serif SC Notes-V42",
+        "license": "SIL Open Font License 1.1"
+      },
+      {
+        "file": "IvanHanSerifSC-Medium-notes-v42.woff2",
+        "bytes": 28164,
+        "sha256": "8bf7847992b0dab1730d968e2096580676e7af1093eef4ede5d8502e343c7c6c",
+        "format": "WOFF2, static TrueType subset",
+        "altered": true,
+        "weight": 500,
+        "glyphCoverage": 115,
+        "subset": "notes-v42",
+        "derivedFrom": "SourceHanSerifCN-VF.ttf.woff2",
+        "internalFamily": "Ivan Han Serif SC Notes-V42",
+        "license": "SIL Open Font License 1.1"
+      },
+      {
+        "file": "IvanHanSerifSC-Semibold-notes-v42.woff2",
+        "bytes": 28272,
+        "sha256": "9d4312b662d845052526da440fb8b587f865a46b736a842b70f8393d8d6b5a5a",
+        "format": "WOFF2, static TrueType subset",
+        "altered": true,
+        "weight": 600,
+        "glyphCoverage": 115,
+        "subset": "notes-v42",
+        "derivedFrom": "SourceHanSerifCN-VF.ttf.woff2",
+        "internalFamily": "Ivan Han Serif SC Notes-V42",
+        "license": "SIL Open Font License 1.1"
+      },
+      {
+        "file": "IvanHanSerifSC-Bold-notes-v42.woff2",
+        "bytes": 28712,
+        "sha256": "4c5473261c62aa850e2c9bfa500d85f90901a96816b98c11e42e2b5d0f712775",
+        "format": "WOFF2, static TrueType subset",
+        "altered": true,
+        "weight": 700,
+        "glyphCoverage": 115,
+        "subset": "notes-v42",
+        "derivedFrom": "SourceHanSerifCN-VF.ttf.woff2",
+        "internalFamily": "Ivan Han Serif SC Notes-V42",
+        "license": "SIL Open Font License 1.1"
+      },
+      {
+        "file": "IvanHanSerifJP-Regular-notes-v42.woff2",
+        "bytes": 22024,
+        "sha256": "ff74454fefe94ae3b70c34d1c3662aa3908eaac46cd31625c7285ce475170841",
+        "format": "WOFF2, static TrueType subset",
+        "altered": true,
+        "weight": 400,
+        "glyphCoverage": 77,
+        "subset": "notes-v42",
+        "derivedFrom": "SourceHanSerifJP-VF.ttf.woff2",
+        "internalFamily": "Ivan Han Serif JP Notes-V42",
+        "license": "SIL Open Font License 1.1"
+      },
+      {
+        "file": "IvanHanSerifJP-Medium-notes-v42.woff2",
+        "bytes": 22324,
+        "sha256": "7fdfe174c4e87d0675465df937ac14a801684681b4960faf638d63ba00d7b970",
+        "format": "WOFF2, static TrueType subset",
+        "altered": true,
+        "weight": 500,
+        "glyphCoverage": 77,
+        "subset": "notes-v42",
+        "derivedFrom": "SourceHanSerifJP-VF.ttf.woff2",
+        "internalFamily": "Ivan Han Serif JP Notes-V42",
+        "license": "SIL Open Font License 1.1"
+      },
+      {
+        "file": "IvanHanSerifJP-Semibold-notes-v42.woff2",
+        "bytes": 22416,
+        "sha256": "84f7eda1fdb0c1e9a09d66a0c0915d0676fccf91faa8fc09cb82efd9ee73040f",
+        "format": "WOFF2, static TrueType subset",
+        "altered": true,
+        "weight": 600,
+        "glyphCoverage": 77,
+        "subset": "notes-v42",
+        "derivedFrom": "SourceHanSerifJP-VF.ttf.woff2",
+        "internalFamily": "Ivan Han Serif JP Notes-V42",
+        "license": "SIL Open Font License 1.1"
+      },
+      {
+        "file": "IvanHanSerifJP-Bold-notes-v42.woff2",
+        "bytes": 22628,
+        "sha256": "a5da33938d0bf644f00d05850f295026dd2f5f4c0c2691fa6b85cebe6b8e8a63",
+        "format": "WOFF2, static TrueType subset",
+        "altered": true,
+        "weight": 700,
+        "glyphCoverage": 77,
+        "subset": "notes-v42",
+        "derivedFrom": "SourceHanSerifJP-VF.ttf.woff2",
+        "internalFamily": "Ivan Han Serif JP Notes-V42",
         "license": "SIL Open Font License 1.1"
       }
     ]
