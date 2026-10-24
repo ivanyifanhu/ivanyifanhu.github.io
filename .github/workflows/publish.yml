@@ -18,6 +18,24 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v6
+      - name: Apply verified authored-blog update
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile,hashlib,json
+          root=Path.cwd().resolve();archive=root/'v44-update.zip'
+          assert hashlib.sha256(archive.read_bytes()).hexdigest()=='a8d398c424c3a9bc2f240bcaf617a701c5c52d2373635a8122836176f0eaf276'
+          with zipfile.ZipFile(archive) as bundle:
+              expected=json.loads(bundle.read('_build/v44-update-manifest.json'))
+              assert set(bundle.namelist())==set(expected)|{'_build/v44-update-manifest.json'}
+              for name in bundle.namelist():
+                  target=(root/name).resolve()
+                  assert target.is_relative_to(root) and not Path(name).is_absolute()
+                  data=bundle.read(name)
+                  if name in expected: assert hashlib.sha256(data).hexdigest()==expected[name]
+                  target.parent.mkdir(parents=True,exist_ok=True)
+                  target.write_bytes(data)
+          PY
       - uses: actions/configure-pages@v5
       - name: Build public website
         run: python3 _build/build.py
