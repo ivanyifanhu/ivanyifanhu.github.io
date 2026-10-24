@@ -104,3 +104,13 @@ main{padding-top:112px;padding-bottom:60px;max-width:none}.page-section{max-widt
 }
 @media(max-width:800px){.work-row{padding:28px 0}.work-row:first-child{padding-top:0}.work-links{font-size:13px}.work-row .work-meta>p:first-child{margin-bottom:12px}}
 @media(prefers-reduced-motion:reduce){.work-links>.text-link::after{transition:none}}
+
+/* v43 incremental note catalog */
+.catalog-image{opacity:0;transition:opacity .42s cubic-bezier(.22,.61,.36,1)}
+.catalog-image.is-ready{opacity:1}
+@media(prefers-reduced-motion:reduce){.catalog-image{transition:none}}
+
+.catalog-load-more{font-family:inherit;font-size:14px;line-height:1.5;color:var(--muted);border:0!important;border-bottom:1px solid var(--line)!important;background:transparent;padding:10px 0!important;margin:24px 0 0!important;cursor:pointer;transition:color .22s,border-color .22s;}
+.catalog-load-more:hover,.catalog-load-more:focus-visible{color:var(--ink);border-bottom-color:currentColor!important;}
+.search-load-more{display:block;margin:28px auto!important;}
+.catalog-load-more[hidden]{display:none!important;}

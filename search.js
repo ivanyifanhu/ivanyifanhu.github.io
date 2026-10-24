@@ -19,6 +19,7 @@
   const versions=new Map();
   let intentOff=()=>{};
   const expanded=new Set();
+  const pageSizes=new Map();
   const visits=new Map();
   const visitPrefix='homepage-search-visit:';
   let lastOpened=null, returnTimer=0, disclosureMotion=null;
@@ -48,7 +49,7 @@
     return {text:chars.map(item=>item.char).join(''),formats};
   }
   function buildIndex(){
-    return [...document.querySelectorAll('[data-searchable]')].map(section=>{
+    return [...document.querySelectorAll('[data-searchable]:not([data-catalog-dynamic])')].map(section=>{
       const route=section.dataset.section, titles={},blocks={};
       languages.forEach(l=>{
         titles[l]=section.querySelector(`h1 [data-lang="${l}"]`)?.textContent.trim()||'';
@@ -63,7 +64,7 @@
         return [l,label||words[l].categories[category]+(subgroup?'—'+subgroup:'')];
       }));
       return {route,category,categoryLabels,image:section.dataset.searchImage,titles,blocks};
-    });
+    }).concat(window.SiteCatalog?.searchDocuments()||[]);
   }
   function normalized(text){
     let value='';const starts=[],ends=[];let position=0;
@@ -254,7 +255,11 @@
     const count=create('p','search-count');count.setAttribute('role','status');count.append(slot(Object.fromEntries(languages.map(l=>[l,query?words[l].count(found.length):'']))));content.append(count);
     if(!found.length){const message=create('p','search-empty');message.append(slot(Object.fromEntries(languages.map(l=>[l,words[l][query?'none':'empty']]))));content.append(message);return;}
     const list=create('div','search-results');content.append(list);
-    for(const doc of found){
+    const moreButton=create('button','catalog-load-more search-load-more');moreButton.type='button';
+    content.append(moreButton);let shown=0;
+    const showBatch=(limit,animate=false)=>{
+      const before=shown;
+      for(const doc of found.slice(shown,limit)){
       const card=create('article','search-result');card.dataset.readingKey='result:'+doc.route;
       const preferred=versions.get(query+'|'+doc.route);
       const selected=doc.matched.includes(preferred)?preferred:doc.matched.includes(language)?language:doc.matched[0];
@@ -315,8 +320,16 @@
       }
       selectVersion(state,selected,false);
       card.append(visual,copy);list.append(card);
-    }
-    setResultLanguage();
+      if(animate&&!matchMedia('(prefers-reduced-motion:reduce)').matches)card.animate([{opacity:0},{opacity:1}],{duration:420,easing:'cubic-bezier(.22,.61,.36,1)'});
+      }
+      shown=Math.min(found.length,limit);pageSizes.set(query,shown);
+      moreButton.hidden=shown>=found.length;
+      const amount=Math.min(30,found.length-shown);
+      moreButton.replaceChildren(slot({en:`Show ${amount} more results`,ja:`さらに${amount}件の結果を表示`,zh:`再显示${amount}条结果`}));
+      setResultLanguage();
+    };
+    moreButton.addEventListener('click',()=>{showBatch(shown+30,true);remember(history.state?.ivanRoute?.id);});
+    showBatch(pageSizes.get(query)||30);
   }
   function sync(lang){
     language=languages.includes(lang)?lang:'en';input.placeholder=words[language].placeholder;input.setAttribute('aria-label',words[language].search);
@@ -328,7 +341,7 @@
     const top=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--reading-top'))||126;
     const anchors=[...page.querySelectorAll('[data-reading-key]')].filter(el=>!el.classList.contains('search-result')&&!el.closest('[hidden],[inert]'));
     const anchor=anchors.find(el=>el.getBoundingClientRect().bottom>top);
-    const snapshot={query,top:scrollY,width:innerWidth,expanded:[...expanded].filter(key=>key.startsWith(query+'|')),versions:[...versions].filter(([key])=>key.startsWith(query+'|')),lastOpened:lastOpened?.query===query?lastOpened:null,
+    const snapshot={query,shown:pageSizes.get(query)||30,top:scrollY,width:innerWidth,expanded:[...expanded].filter(key=>key.startsWith(query+'|')),versions:[...versions].filter(([key])=>key.startsWith(query+'|')),lastOpened:lastOpened?.query===query?lastOpened:null,
       anchor:anchor?{key:anchor.dataset.readingKey,offset:anchor.getBoundingClientRect().top}:null};
     visits.set(entryId,snapshot);
     try{sessionStorage.setItem(visitPrefix+entryId,JSON.stringify(snapshot));}catch{}
@@ -342,6 +355,8 @@
   }
   function prepareReturn(snapshot){
     if(!snapshot)return;
+    const count=Number.isFinite(snapshot.shown)?Math.max(30,snapshot.shown):30;
+    if((pageSizes.get(snapshot.query)||30)!==count){pageSizes.set(snapshot.query,count);renderedQuery=null;}
     // Restore the expansion state of this history entry, even if a later visit
     // to the same query changed it. Render before revealing the new page.
     const prefix=snapshot.query+'|';

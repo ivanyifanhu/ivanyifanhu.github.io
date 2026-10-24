@@ -7,6 +7,7 @@
   const sidebar = document.querySelector('#mobile-menu');
   const menu = document.querySelector('.menu-toggle');
   const sections = [...document.querySelectorAll('[data-section]')];
+  const catalogRecent=[];
   const langs = ['en', 'ja', 'zh'];
   const mobile = matchMedia('(max-width:800px)');
   const outlineButton=document.querySelector('.outline-toggle');
@@ -67,6 +68,7 @@
     if(!page)return;
     readingPositions[renderedHistoryEntry]={
       route:entry.hidden?active:'entry',y:scrollY,time:Date.now(),
+      catalogState:window.SiteCatalog?.snapshot(),
       tocSelection:tocSelection?.route===active?{...tocSelection}:null,
       details:[...page.querySelectorAll('details')].filter(el=>!el.closest('[data-lang][hidden]'))
         .map((el,i)=>[el.dataset.readingKey||el.dataset.source||String(i),el.open])
@@ -78,6 +80,7 @@
   }
   function restoreReadingPosition(record){
     if(!record)return;
+    if(record.catalogState)window.SiteCatalog?.restore(record.catalogState);
     const states=new Map(record.details||[]),page=sections.find(s=>s.dataset.section===active);
     [...(page?.querySelectorAll('details')||[])].filter(el=>!el.closest('[data-lang][hidden]')).forEach((el,i)=>{
       const key=el.dataset.readingKey||el.dataset.source||String(i);
@@ -198,6 +201,16 @@
     if(outlineOpen)toc.querySelector('.toc-item')?.focus({preventScroll:true});
   }
   function showSection(route, focus=false, restore=null) {
+    const dynamic=window.SiteCatalog?.ensure(route,language);
+    if(dynamic&&!sections.includes(dynamic))sections.push(dynamic);
+    if(dynamic?.hasAttribute('data-catalog-dynamic')){
+      const at=catalogRecent.indexOf(route);if(at>=0)catalogRecent.splice(at,1);
+      catalogRecent.push(route);
+      while(catalogRecent.length>8){
+        const expired=catalogRecent.shift(),node=sections.find(s=>s.dataset.section===expired);
+        if(node?.hasAttribute('data-catalog-dynamic')){sections.splice(sections.indexOf(node),1);window.SiteCatalog?.forget(expired);node.remove();}
+      }
+    }
     active = sections.some(s=>s.dataset.section===route) ? route : 'about';
     tocSelection=null;
     sections.forEach(s=> { s.hidden = s.dataset.section !== active; });
@@ -213,6 +226,7 @@
     if (focus) main.focus({preventScroll:true});
     window.FlightProgress?.setVisible(entry.hidden);
   }
+  document.addEventListener('catalogchange',()=>{requestAnimationFrame(buildToc);window.FlightProgress?.update();});
   function showCover() {
     setMenu(false);setOutline(false);
     window.FlightProgress?.setVisible(false);
