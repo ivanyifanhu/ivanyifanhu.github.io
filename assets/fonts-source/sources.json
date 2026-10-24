@@ -377,5 +377,128 @@
         "license": "SIL Open Font License 1.1"
       }
     ]
+  },
+  "catalogSupplement43": {
+    "generated": "2026-10-24",
+    "files": [
+      {
+        "file": "IvanHanSerifSC-Regular-notes-v43.woff2",
+        "bytes": 60920,
+        "sha256": "9d04e4d58dd435b4b4fd8bcfb714eafff49f471172cf4b98ddcc7f2e798d8bc4",
+        "format": "WOFF2, static TrueType subset",
+        "altered": true,
+        "weight": 400,
+        "glyphCoverage": 264,
+        "subset": "notes-v43",
+        "derivedFrom": "SourceHanSerifCN-VF.ttf.woff2",
+        "internalFamily": "Ivan Han Serif SC Notes-V43",
+        "license": "SIL Open Font License 1.1"
+      },
+      {
+        "file": "IvanHanSerifSC-Medium-notes-v43.woff2",
+        "bytes": 61676,
+        "sha256": "87d16073d1b23a8e84c82e8cf5cc46a96a0b2eb57c29c2d66b6d8cba9e5e4c8d",
+        "format": "WOFF2, static TrueType subset",
+        "altered": true,
+        "weight": 500,
+        "glyphCoverage": 264,
+        "subset": "notes-v43",
+        "derivedFrom": "SourceHanSerifCN-VF.ttf.woff2",
+        "internalFamily": "Ivan Han Serif SC Notes-V43",
+        "license": "SIL Open Font License 1.1"
+      },
+      {
+        "file": "IvanHanSerifSC-Semibold-notes-v43.woff2",
+        "bytes": 61728,
+        "sha256": "8a74fdd27a037b39b55784759db3134ec10e516bec56c375584f9d247f9e7c6d",
+        "format": "WOFF2, static TrueType subset",
+        "altered": true,
+        "weight": 600,
+        "glyphCoverage": 264,
+        "subset": "notes-v43",
+        "derivedFrom": "SourceHanSerifCN-VF.ttf.woff2",
+        "internalFamily": "Ivan Han Serif SC Notes-V43",
+        "license": "SIL Open Font License 1.1"
+      },
+      {
+        "file": "IvanHanSerifSC-Bold-notes-v43.woff2",
+        "bytes": 62604,
+        "sha256": "0a06a0a3f273c11ca05aa0c8baafdb334e9be9a29625709b41a697dd6b7f3252",
+        "format": "WOFF2, static TrueType subset",
+        "altered": true,
+        "weight": 700,
+        "glyphCoverage": 264,
+        "subset": "notes-v43",
+        "derivedFrom": "SourceHanSerifCN-VF.ttf.woff2",
+        "internalFamily": "Ivan Han Serif SC Notes-V43",
+        "license": "SIL Open Font License 1.1"
+      },
+      {
+        "file": "IvanHanSerifJP-Regular-notes-v43.woff2",
+        "bytes": 27296,
+        "sha256": "d57f29308f6ca0309baad7039e8469e5e5d2391772e44d20163212058741c076",
+        "format": "WOFF2, static TrueType subset",
+        "altered": true,
+        "weight": 400,
+        "glyphCoverage": 105,
+        "subset": "notes-v43",
+        "derivedFrom": "SourceHanSerifJP-VF.ttf.woff2",
+        "internalFamily": "Ivan Han Serif JP Notes-V43",
+        "license": "SIL Open Font License 1.1"
+      },
+      {
+        "file": "IvanHanSerifJP-Medium-notes-v43.woff2",
+        "bytes": 27508,
+        "sha256": "5538dd0c841d0b7ff3b95828bd2f48dffc7d1460c1b4f4a595ec1c8e6e71065f",
+        "format": "WOFF2, static TrueType subset",
+        "altered": true,
+        "weight": 500,
+        "glyphCoverage": 105,
+        "subset": "notes-v43",
+        "derivedFrom": "SourceHanSerifJP-VF.ttf.woff2",
+        "internalFamily": "Ivan Han Serif JP Notes-V43",
+        "license": "SIL Open Font License 1.1"
+      },
+      {
+        "file": "IvanHanSerifJP-Semibold-notes-v43.woff2",
+        "bytes": 27696,
+        "sha256": "2d11a211e607237b47206a2f71ea89dcb1812c7226c706235ca17f02012a8cdf",
+        "format": "WOFF2, static TrueType subset",
+        "altered": true,
+        "weight": 600,
+        "glyphCoverage": 105,
+        "subset": "notes-v43",
+        "derivedFrom": "SourceHanSerifJP-VF.ttf.woff2",
+        "internalFamily": "Ivan Han Serif JP Notes-V43",
+        "license": "SIL Open Font License 1.1"
+      },
+      {
+        "file": "IvanHanSerifJP-Bold-notes-v43.woff2",
+        "bytes": 27944,
+        "sha256": "78547861afa1da197a21f03f2f4de6db163a23353cd9009888035c8f6507fde4",
+        "format": "WOFF2, static TrueType subset",
+        "altered": true,
+        "weight": 700,
+        "glyphCoverage": 105,
+        "subset": "notes-v43",
+        "derivedFrom": "SourceHanSerifJP-VF.ttf.woff2",
+        "internalFamily": "Ivan Han Serif JP Notes-V43",
+        "license": "SIL Open Font License 1.1"
+      }
+    ],
+    "coverage": {
+      "zh": {
+        "requested": 1457,
+        "newStatic": 264,
+        "unsupported": "",
+        "sourceHanSCFallback": ""
+      },
+      "ja": {
+        "requested": 1037,
+        "newStatic": 105,
+        "unsupported": "",
+        "sourceHanSCFallback": "为动图归显结语赠"
+      }
+    }
   }
 }
