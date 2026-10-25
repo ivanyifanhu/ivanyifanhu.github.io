@@ -20,11 +20,11 @@ jobs:
       - uses: actions/checkout@v6
       - name: Apply verified website updates
         run: |
-          python3 - <<'PY45'
+          python3 - <<'PY46'
           from pathlib import Path
           import zipfile,hashlib,json
           root=Path.cwd().resolve()
-          updates=[('v44-update.zip','a8d398c424c3a9bc2f240bcaf617a701c5c52d2373635a8122836176f0eaf276','_build/v44-update-manifest.json'),('v45-update.zip','b2348b35441fdbda1377f33c4e61db283ee9960bf32edad8305d1e4f52db51cd','_build/v45-update-manifest.json')]
+          updates=[('v44-update.zip','a8d398c424c3a9bc2f240bcaf617a701c5c52d2373635a8122836176f0eaf276','_build/v44-update-manifest.json'),('v46-update.zip','c55c9b7dbe06553cc843d1ab05f3ecb2365138818b15bb7195e7bad35063ddf1','_build/v46-update-manifest.json')]
           for filename,digest,manifest in updates:
               archive=root/filename
               assert hashlib.sha256(archive.read_bytes()).hexdigest()==digest
@@ -38,7 +38,7 @@ jobs:
                       if name in expected: assert hashlib.sha256(data).hexdigest()==expected[name]
                       target.parent.mkdir(parents=True,exist_ok=True)
                       target.write_bytes(data)
-          PY45
+          PY46
       - uses: actions/configure-pages@v5
       - name: Build public website
         run: python3 _build/build.py
