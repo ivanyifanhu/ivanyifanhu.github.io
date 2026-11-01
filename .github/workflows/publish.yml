@@ -24,7 +24,7 @@ jobs:
           from pathlib import Path
           import zipfile,hashlib,json
           root=Path.cwd().resolve()
-          updates=[('v44-update.zip','a8d398c424c3a9bc2f240bcaf617a701c5c52d2373635a8122836176f0eaf276','_build/v44-update-manifest.json'),('v48-update.zip','40e33434d3c886fd01bc1dce551a04dff4e372dceda078ea9b703896c39a5beb','_build/v48-update-manifest.json'),('v49-update.zip','d014742044ae92e4a5cb8c35b509fadb1c2c860043c5a4198b3f840ec65e1bdd','_build/v49-update-manifest.json')]
+          updates=[('v44-update.zip','a8d398c424c3a9bc2f240bcaf617a701c5c52d2373635a8122836176f0eaf276','_build/v44-update-manifest.json'),('v48-update.zip','40e33434d3c886fd01bc1dce551a04dff4e372dceda078ea9b703896c39a5beb','_build/v48-update-manifest.json'),('v49-update.zip','d014742044ae92e4a5cb8c35b509fadb1c2c860043c5a4198b3f840ec65e1bdd','_build/v49-update-manifest.json'),('v50-update.zip','c6ac256c6919e7a91bea38c9f179d93a6b2a2868e12777e42a49023441da9314','_build/v50-update-manifest.json')]
           for filename,digest,manifest in updates:
               archive=root/filename
               assert hashlib.sha256(archive.read_bytes()).hexdigest()==digest
